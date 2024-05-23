@@ -21,21 +21,6 @@ export default function ProductCreate() {
   const [prod_price, setProdPrice] = useState<string>('');
   const dataLine = useContext<User | undefined>(GetProfile);
 
-  useEffect(() => {
-    const liffId = '2005244347-lY246dm4';
-    liff
-      .init({
-        liffId: liffId,
-      })
-      .then(() => {
-        if (liff.isLoggedIn()) {
-          // if (dataLine) console.log(dataLine);
-        } else {
-          liff.login();
-        }
-      });
-  }, []);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const myHeaders = new Headers();
@@ -68,6 +53,7 @@ export default function ProductCreate() {
       })
       .then(() => {
         alert('เพิ่มข้อมูล Product แล้ว T0T');
+        window.location.href = '/admin'
       })
       .catch((error) => console.error(error));
   };
@@ -76,23 +62,23 @@ export default function ProductCreate() {
     <React.Fragment>
       <CssBaseline />
       <div
-        className="w-full h-screen pt-8"
-        style={{ backgroundColor: '#c8c6c6' }}
+        className="w-full h-screen pt-8 "
+        style={{ backgroundColor: '#212233' }}
       >
         <Container
           className="bg-white"
           maxWidth="sm"
           sx={{ p: 6, overflow: 'auto' }}
         >
-          <Typography variant="h6" gutterBottom component={'div'}>
-            Create Products
+          <Typography variant="h6" style={{marginBottom:"30px"}} gutterBottom component={'div'}>
+            Create GameProducts
           </Typography>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
               <Grid item xs={12}>
                 <TextField
                   id="prod_img"
-                  label="Product image"
+                  label="GameProduct image"
                   variant="outlined"
                   fullWidth
                   required
@@ -103,7 +89,7 @@ export default function ProductCreate() {
               <Grid item xs={12}>
                 <TextField
                   id="prod_name"
-                  label="Product Name"
+                  label="GameProduct Name"
                   variant="outlined"
                   fullWidth
                   required
@@ -114,7 +100,7 @@ export default function ProductCreate() {
               <Grid item xs={12}>
                 <TextField
                   id="prod_desc"
-                  label="Product Desciption"
+                  label="GameProduct Desciption"
                   variant="outlined"
                   fullWidth
                   value={prod_desc}
@@ -124,7 +110,7 @@ export default function ProductCreate() {
               <Grid item xs={12}>
                 <TextField
                   id="prod_price"
-                  label="Product Price"
+                  label="GameProduct Price"
                   variant="outlined"
                   type="number"
                   fullWidth

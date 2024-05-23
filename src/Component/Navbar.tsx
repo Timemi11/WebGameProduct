@@ -28,55 +28,25 @@ export default function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const sendMessageToLine = async () => {
-    try {
-      const response = await fetch('https://api.line.me/v2/bot/message/push', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Bearer ต่อด้วย  Channel access token ของ messagesing api
-          Authorization:
-            'Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=',
-        },
-        body: JSON.stringify({
-          // to : userId
-          to: 'Uee534050cb274b81e66a9f0333932612',
-          messages: [
-            {
-              type: 'text',
-              text: 'ส่งข้อความ',
-            },
-          ],
-        }),
-      });
 
-      if (response.ok) {
-        alert('Message sent successfully');
-      } else {
-        alert('Failed to send message');
-      }
-    } catch (error) {
-      console.error('Failed to send message:', error);
-      alert('Failed to send message');
-    }
-  };
 
-  // useEffect(() => {
-  //   sendMessageToLine();
-  // }, []);
-
+  
   useEffect(() => {
     // Initialize LIFF SDK
     const initLiff = async () => {
       try {
-        await liff.init({ liffId });
+        await liff.init({ liffId ,});
         setIsLogin(liff.isLoggedIn());
       } catch (error) {
         console.error('LIFF initialization failed', error);
       }
     };
-    initLiff();
-  }, [isLogin, dataLine]);
+    setInterval(
+      initLiff,
+      1000
+    )
+  }, [isLogin , dataLine]
+  );
 
   const btnLogin = useCallback(() => {
     liff.login();
@@ -86,14 +56,10 @@ export default function Navbar() {
     window.location.href = '/admin';
   }, []);
 
-  const goUserPage = useCallback(() => {
-    window.location.href = '/';
-  }, []);
-
   const btnLogOut = useCallback(() => {
     console.log('Logout');
     liff.logout();
-    window.location.reload();
+    window.location.href = '/';
   }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -106,7 +72,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{ backgroundColor: 'rgb(76 29 149)' }} position="static">
+      <AppBar style={{ backgroundColor: 'rgba(33, 34, 51, 0.9)' }} position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -124,7 +90,11 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            <a href="/">GameProductShop</a>
+            <div className='flex items-center gap-x-2'>
+            <img style={{width:'30px',height:"30px"}}  src="https://cdn-icons-png.flaticon.com/512/528/528111.png" alt="redMushroom" />
+            <a className='font-extrabold' href="/">GameProductShop</a>
+
+            </div>
           </Typography>
 
           {isMobile ? (
@@ -150,9 +120,7 @@ export default function Navbar() {
                     <MenuItem key="admin" onClick={goAdminPage}>
                       Admin
                     </MenuItem>,
-                    <MenuItem key="user" onClick={goUserPage}>
-                      User
-                    </MenuItem>,
+         
                     <MenuItem key="logout" onClick={btnLogOut}>
                       LogOut
                     </MenuItem>,
@@ -186,7 +154,7 @@ export default function Navbar() {
                   <Button
                     variant="contained"
                     style={{
-                      backgroundColor: '#0A6847',
+                      backgroundColor: 'rgb(104, 66, 255)',
                     }}
                     onClick={btnLogin}
                   >
@@ -208,18 +176,12 @@ export default function Navbar() {
                   </Button>
                   <Button
                     variant="contained"
-                    style={{ backgroundColor: '#ECB176' }}
+                    style={{ backgroundColor: '#ef8f2f' }}
                     onClick={goAdminPage}
                   >
                     Admin
                   </Button>
-                  <Button
-                    variant="contained"
-                    style={{ backgroundColor: '#B0EBB4' }}
-                    onClick={goUserPage}
-                  >
-                    User
-                  </Button>
+           
                 </>
               )}
             </ButtonGroup>

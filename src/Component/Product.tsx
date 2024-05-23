@@ -15,8 +15,10 @@ import { useState, useEffect } from 'react';
 import Link from '@mui/material/Link';
 import { ButtonGroup } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import liff from '@line/liff';
+// import liff from '@line/liff';
 import { ngrokDomain } from '../Component/pathngrok/ngrokdomain';
+import './custom.css';
+
 
 type List = {
   prod_img: string;
@@ -32,7 +34,7 @@ type List = {
 
 export default function Product() {
   const [items, setItems] = useState<List[]>([]);
-  const liffId = '2005244347-lY246dm4';
+  // const liffId = '2005244347-lY246dm4';
 
   const ProductUpdate = (id: string) => {
     window.location.href = '/update/' + id;
@@ -63,20 +65,6 @@ export default function Product() {
   };
 
   useEffect(() => {
-    liff
-      .init({
-        liffId: liffId,
-      })
-      .then(() => {
-        if (liff.isLoggedIn()) {
-          // if (dataLine) console.log(dataLine);
-        } else {
-          liff.login();
-        }
-      });
-  }, []);
-
-  useEffect(() => {
     UserGet();
   }, []);
 
@@ -84,15 +72,19 @@ export default function Product() {
     <React.Fragment>
       <CssBaseline />
       <div
-        className="w-full h-full pt-8"
-        style={{ backgroundColor: '#c8c6c6' }}
+        className="w-full h-full pt-8 "
+        style={{ 
+          backgroundColor: '#0C0D14',
+      }}
       >
-        <Container maxWidth="xl" sx={{ p: 2 }}>
-          <Paper sx={{ p: 2 }}>
+        <Container maxWidth="lg" sx={{ p: 2 } }>
+          <Paper 
+          sx={{ p: 2 }} 
+          style={{backgroundColor:"#1A1B28"}} >
             <Box display={'flex'}>
               <Box sx={{ width: '100%' }}>
-                <Typography variant="h6" gutterBottom component={'div'}>
-                  Products
+                <Typography className='font-custom text-superlarge' variant="h6" gutterBottom component={'div'}>
+                  GameProducts Table
                 </Typography>
               </Box>
               <Box>
@@ -101,21 +93,48 @@ export default function Product() {
                 </Link>
               </Box>
             </Box>
-            <TableContainer component={Paper} sx={{ marginTop: 2 }}>
+            <TableContainer style={{backgroundColor:"#1A1B28" }}   component={Paper} sx={{ marginTop: 2 }}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
-                  <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell align="right">Product_Image</TableCell>
-                    <TableCell align="right">Product_Name</TableCell>
-                    <TableCell align="left">Product_Description</TableCell>
-                    <TableCell align="right">Product_Price</TableCell>
-                    <TableCell align="right">User_Avatar</TableCell>
-                    <TableCell align="right">User_Id</TableCell>
-                    <TableCell align="right">User_Name</TableCell>
-                    <TableCell align="right">User_StatusName</TableCell>
-                    <TableCell align="right">Upload_Date</TableCell>
-                    <TableCell align="right">Action</TableCell>
+                  <TableRow  >
+                    <TableCell className='font-custom' >
+                      ID
+                      </TableCell>
+                    <TableCell className='font-custom'  align="right">GameProducts_Image</TableCell>
+                    <TableCell align="right" className='font-custom' > GameProducts_Name</TableCell>
+                    <TableCell align="left" className='font-custom' >
+                    GameProducts_Description
+                    
+                    </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                      GameProducts_Price
+                    
+                      </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                    User_Avatar 
+                    </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                               User_Id 
+                    </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                    User_Name
+               
+                    
+                    </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                    User_StatusName
+                      
+                      
+                      </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                      Upload_Date
+                    
+                      </TableCell>
+                    <TableCell align="right" className='font-custom' >
+                       Action
+                    
+                      
+                      </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -124,15 +143,15 @@ export default function Product() {
                       key={row._id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
+                      <TableCell className='font-custom' component="th" scope="row">
                         {row._id}
                       </TableCell>
                       <TableCell align="right">
                         <img className="rounded-lg" src={row.prod_img}></img>
                       </TableCell>
-                      <TableCell align="right">{row.prod_name}</TableCell>
+                      <TableCell align="right" className='font-custom' >{row.prod_name}</TableCell>
                       <TableCell
-                        className="text-wrap "
+                        className="text-wrap font-custom"
                         style={{
                           minWidth: '500px',
                         }}
@@ -141,21 +160,22 @@ export default function Product() {
                         {row.prod_desc}
                       </TableCell>
                       <TableCell
+                      className='font-custom' 
                         style={{
                           minWidth: '200px',
                         }}
                         align="right"
                       >
-                        {row.prod_price}
+                        {row.prod_price} บาท
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="right" className='font-custom' >
                         <img className="rounded-lg" src={row.pictureUrl}></img>
                       </TableCell>
-                      <TableCell align="right">{row.userId}</TableCell>
-                      <TableCell align="right">{row.displayName}</TableCell>
-                      <TableCell align="right">{row.statusMessage}</TableCell>
-                      <TableCell align="right">{row.update_at}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="right" className='font-custom' >{row.userId}</TableCell>
+                      <TableCell align="right" className='font-custom' >{row.displayName}</TableCell>
+                      <TableCell align="right" className='font-custom' >{row.statusMessage}</TableCell>
+                      <TableCell align="right" className='font-custom' >{row.update_at}</TableCell>
+                      <TableCell align="right" className='font-custom' >
                         <ButtonGroup
                           variant="outlined"
                           aria-label="Basic button group"

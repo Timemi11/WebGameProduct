@@ -23,7 +23,7 @@ const App: React.FC = () => {
       displayName,
       statusMessage,
     }
-    =  profile as { pictureUrl: string; userId: string; displayName: string; statusMessage: string };
+    =  profile as { pictureUrl: string | '' ; userId: string | ''; displayName: string | ''; statusMessage: string | '' };
     setDataLine({ pictureUrl, userId, displayName, statusMessage });
   };
 
@@ -33,6 +33,7 @@ const App: React.FC = () => {
       try {
         await liff.init({
           liffId: liffId,
+          // withLoginOnExternalBrowser: true,
         });
         if (!liff.isLoggedIn()) {
         } else {

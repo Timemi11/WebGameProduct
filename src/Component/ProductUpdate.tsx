@@ -13,13 +13,13 @@ import {
   ButtonGroup,
 } from '@mui/material';
 
+
 export default function ProductUpdate() {
   const [prod_img, setProdImg] = useState<string>('');
   const [prod_name, setProdName] = useState<string>('');
   const [prod_desc, setProdDesc] = useState<string>('');
   const [prod_price, setProdPrice] = useState<string>('');
   const dataLine = useContext<User | undefined>(GetProfile);
-
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -28,11 +28,9 @@ export default function ProductUpdate() {
       redirect: 'follow',
     };
 
-    fetch(ngrokDomain+'products/' + id, requestOptions)
+    fetch(ngrokDomain+'/products/' + id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        //ในคลิปมี key status แต่ api ใน mongo ไม่ได้ทำเอาไว้
-
         setProdImg(result['prod_img']);
         setProdName(result['prod_name']);
         setProdDesc(result['prod_desc']);
@@ -73,6 +71,7 @@ export default function ProductUpdate() {
       })
       .then(() => {
         alert('แก้ไขข้อมูล Product แล้ว T0T');
+        window.location.href = '/admin'
       })
       .catch((error: Error) => console.error(error));
   };
@@ -82,22 +81,22 @@ export default function ProductUpdate() {
       <CssBaseline />
       <div
         className="w-full h-screen pt-8"
-        style={{ backgroundColor: '#c8c6c6' }}
+        style={{ backgroundColor: '#212233' }}
       >
         <Container
           className="bg-white"
           maxWidth="sm"
           sx={{ p: 6, overflow: 'auto' }}
         >
-          <Typography variant="h6" gutterBottom component={'div'}>
-            Update Products
+          <Typography variant="h6" style={{marginBottom:"30px"}} gutterBottom component={'div'} >
+            Update GameProducts
           </Typography>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
               <Grid item xs={12}>
                 <TextField
                   id="prod_img"
-                  label="Product Image"
+                  label="GameProduct Image"
                   variant="outlined"
                   fullWidth
                   required
@@ -108,7 +107,7 @@ export default function ProductUpdate() {
               <Grid item xs={12}>
                 <TextField
                   id="prod_name"
-                  label="Product Name"
+                  label="GameProduct Name"
                   variant="outlined"
                   fullWidth
                   required
@@ -119,7 +118,7 @@ export default function ProductUpdate() {
               <Grid item xs={12}>
                 <TextField
                   id="prod_desc"
-                  label="Product Desciption"
+                  label="GameProduct Desciption"
                   variant="outlined"
                   fullWidth
                   onChange={(e) => setProdDesc(e.target.value)}
@@ -129,7 +128,7 @@ export default function ProductUpdate() {
               <Grid item xs={12}>
                 <TextField
                   id="prod_price"
-                  label="Product Price"
+                  label="GameProduct Price"
                   type="number"
                   variant="outlined"
                   fullWidth

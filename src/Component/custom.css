@@ -1,0 +1,11 @@
+.font-custom{
+    color: white !important;
+    font-weight: 900 !important;
+}
+.text-superlarge{
+    font-size: 26px !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
