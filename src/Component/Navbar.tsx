@@ -1,9 +1,9 @@
-import * as React from 'react';
-import liff from '@line/liff';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { GetProfile } from '../App';
-import { User } from './Model/User';
-import MenuIcon from '@mui/icons-material/Menu';
+import * as React from "react";
+import liff from "@line/liff";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { GetProfile } from "../App";
+import { User } from "./Model/User";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Box,
@@ -17,49 +17,41 @@ import {
   MenuItem,
   useMediaQuery,
   Avatar,
-} from '@mui/material/';
-
+} from "@mui/material/";
 
 export default function Navbar() {
-  const liffId = '2005244347-lY246dm4';
+  const liffId = "2005244347-lY246dm4";
   const dataLine = useContext<User | undefined>(GetProfile);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-
-
-  
   useEffect(() => {
     // Initialize LIFF SDK
     const initLiff = async () => {
       try {
-        await liff.init({ liffId ,});
+        await liff.init({ liffId });
         setIsLogin(liff.isLoggedIn());
       } catch (error) {
-        console.error('LIFF initialization failed', error);
+        console.error("LIFF initialization failed", error);
       }
     };
-    setInterval(
-      initLiff,
-      1000
-    )
-  }, [isLogin , dataLine]
-  );
+    setInterval(initLiff, 1000);
+  }, [isLogin, dataLine]);
 
   const btnLogin = useCallback(() => {
     liff.login();
   }, []);
 
   const goAdminPage = useCallback(() => {
-    window.location.href = '/admin';
+    window.location.href = "/admin";
   }, []);
 
   const btnLogOut = useCallback(() => {
-    console.log('Logout');
+    console.log("Logout");
     liff.logout();
-    window.location.href = '/';
+    window.location.href = "/";
   }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -72,7 +64,9 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{ backgroundColor: 'rgba(33, 34, 51, 0.9)' }} position="static">
+      <AppBar
+        style={{ backgroundColor: "rgba(33, 34, 51, 0.9)" }}
+        position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -80,33 +74,29 @@ export default function Navbar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={isMobile ? handleMenuOpen : undefined}
-          >
+            onClick={isMobile ? handleMenuOpen : undefined}>
             {isMobile && <MenuIcon />}
           </IconButton>
           <Typography
-            style={{ fontSize: '20px' }}
+            style={{ fontSize: "20px" }}
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1 }}
-          >
-
-            <a className='font-extrabold flex items-center gap-x-2' href="/">
-            <img style={{width:'30px',height:"30px"}}  src="https://cdn-icons-png.flaticon.com/512/528/528111.png" alt="redMushroom" />
-    
+            sx={{ flexGrow: 1 }}>
+            <a className="font-extrabold flex items-center gap-x-2" href="/">
+              <img
+                style={{ width: "30px", height: "30px" }}
+                src="https://cdn-icons-png.flaticon.com/512/528/528111.png"
+                alt="redMushroom"
+              />
               GameProductShop
-              
-              </a>
-
-      
+            </a>
           </Typography>
 
           {isMobile ? (
             <Menu
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
-            >
+              onClose={handleMenuClose}>
               {!isLogin
                 ? [
                     <MenuItem key="login" onClick={btnLogin}>
@@ -124,7 +114,7 @@ export default function Navbar() {
                     <MenuItem key="admin" onClick={goAdminPage}>
                       Admin
                     </MenuItem>,
-         
+
                     <MenuItem key="logout" onClick={btnLogOut}>
                       LogOut
                     </MenuItem>,
@@ -132,7 +122,7 @@ export default function Navbar() {
                       <img
                         width="50px"
                         height="50px"
-                        style={{ borderRadius: '2rem', marginRight: '10px' }}
+                        style={{ borderRadius: "2rem", marginRight: "10px" }}
                         src={dataLine?.pictureUrl}
                         alt="User"
                       />
@@ -146,8 +136,7 @@ export default function Navbar() {
             <ButtonGroup
               className="flex gap-x-4 p-4 "
               variant="outlined"
-              aria-label="Basic button group"
-            >
+              aria-label="Basic button group">
               {!isLogin ? (
                 <>
                   <Avatar
@@ -158,10 +147,9 @@ export default function Navbar() {
                   <Button
                     variant="contained"
                     style={{
-                      backgroundColor: 'rgb(104, 66, 255)',
+                      backgroundColor: "rgb(104, 66, 255)",
                     }}
-                    onClick={btnLogin}
-                  >
+                    onClick={btnLogin}>
                     Login
                   </Button>
                 </>
@@ -171,7 +159,7 @@ export default function Navbar() {
                   <img
                     width="50px"
                     height="50px"
-                    style={{ borderRadius: '2rem', marginRight: '10px' }}
+                    style={{ borderRadius: "2rem", marginRight: "10px" }}
                     src={dataLine?.pictureUrl}
                     alt="User"
                   />
@@ -180,12 +168,10 @@ export default function Navbar() {
                   </Button>
                   <Button
                     variant="contained"
-                    style={{ backgroundColor: '#ef8f2f' }}
-                    onClick={goAdminPage}
-                  >
+                    style={{ backgroundColor: "#ef8f2f" }}
+                    onClick={goAdminPage}>
                     Admin
                   </Button>
-           
                 </>
               )}
             </ButtonGroup>
