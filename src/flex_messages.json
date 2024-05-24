@@ -1,0 +1,83 @@
+{
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "size": "full",
+      "aspectRatio": "20:13",
+      "aspectMode": "cover",
+      "action": {
+        "type": "uri",
+        "uri": "https://line.me/"
+      },
+      "url": "https://th.bing.com/th/id/OIP.rpNcXv9QqIj19FYeFWoayQHaKq?rs=1&pid=ImgDetMain"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Mass Effect",
+          "weight": "bold",
+          "size": "xl",
+          "align": "center"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "ราคา 520 บาท",
+              "align": "center",
+              "color": "#A1DD70"
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "md",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "ยืนยันการสั่งซื้อ",
+                "uri": "http://linecorp.com/"
+              },
+              "color": "#ffffff"
+            }
+          ],
+          "margin": "sm",
+          "backgroundColor": "#1B1A55",
+          "cornerRadius": "xl"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "เว็บของเรา",
+                "uri": "http://linecorp.com/"
+              },
+              "color": "#ffffff"
+            }
+          ],
+          "backgroundColor": "#535C91",
+          "cornerRadius": "xl"
+        }
+      ],
+      "flex": 0,
+      "cornerRadius": "none"
+    }
+  }
