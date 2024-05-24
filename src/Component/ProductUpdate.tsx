@@ -88,7 +88,7 @@ export default function ProductUpdate() {
           maxWidth="sm"
           sx={{ p: 6, overflow: 'auto' }}
         >
-          <Typography variant="h6" style={{marginBottom:"30px"}} gutterBottom component={'div'} >
+          <Typography variant="h6" style={{marginBottom:"30px", textAlign:"center"}} gutterBottom component={'div'} >
             Update GameProducts
           </Typography>
           <form onSubmit={handleSubmit}>

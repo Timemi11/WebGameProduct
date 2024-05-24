@@ -70,7 +70,7 @@ export default function ProductCreate() {
           maxWidth="sm"
           sx={{ p: 6, overflow: 'auto' }}
         >
-          <Typography variant="h6" style={{marginBottom:"30px"}} gutterBottom component={'div'}>
+          <Typography variant="h6" style={{marginBottom:"30px", textAlign:"center"}} gutterBottom component={'div'}>
             Create GameProducts
           </Typography>
           <form onSubmit={handleSubmit}>

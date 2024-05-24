@@ -83,7 +83,7 @@ export default function Product() {
           style={{backgroundColor:"#1A1B28"}} >
             <Box display={'flex'}>
               <Box sx={{ width: '100%' }}>
-                <Typography className='font-custom text-superlarge' variant="h6" gutterBottom component={'div'}>
+                <Typography  className='font-custom text-superlarge'  variant="h6" gutterBottom component={'div'}>
                   GameProducts Table
                 </Typography>
               </Box>

@@ -5,6 +5,9 @@
 .text-superlarge{
     font-size: 26px !important;
 }
+.text-center{
+    text-align: center !important;
+}
 
 @tailwind base;
 @tailwind components;

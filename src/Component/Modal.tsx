@@ -81,7 +81,7 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
         ></img>
         <p>รายละเอียด</p>
         <p className="text-white mb-4">{product.prod_desc}</p>
-        <p className="text-gray-700 mb-4 text-green-500 text-xl font-extrabold">
+        <p className="mb-4 text-green-500 text-xl font-extrabold">
           ราคา {product.prod_price} บาท
         </p>
         <div className="buttonGroup flex gap-x-6 justify-between w-full">

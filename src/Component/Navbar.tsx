@@ -90,11 +90,15 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            <div className='flex items-center gap-x-2'>
-            <img style={{width:'30px',height:"30px"}}  src="https://cdn-icons-png.flaticon.com/512/528/528111.png" alt="redMushroom" />
-            <a className='font-extrabold' href="/">GameProductShop</a>
 
-            </div>
+            <a className='font-extrabold flex items-center gap-x-2' href="/">
+            <img style={{width:'30px',height:"30px"}}  src="https://cdn-icons-png.flaticon.com/512/528/528111.png" alt="redMushroom" />
+    
+              GameProductShop
+              
+              </a>
+
+      
           </Typography>
 
           {isMobile ? (
