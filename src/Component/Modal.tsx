@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { GameProduct } from "./Model/GameProduct";
 import liff from "@line/liff";
+import { ngrokDomain } from "./pathngrok/ngrokdomain";
+import { User } from "./Model/User";
+import { GetProfile } from "../App";
 
 type ModalProps = {
   handleToggleModal: () => void;
@@ -9,122 +12,27 @@ type ModalProps = {
 
 export default function Modal({ handleToggleModal, product }: ModalProps) {
   const liffId = "2005244347-lY246dm4";
-
-  // userId Uee534050cb274b81e66a9f0333932612
-
+  const dataLine = useContext<User | undefined>(GetProfile);
+  // * userId Uee534050cb274b81e66a9f0333932612
   const sendMessageToLine = async () => {
-    try {
-      const response = await fetch("https://api.line.me/v2/bot/message/push", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Bearer ต่อด้วย  Channel access token ของ messagesing api
-          Authorization:
-            "Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
-        },
-        body: JSON.stringify({
-          to: "Uee534050cb274b81e66a9f0333932612",
-          messages: [
-            {
-              type: "flex",
-              altText: "GameProduct Sent",
-              contents: {
-                type: "bubble",
-                hero: {
-                  type: "image",
-                  size: "full",
-                  aspectRatio: "20:13",
-                  aspectMode: "cover",
-                  action: {
-                    type: "uri",
-                    uri: "https://line.me/",
-                  },
-                  url: "https://th.bing.com/th/id/OIP.rpNcXv9QqIj19FYeFWoayQHaKq?rs=1&pid=ImgDetMain",
-                },
-                body: {
-                  type: "box",
-                  layout: "vertical",
-                  contents: [
-                    {
-                      type: "text",
-                      text: "Mass Effect",
-                      weight: "bold",
-                      size: "xl",
-                      align: "center",
-                    },
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "ราคา 520 บาท",
-                          align: "center",
-                          color: "#A1DD70",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                footer: {
-                  type: "box",
-                  layout: "vertical",
-                  spacing: "md",
-                  contents: [
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "button",
-                          action: {
-                            type: "uri",
-                            label: "ยืนยันการสั่งซื้อ",
-                            uri: "http://linecorp.com/",
-                          },
-                          color: "#ffffff",
-                        },
-                      ],
-                      margin: "sm",
-                      backgroundColor: "#1B1A55",
-                      cornerRadius: "xl",
-                    },
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "button",
-                          action: {
-                            type: "uri",
-                            label: "เว็บของเรา",
-                            uri: "http://linecorp.com/", //เชื่อมเว็บของ GameProduct
-                          },
-                          color: "#ffffff",
-                        },
-                      ],
-                      backgroundColor: "#535C91",
-                      cornerRadius: "xl",
-                    },
-                  ],
-                  flex: 0,
-                  cornerRadius: "none",
-                },
-              },
-            },
-          ],
-        }),
-      });
+    //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
 
-      if (response.ok) {
-        alert("Message sent successfully");
-      } else {
-        alert("Failed to send message");
-      }
-    } catch (error) {
-      console.error("Failed to send message:", error);
-      alert("Failed to send message");
-    }
+    // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // ! Bearer ต่อด้วย  [Channel access token] ของ messagesing api
+            Authorization:
+              "Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
+          },
+        }
+      ).then((res) => console.log(res.json));
+    } catch (error) {}
   };
 
   const logInBeforeBuy = () => {

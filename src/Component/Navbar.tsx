@@ -28,17 +28,11 @@ export default function Navbar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    // Initialize LIFF SDK
     const initLiff = async () => {
-      try {
-        await liff.init({ liffId });
-        setIsLogin(liff.isLoggedIn());
-      } catch (error) {
-        console.error("LIFF initialization failed", error);
-      }
+      setIsLogin(liff.isLoggedIn());
     };
     setInterval(initLiff, 1000);
-  }, [isLogin, dataLine]);
+  }, []);
 
   const btnLogin = useCallback(() => {
     liff.login();
@@ -82,7 +76,7 @@ export default function Navbar() {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1 }}>
-            <a className="font-extrabold flex items-center gap-x-2" href="/">
+            <a className="font-extrabold flex items-center gap-x-2 " href="/">
               <img
                 style={{ width: "30px", height: "30px" }}
                 src="https://cdn-icons-png.flaticon.com/512/528/528111.png"

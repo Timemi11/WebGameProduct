@@ -1,2 +1,1 @@
-export const ngrokDomain =
-  'http://localhost:3001';
+export const ngrokDomain = "https://archive-rouge-five.vercel.app";
