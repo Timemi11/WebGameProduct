@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GameProduct } from "./Model/GameProduct";
 import liff from "@line/liff";
 import { ngrokDomain } from "./pathngrok/ngrokdomain";
@@ -10,18 +10,22 @@ type ModalProps = {
   product: GameProduct;
 };
 
+// * userId Uee534050cb274b81e66a9f0333932612
+
 export default function Modal({ handleToggleModal, product }: ModalProps) {
   const liffId = "2005244347-lY246dm4";
+  const liffurl = "https://liff.line.me/2005244347-lY246dm4";
   const dataLine = useContext<User | undefined>(GetProfile);
-  // * userId Uee534050cb274b81e66a9f0333932612
+  const [isLoading, setisLoading] = useState(false);
+
+  // ngrokDomain + `/webhook/${dataLine?.userId}?_id=${product._id}`
+  //
   const sendMessageToLine = async () => {
-    //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
-
-    // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
-
     try {
       const response = await fetch(
         `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}`,
+        // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
+        //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
         {
           method: "POST",
           headers: {
@@ -30,8 +34,11 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
             Authorization:
               "Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
           },
+          body: JSON.stringify({
+            url: liffurl,
+          }),
         }
-      ).then((res) => console.log(res.json));
+      );
     } catch (error) {}
   };
 
@@ -44,44 +51,62 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
         if (!liff.isLoggedIn()) {
           liff.login();
         } else {
-          sendMessageToLine();
+          setisLoading(true); //ตั้งเวลา loading เมื่อกดสั่งซื้อ
+          sendMessageToLine().then(() => {
+            setisLoading(false);
+            if (liff.getContext()?.type === "external")
+              window.location.reload();
+            else liff.closeWindow();
+          });
         }
       });
   };
 
   return (
-    <div className=" fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div
-        className="overflow-y-auto text-white flex flex-col items-center p-8 rounded-lg max-w-lg w-full"
-        style={{
-          maxHeight: "-webkit-fill-available",
-          backgroundColor: "#212233",
-          scrollbarWidth: "thin",
-          scrollbarColor: "#AAADBE #6842ff",
-        }}>
-        <h2 className="text-2xl font-bold mb-4">{product.prod_name}</h2>
-        <img
-          src={product.prod_img}
-          alt="prod_img"
-          className=" h-48 w-48 object-cover mb-4 rounded-lg"></img>
-        <p>รายละเอียด</p>
-        <p className="text-white mb-4">{product.prod_desc}</p>
-        <p className="mb-4 text-green-500 text-xl font-extrabold">
-          ราคา {product.prod_price} บาท
-        </p>
-        <div className="buttonGroup flex gap-x-6 justify-between w-full">
-          <button
-            onClick={handleToggleModal}
-            className="w-1/2 mt-4 text-2xl font-extrabold bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-md">
-            ปิด
-          </button>
-          <button
-            onClick={logInBeforeBuy}
-            className="w-1/2 mt-4 text-2xl font-extrabold bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-md">
-            สั่งซื้อ
-          </button>
+    <div className="higher-bg">
+      {!isLoading ? (
+        <div className=" fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div
+            className="overflow-y-auto text-white flex flex-col items-center p-8 rounded-lg max-w-lg w-full"
+            style={{
+              maxHeight: "-webkit-fill-available",
+              backgroundColor: "#212233",
+              scrollbarWidth: "thin",
+              scrollbarColor: "#AAADBE #6842ff",
+            }}>
+            <h2 className="text-2xl font-bold mb-4">{product.prod_name}</h2>
+            <img
+              src={product.prod_img}
+              alt="prod_img"
+              className=" h-48 w-48 object-cover mb-4 rounded-lg"></img>
+            <p>รายละเอียด</p>
+            <p className="text-white mb-4">{product.prod_desc}</p>
+            <p className="mb-4 text-red-500 text-xl font-extrabold line-through">
+              ราคาเดิม {product.prod_price + product.prod_price * (50 / 100)}{" "}
+              บาท
+            </p>
+            <p className="mb-4 text-green-500 text-xl font-extrabold">
+              ลดเหลือ {product.prod_price} บาท
+            </p>
+            <div className="buttonGroup flex gap-x-6 justify-between w-full">
+              <button
+                onClick={handleToggleModal}
+                className="w-1/2 mt-4 text-2xl font-extrabold bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-md">
+                ปิด
+              </button>
+              <button
+                onClick={logInBeforeBuy}
+                className="w-1/2 mt-4 text-2xl font-extrabold bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-md">
+                สั่งซื้อ
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="bg-white font-extrabold fixed inset-0 flex items-center justify-center">
+          <h1>LOADING...</h1>
+        </div>
+      )}
     </div>
   );
 }

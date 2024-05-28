@@ -46,7 +46,6 @@ export default function ShowGameProduct() {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {/* GameProduct */}
-
         {gamedata.map((items, ind) => (
           <div
             key={ind}
@@ -59,8 +58,13 @@ export default function ShowGameProduct() {
             <h3 className="text-lg font-semibold">{items.prod_name}</h3>
             <p>รายละเอียด</p>
 
-            <p className="text-gray-500 truncate w-60 ">{items.prod_desc}</p>
-            <p className="text-green-500">ราคา {items.prod_price} บาท</p>
+            <p className="text-gray-500 truncate w-60  ">{items.prod_desc}</p>
+            <div className="flex flex-col ">
+              <p className="text-red-500 line-through">
+                ราคาเดิม {items.prod_price + items.prod_price * (50 / 100)} บาท
+              </p>
+              <p className="text-green-300">ลดเหลือ {items.prod_price} บาท</p>
+            </div>
             <button
               onClick={() => handleToggleModal(items)}
               className="mt-4 font-extrabold bg-violet-800 hover:bg-violet-700 text-white px-4 py-2 rounded-md">
@@ -68,6 +72,7 @@ export default function ShowGameProduct() {
             </button>
           </div>
         ))}
+        {/*  เปิด modal */}
         {isDetail && selectedProduct && (
           <Modal
             handleToggleModal={handleToggleModal}
