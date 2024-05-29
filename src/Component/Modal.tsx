@@ -31,15 +31,14 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
       const data = await response.json();
       if (data[appId].success) {
         const gameData = data[appId].data;
-        return {
+        return JSON.stringify({
           name: gameData.name,
           header_image: gameData.header_image,
-        };
+        });
       }
-      return null;
     } catch (error) {
       console.error("Error fetching game details:", error);
-      return null;
+      return error;
     }
   };
 
