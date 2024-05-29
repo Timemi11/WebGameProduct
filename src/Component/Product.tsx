@@ -15,7 +15,6 @@ import { useState, useEffect } from "react";
 import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import liff from '@line/liff';
 import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";
 import "./custom.css";
 
@@ -34,7 +33,6 @@ type List = {
 
 export default function Product() {
   const [items, setItems] = useState<List[]>([]);
-  // const liffId = '2005244347-lY246dm4';
 
   const ProductUpdate = (id: string) => {
     window.location.href = "/update/" + id;

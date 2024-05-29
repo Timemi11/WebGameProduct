@@ -1,6 +1,6 @@
 import * as React from "react";
 import liff from "@line/liff";
-import { useCallback, useContext, useEffect, useState } from "react";
+import {  useContext, useEffect, useState } from "react";
 import { GetProfile } from "../App";
 import { User } from "./Model/User";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,7 +20,6 @@ import {
 } from "@mui/material/";
 
 export default function Navbar() {
-  const liffId = "2005244347-lY246dm4";
   const dataLine = useContext<User | undefined>(GetProfile);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
