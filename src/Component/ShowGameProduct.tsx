@@ -5,7 +5,6 @@ import Modal from "./Modal";
 import { GameProduct } from "./Model/GameProduct";
 import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";
 
-
 export default function ShowGameProduct() {
   const [gamedata, setGameData] = useState<GameProduct[]>([]);
   const [isDetail, setIsDetail] = useState<boolean>(false);
@@ -43,7 +42,7 @@ export default function ShowGameProduct() {
           backgroundColor: "rgb(104, 66, 255)",
         }}
         className="text-3xl text-white text-center shadow-md p-4 rounded-lg  font-semibold mb-8 ">
-        Our Games
+        สินค้าของเรา
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center gap-8 ">

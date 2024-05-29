@@ -90,7 +90,7 @@ export default function ProductUpdate() {
             style={{ marginBottom: "30px", textAlign: "center" }}
             gutterBottom
             component={"div"}>
-            Update GameProducts
+            แก้ไขสินค้า
           </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
