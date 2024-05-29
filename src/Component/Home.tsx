@@ -19,7 +19,7 @@ export default function Home() {
           <div className="wrapper w-full">
             <svg>
               <text x="50%" y="50%" dy=".35em" text-anchor="middle">
-                GameProduct1
+                GameProduct
               </text>
             </svg>
           </div>
