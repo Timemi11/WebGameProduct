@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 
 import { GameProduct } from "../type/items";
-
 import { getGameProduct } from "../service/fectch";
 
 export default function ShowGameProduct() {
@@ -16,8 +15,13 @@ export default function ShowGameProduct() {
     setIsDetail(!isDetail);
   };
 
+  async function get() {
+    const data = await getGameProduct();
+    setGameData(data);
+  }
+
   useEffect(() => {
-    getGameProduct();
+    get();
   }, []);
 
   return (

@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useContext, FormEvent } from "react";
 
 import { GetProfile } from "../App";
-import { User } from "../type/items";
+import { GameProduct } from "../type/items";
 import { ngrokDomain } from "../service/ngrokdomain";
 import {
   CssBaseline,
@@ -19,7 +19,7 @@ export default function ProductCreate() {
   const [prod_name, setProdName] = useState<string>("");
   const [prod_desc, setProdDesc] = useState<string>("");
   const [prod_price, setProdPrice] = useState<string>("");
-  const dataLine = useContext<User | undefined>(GetProfile);
+  const dataLine = useContext<GameProduct | null>(GetProfile);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

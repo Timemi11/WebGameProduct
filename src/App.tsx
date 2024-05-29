@@ -7,14 +7,14 @@ import ProductCreate from "./components/ProductCreate";
 import ProductUpdate from "./components/ProductUpdate";
 import ShowGameProduct from "./components/ShowGameProduct";
 import liff from "@line/liff";
-import { User } from "./type/items";
+import { GameProduct } from "./type/items";
 import Home from "./components/Home";
 
-export const GetProfile = createContext<User | undefined>(undefined);
+export const GetProfile = createContext<GameProduct | null>(null);
 
 const App: React.FC = () => {
   const liffId = "2005244347-lY246dm4";
-  const [dataLine, setDataLine] = useState<User>();
+  const [dataLine, setDataLine] = useState<GameProduct | null>(null);
 
   const getProfile = async (): Promise<void> => {
     const profile = await liff.getProfile();
@@ -24,7 +24,18 @@ const App: React.FC = () => {
       displayName: string | "";
       statusMessage: string | "";
     };
-    setDataLine({ pictureUrl, userId, displayName, statusMessage });
+    setDataLine({
+      _id: "",
+      pictureUrl,
+      userId,
+      displayName,
+      statusMessage,
+      prod_img: "",
+      prod_name: "",
+      prod_desc: "",
+      prod_price: 0,
+      update_at: "",
+    });
   };
 
   useEffect(() => {

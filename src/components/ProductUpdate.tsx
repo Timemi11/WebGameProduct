@@ -1,8 +1,8 @@
 import React, { FormEvent, useContext, useState, useEffect } from "react";
 import { GetProfile } from "../App";
-import { User } from "../type/items";
+import { GameProduct } from "../type/items";
 import { useParams } from "react-router-dom";
-import { ngrokDomain } from "../service/ngrokdomain";
+
 import {
   CssBaseline,
   Container,
@@ -12,67 +12,60 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
+import { getGameProduct, putGameProduct } from "../service/fectch";
 
 export default function ProductUpdate() {
   const [prod_img, setProdImg] = useState<string>("");
   const [prod_name, setProdName] = useState<string>("");
   const [prod_desc, setProdDesc] = useState<string>("");
   const [prod_price, setProdPrice] = useState<string>("");
-  const dataLine = useContext<User | undefined>(GetProfile);
-  const { id } = useParams<{ id: string }>();
+  const dataLine = useContext<GameProduct | null>(GetProfile);
+  const { id } = useParams<{ id: string | undefined }>();
+
+  async function get() {
+    const data = await getGameProduct();
+    setProdImg(data["prod_img"]);
+    setProdName(data["prod_name"]);
+    setProdDesc(data["prod_desc"]);
+    setProdPrice(data["prod_price"]);
+  }
 
   useEffect(() => {
-    const requestOptions: RequestInit = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch(ngrokDomain + "/products/" + id, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setProdImg(result["prod_img"]);
-        setProdName(result["prod_name"]);
-        setProdDesc(result["prod_desc"]);
-        setProdPrice(result["prod_price"]);
-      })
-      .catch((error: Error) => console.error(error));
+    get();
   }, [id]); //ดึงข้อมูลจาก Id ที่ส่งมาจาก หน้าแรก แค่รอบเดียว และ get ค่าอีกครั้งเมื่อ Id เปลี่ยนค่า
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //ป้องกันการ refresh หน้าเว็บเมื่อ submit
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    putGameProduct(dataLine, id);
 
-    const raw = JSON.stringify({
-      pictureUrl: dataLine?.pictureUrl,
-      userId: dataLine?.userId,
-      displayName: dataLine?.displayName,
-      statusMessage: dataLine?.statusMessage,
-      prod_img: prod_img,
-      prod_name: prod_name,
-      prod_desc: prod_desc,
-      prod_price: prod_price,
-    });
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
-    const requestOptions: RequestInit = {
-      method: "PUT",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+    // const raw = JSON.stringify({
+    //   pictureUrl: dataLine?.pictureUrl,
+    //   userId: dataLine?.userId,
+    //   displayName: dataLine?.displayName,
+    //   statusMessage: dataLine?.statusMessage,
+    //   prod_img: prod_img,
+    //   prod_name: prod_name,
+    //   prod_desc: prod_desc,
+    //   prod_price: prod_price,
+    // });
 
-    fetch(ngrokDomain + "/products/" + id, requestOptions)
-      .then((response: Response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then(() => {
-        alert("แก้ไขข้อมูล Product แล้ว T0T");
-        window.location.href = "/admin";
-      })
-      .catch((error: Error) => console.error(error));
+    // const requestOptions: RequestInit = {
+    //   method: "PUT",
+    //   headers: myHeaders,
+    //   body: raw,
+    //   redirect: "follow",
+    // };
+
+    // fetch(ngrokDomain + "/products/" + id, requestOptions)
+    //   .then((response: Response) => response.json())
+    //   .then(() => {
+    //     alert("แก้ไขข้อมูล Product แล้ว T0T");
+    //     window.location.href = "/admin";
+    //   })
+    //   .catch((error: Error) => console.error(error));
   };
 
   return (

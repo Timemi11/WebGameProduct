@@ -16,7 +16,7 @@ type ModalProps = {
 export default function Modal({ handleToggleModal, product }: ModalProps) {
   const liffId = "2005244347-lY246dm4";
   const liffurl = "https://liff.line.me/2005244347-lY246dm4";
-  const dataLine = useContext<User | undefined>(GetProfile);
+  const dataLine = useContext<GameProduct | null>(GetProfile);
   const [isLoading, setisLoading] = useState(false);
 
   // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
