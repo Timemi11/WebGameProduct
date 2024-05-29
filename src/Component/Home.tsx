@@ -19,7 +19,7 @@ export default function Home() {
           <div className="wrapper w-full">
             <svg>
               <text
-                className="text-custom md:text-md"
+                className="text-5xl md:text-9xl"
                 x="50%"
                 y="50%"
                 dy=".35em"
@@ -29,7 +29,7 @@ export default function Home() {
             </svg>
           </div>
           <button
-            className="font-extrabold text-3xl p-4 rounded-lg border-8 border-orange-500 hover:border-orange-300 "
+            className="font-extrabold text-2xl md:text-3xl p-4 rounded-lg border-8 border-orange-500 hover:border-orange-300 "
             onClick={() => (window.location.href = "user")}>
             Next!
           </button>
