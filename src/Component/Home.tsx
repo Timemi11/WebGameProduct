@@ -16,10 +16,10 @@ export default function Home() {
           muted
           loop></video>
         <div className="content">
-          <div className="wrapper">
+          <div className="wrapper w-full">
             <svg>
-              <text x="50%" y="50%" dy=".35em" text-anchor="middle">
-                Home
+              <text x="100%" y="100%" dy=".35em" text-anchor="middle">
+                GameProduct
               </text>
             </svg>
           </div>
