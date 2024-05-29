@@ -18,6 +18,8 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
   const liffurl = "https://liff.line.me/2005244347-lY246dm4";
   const dataLine = useContext<User | undefined>(GetProfile);
   const [isLoading, setisLoading] = useState(false);
+  const appId = 374410;
+  const key = "80631961452FFECB91BA8D6639E9B892";
 
   // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
   //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
