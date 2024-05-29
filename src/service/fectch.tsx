@@ -16,6 +16,21 @@ export const getGameProduct = () => {
     .then((result) => result)
     .catch((error: Error) => console.error(error));
 };
+export const getGameProductId = (id: string | undefined) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestOptions: RequestInit = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  return fetch(ngrokDomain + "/products/" + id, requestOptions)
+    .then((response: Response) => response.json())
+    .then((result) => result)
+    .catch((error: Error) => console.error(error));
+};
 
 export const putGameProduct = (data: any, paramId: any) => {
   const myHeaders = new Headers();

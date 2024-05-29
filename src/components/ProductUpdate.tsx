@@ -12,7 +12,7 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-import { getGameProduct, putGameProduct } from "../service/fectch";
+import { getGameProductId, putGameProduct } from "../service/fectch";
 
 export default function ProductUpdate() {
   const [prod_img, setProdImg] = useState<string>("");
@@ -22,8 +22,8 @@ export default function ProductUpdate() {
   const dataLine = useContext<GameProduct | null>(GetProfile);
   const { id } = useParams<{ id: string | undefined }>();
 
-  async function get() {
-    const data = await getGameProduct();
+  async function get(id: string | undefined) {
+    const data = await getGameProductId(id);
     setProdImg(data["prod_img"]);
     setProdName(data["prod_name"]);
     setProdDesc(data["prod_desc"]);
@@ -31,7 +31,7 @@ export default function ProductUpdate() {
   }
 
   useEffect(() => {
-    get();
+    get(id);
   }, [id]); //ดึงข้อมูลจาก Id ที่ส่งมาจาก หน้าแรก แค่รอบเดียว และ get ค่าอีกครั้งเมื่อ Id เปลี่ยนค่า
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
