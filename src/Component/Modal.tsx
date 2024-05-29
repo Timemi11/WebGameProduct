@@ -23,7 +23,7 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
   //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
 
   const surveyssprlit = async () => {
-    const url = `http://store.steampowered.com/api/appdetails?appids=${appId}`;
+    const url = `https://store.steampowered.com/api/appdetails?appids=${appId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
