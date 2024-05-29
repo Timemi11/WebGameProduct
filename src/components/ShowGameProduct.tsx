@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import Modal from "./Modal";
 
-import { GameProduct } from "./Model/GameProduct";
-import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";
+import { GameProduct } from "../type/items";
+
+import { getGameProduct } from "../service/fectch";
 
 export default function ShowGameProduct() {
   const [gamedata, setGameData] = useState<GameProduct[]>([]);
@@ -18,22 +19,6 @@ export default function ShowGameProduct() {
   useEffect(() => {
     getGameProduct();
   }, []);
-
-  const getGameProduct = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const requestOptions: RequestInit = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(ngrokDomain + "/products", requestOptions)
-      .then((response: Response) => response.json())
-      .then((result) => setGameData(result))
-      .catch((error: Error) => console.error(error));
-  };
 
   return (
     <div className=" container mx-auto p-4 ">

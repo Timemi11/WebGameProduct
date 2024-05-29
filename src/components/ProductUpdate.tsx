@@ -1,9 +1,8 @@
-import * as React from "react";
-import { useState, useContext, FormEvent } from "react";
-
+import React, { FormEvent, useContext, useState, useEffect } from "react";
 import { GetProfile } from "../App";
-import { User } from "./Model/User";
-import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";
+import { User } from "../type/items";
+import { useParams } from "react-router-dom";
+import { ngrokDomain } from "../service/ngrokdomain";
 import {
   CssBaseline,
   Container,
@@ -14,15 +13,33 @@ import {
   ButtonGroup,
 } from "@mui/material";
 
-export default function ProductCreate() {
+export default function ProductUpdate() {
   const [prod_img, setProdImg] = useState<string>("");
   const [prod_name, setProdName] = useState<string>("");
   const [prod_desc, setProdDesc] = useState<string>("");
   const [prod_price, setProdPrice] = useState<string>("");
   const dataLine = useContext<User | undefined>(GetProfile);
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    const requestOptions: RequestInit = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(ngrokDomain + "/products/" + id, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setProdImg(result["prod_img"]);
+        setProdName(result["prod_name"]);
+        setProdDesc(result["prod_desc"]);
+        setProdPrice(result["prod_price"]);
+      })
+      .catch((error: Error) => console.error(error));
+  }, [id]); //ดึงข้อมูลจาก Id ที่ส่งมาจาก หน้าแรก แค่รอบเดียว และ get ค่าอีกครั้งเมื่อ Id เปลี่ยนค่า
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault(); //ป้องกันการ refresh หน้าเว็บเมื่อ submit
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -38,13 +55,13 @@ export default function ProductCreate() {
     });
 
     const requestOptions: RequestInit = {
-      method: "POST",
+      method: "PUT",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
     };
 
-    fetch(ngrokDomain + "/products", requestOptions)
+    fetch(ngrokDomain + "/products/" + id, requestOptions)
       .then((response: Response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -52,17 +69,17 @@ export default function ProductCreate() {
         return response.json();
       })
       .then(() => {
-        alert("เพิ่มข้อมูล Product แล้ว T0T");
+        alert("แก้ไขข้อมูล Product แล้ว T0T");
         window.location.href = "/admin";
       })
-      .catch((error) => console.error(error));
+      .catch((error: Error) => console.error(error));
   };
 
   return (
     <React.Fragment>
       <CssBaseline />
       <div
-        className="w-full h-screen pt-8 "
+        className="w-full h-screen pt-8"
         style={{ backgroundColor: "#212233" }}>
         <Container
           className="bg-white"
@@ -73,19 +90,19 @@ export default function ProductCreate() {
             style={{ marginBottom: "30px", textAlign: "center" }}
             gutterBottom
             component={"div"}>
-            เพิ่มสินค้า
+            แก้ไขสินค้า
           </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <TextField
                   id="prod_img"
-                  label="GameProduct image"
+                  label="GameProduct Image"
                   variant="outlined"
                   fullWidth
                   required
-                  value={prod_img}
-                  onChange={(e) => setProdImg(e.target.value)}></TextField>
+                  onChange={(e) => setProdImg(e.target.value)}
+                  value={prod_img}></TextField>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -94,8 +111,8 @@ export default function ProductCreate() {
                   variant="outlined"
                   fullWidth
                   required
-                  value={prod_name}
-                  onChange={(e) => setProdName(e.target.value)}></TextField>
+                  onChange={(e) => setProdName(e.target.value)}
+                  value={prod_name}></TextField>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -103,19 +120,19 @@ export default function ProductCreate() {
                   label="GameProduct Desciption"
                   variant="outlined"
                   fullWidth
-                  value={prod_desc}
-                  onChange={(e) => setProdDesc(e.target.value)}></TextField>
+                  onChange={(e) => setProdDesc(e.target.value)}
+                  value={prod_desc}></TextField>
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   id="prod_price"
                   label="GameProduct Price"
-                  variant="outlined"
                   type="number"
+                  variant="outlined"
                   fullWidth
                   required
-                  value={prod_price}
-                  onChange={(e) => setProdPrice(e.target.value)}></TextField>
+                  onChange={(e) => setProdPrice(e.target.value)}
+                  value={prod_price}></TextField>
               </Grid>
               <Grid item xs={12}>
                 <ButtonGroup
@@ -140,7 +157,7 @@ export default function ProductCreate() {
                     Clear
                   </Button>
                   <Button type="submit" variant="contained" color="success">
-                    Create
+                    Update
                   </Button>
                 </ButtonGroup>
               </Grid>

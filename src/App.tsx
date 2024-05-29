@@ -1,14 +1,14 @@
 import React, { useEffect, useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Navbar from "./Component/Navbar";
-import Product from "./Component/Product";
-import ProductCreate from "./Component/ProductCreate";
-import ProductUpdate from "./Component/ProductUpdate";
-import ShowGameProduct from "./Component/ShowGameProduct";
+import Navbar from "./components/Navbar";
+import Product from "./components/Product";
+import ProductCreate from "./components/ProductCreate";
+import ProductUpdate from "./components/ProductUpdate";
+import ShowGameProduct from "./components/ShowGameProduct";
 import liff from "@line/liff";
-import { User } from "./Component/Model/User";
-import Home from "./Component/Home";
+import { User } from "./type/items";
+import Home from "./components/Home";
 
 export const GetProfile = createContext<User | undefined>(undefined);
 

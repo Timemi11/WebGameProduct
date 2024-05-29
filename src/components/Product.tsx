@@ -15,17 +15,10 @@ import { useState, useEffect } from "react";
 import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";
-import "./custom.css";
-import { GameProduct } from "./Model/GameProduct";
-
-
-
-// ตัวอย่างข้อมูล
-// prod_img : https://th.bing.com/th/id/OIP.Z7ONfsHRRODBL1xmGG65RwHaE7?w=719&h=479&rs=1&pid=ImgDetMain
-// prod_name: ไอโฟน
-// prod_desc : สุดยอดกล้อง
-// prod_price : 1200
+import { ngrokDomain } from "../service/ngrokdomain";
+import "../assets/Home.css";
+import "../assets/Loading.css";
+import { GameProduct } from "../type/items";
 
 export default function Product() {
   const [items, setItems] = useState<GameProduct[]>([]);

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { GameProduct } from "./Model/GameProduct";
 import liff from "@line/liff";
-import { ngrokDomain } from "./pathngrok/ngrokdomain";
-import { User } from "./Model/User";
+import { ngrokDomain } from "../service/ngrokdomain";
+import { User, GameProduct } from "../type/items";
 import { GetProfile } from "../App";
-import "./custom.css";
+import "../assets/Home.css";
+import "../assets/Loading.css";
 
 type ModalProps = {
   handleToggleModal: () => void;

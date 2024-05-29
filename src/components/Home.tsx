@@ -1,7 +1,8 @@
 import React from "react";
 import videobg from "../assets/v1.mp4";
-import "./customarrow.css";
-import "../custom.d.ts";
+import "../assets/Home.css";
+import "../assets/Loading.css";
+
 export default function Home() {
   return (
     <div className="container mx-auto">

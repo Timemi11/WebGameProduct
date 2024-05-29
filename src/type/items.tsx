@@ -11,3 +11,10 @@ export type GameProduct = {
   update_at: string;
 };
 // ! ข้อดีของมันคือ เวลาเราดึงพวก api มามันจะเป็น json ดังนั่น หากเรามี interface object class มารอเก็บเอาไว้มาจะช่วยให้เราเก็บข้อมูลได้ง่ายขึ้น
+
+export type User = {
+  pictureUrl: string;
+  userId: string;
+  displayName: string;
+  statusMessage: string;
+};

@@ -1,8 +1,8 @@
 import * as React from "react";
 import liff from "@line/liff";
-import {  useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GetProfile } from "../App";
-import { User } from "./Model/User";
+import { User } from "../type/items";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
