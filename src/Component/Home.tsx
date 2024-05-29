@@ -18,7 +18,7 @@ export default function Home() {
         <div className="content">
           <div className="wrapper w-full">
             <svg>
-              <text x="100%" y="100%" dy=".35em" text-anchor="middle">
+              <text x="50%" y="50%" dy=".35em" text-anchor="middle">
                 GameProduct
               </text>
             </svg>
