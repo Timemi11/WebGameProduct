@@ -18,16 +18,32 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
   const liffurl = "https://liff.line.me/2005244347-lY246dm4";
   const dataLine = useContext<User | undefined>(GetProfile);
   const [isLoading, setisLoading] = useState(false);
-
+  const appId = 374410;
   // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
   //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
 
-  // const surveyssprlit = async () => {
-  //   const response = await fetch(ngrokDomain + `/surveys`);
-  //   const result = await response.json();
-  //   console.log(result[0]["answers"][0]);
-  // };
-  // surveyssprlit();
+  const surveyssprlit = async () => {
+    const url = `http://store.steampowered.com/api/appdetails?appids=${appId}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data[appId].success) {
+        const gameData = data[appId].data;
+        return {
+          name: gameData.name,
+          header_image: gameData.header_image,
+        };
+      }
+      return null;
+    } catch (error) {
+      console.error("Error fetching game details:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    surveyssprlit();
+  }, []);
 
   const sendMessageToLine = async () => {
     try {
