@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import liff from "@line/liff";
 import { ngrokDomain } from "../service/ngrokdomain";
-import { User, GameProduct } from "../type/items";
+import { GameProduct } from "../type/items";
 import { GetProfile } from "../App";
 import "../assets/Home.css";
 import "../assets/Loading.css";
