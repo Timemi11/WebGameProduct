@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState, useEffect, useContext, FormEvent } from "react";
-import liff from "@line/liff";
+import { useState, useContext, FormEvent } from "react";
+
 import { GetProfile } from "../App";
 import { User } from "./Model/User";
 import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";

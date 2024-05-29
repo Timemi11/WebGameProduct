@@ -17,14 +17,10 @@ import { ButtonGroup } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ngrokDomain } from "../Component/pathngrok/ngrokdomain";
 import "./custom.css";
+import { GameProduct } from "./Model/GameProduct";
 
-type List = {
-  // ! ข้อดีของมันคือ เวลาเราดึงพวก api มามันจะเป็น json ดังนั่น หากเรามี interface object class มารอเก็บเอาไว้มาจะช่วยให้เราเก็บข้อมูลได้ง่ายขึ้น
-  prod_img: string;
-  prod_name: string;
-  prod_desc: string;
-  prod_price: number;
-};
+
+
 // ตัวอย่างข้อมูล
 // prod_img : https://th.bing.com/th/id/OIP.Z7ONfsHRRODBL1xmGG65RwHaE7?w=719&h=479&rs=1&pid=ImgDetMain
 // prod_name: ไอโฟน
@@ -32,7 +28,7 @@ type List = {
 // prod_price : 1200
 
 export default function Product() {
-  const [items, setItems] = useState<List[]>([]);
+  const [items, setItems] = useState<GameProduct[]>([]);
 
   const ProductUpdate = (id: string) => {
     window.location.href = "/update/" + id;
@@ -134,7 +130,7 @@ export default function Product() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {items.map((row: any) => (
+                  {items.map((row: GameProduct) => (
                     <TableRow
                       key={row._id}
                       sx={{
