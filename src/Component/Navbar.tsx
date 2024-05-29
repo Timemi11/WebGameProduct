@@ -45,7 +45,7 @@ export default function Navbar() {
   const btnLogOut = useCallback(() => {
     console.log("Logout");
     liff.logout();
-    window.location.href = "/";
+    window.location.href = "/user";
   }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {

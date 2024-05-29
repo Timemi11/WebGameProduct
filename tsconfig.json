@@ -22,7 +22,5 @@
     "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     "outDir": "./dist",   
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src/**/*", "src/custom.d.ts"]
 }

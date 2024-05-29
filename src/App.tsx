@@ -1,29 +1,29 @@
-import React, { useEffect, useState, createContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './Component/Navbar';
-import Product from './Component/Product';
-import ProductCreate from './Component/ProductCreate';
-import ProductUpdate from './Component/ProductUpdate';
-import ShowGameProduct from './Component/ShowGameProduct';
-import liff from '@line/liff';
-import { User } from './Component/Model/User';
+import React, { useEffect, useState, createContext } from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import Navbar from "./Component/Navbar";
+import Product from "./Component/Product";
+import ProductCreate from "./Component/ProductCreate";
+import ProductUpdate from "./Component/ProductUpdate";
+import ShowGameProduct from "./Component/ShowGameProduct";
+import liff from "@line/liff";
+import { User } from "./Component/Model/User";
+import Home from "./Component/Home";
 
 export const GetProfile = createContext<User | undefined>(undefined);
 
 const App: React.FC = () => {
-  const liffId = '2005244347-lY246dm4';
+  const liffId = "2005244347-lY246dm4";
   const [dataLine, setDataLine] = useState<User>();
 
   const getProfile = async (): Promise<void> => {
     const profile = await liff.getProfile();
-    const {
-      pictureUrl,
-      userId,
-      displayName,
-      statusMessage,
-    }
-    =  profile as { pictureUrl: string | '' ; userId: string | ''; displayName: string | ''; statusMessage: string | '' };
+    const { pictureUrl, userId, displayName, statusMessage } = profile as {
+      pictureUrl: string | "";
+      userId: string | "";
+      displayName: string | "";
+      statusMessage: string | "";
+    };
     setDataLine({ pictureUrl, userId, displayName, statusMessage });
   };
 
@@ -40,7 +40,7 @@ const App: React.FC = () => {
           getProfile();
         }
       } catch (error) {
-        console.error('LIFF initialization failed', error);
+        console.error("LIFF initialization failed", error);
       }
     };
     initLiff();
@@ -50,7 +50,8 @@ const App: React.FC = () => {
     <GetProfile.Provider value={dataLine}>
       <Navbar />
       <Routes>
-        <Route path="/" element={<ShowGameProduct />} />
+        <Route path="/" element={<Home />} />
+        <Route path="user" element={<ShowGameProduct />} />
         <Route path="admin" element={<Product />} />
         <Route path="create" element={<ProductCreate />} />
         <Route path="update/:id" element={<ProductUpdate />} />
