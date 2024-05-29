@@ -108,3 +108,19 @@ export const postGameProduct = (
     })
     .catch((error) => console.error(error));
 };
+
+export const deleteProduct = (id: string) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const requestOptions: RequestInit = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(ngrokDomain + "/products/" + id, requestOptions)
+      .then((response) => response.json())
+      .then(() => getGameProduct())
+      .catch((error) => console.error(error));
+  };

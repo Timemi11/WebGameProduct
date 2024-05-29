@@ -15,44 +15,25 @@ import { useState, useEffect } from "react";
 import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ngrokDomain } from "../service/ngrokdomain";
+
 import "../assets/Home.css";
 import "../assets/Loading.css";
 import { GameProduct } from "../type/items";
+import { getGameProduct, deleteProduct } from "../service/fectch";
 
 export default function Product() {
   const [items, setItems] = useState<GameProduct[]>([]);
 
-  const ProductUpdate = (id: string) => {
+  const goToEdit = (id: string) => {
     window.location.href = "/update/" + id;
   };
 
-  const ProductDelete = (id: string) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const requestOptions: RequestInit = {
-      method: "DELETE",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(ngrokDomain + "/products/" + id, requestOptions)
-      .then((response) => response.json())
-      .then(() => UserGet())
-      .catch((error) => console.error(error));
-  };
-
-  const UserGet = () => {
-    fetch(ngrokDomain + "/products")
-      .then((res: Response) => res.json()) //  .then ส่งค่าคืนมาเป็นformat json  สามารถ ส่งค่า resolve function และ reject function
-      .then((result) => {
-        setItems(result);
-      });
-  };
-
+  async function get() {
+    const data = await getGameProduct();
+    setItems(data);
+  }
   useEffect(() => {
-    UserGet();
+    get();
   }, []);
 
   return (
@@ -180,14 +161,14 @@ export default function Product() {
                             sx={{ marginRight: 1 }}
                             variant="contained"
                             color="warning"
-                            onClick={() => ProductUpdate(row._id)}>
+                            onClick={() => goToEdit(row._id)}>
                             Edit
                           </Button>
                           <Button
                             variant="contained"
                             color="error"
                             startIcon={<DeleteIcon />}
-                            onClick={() => ProductDelete(row._id)}>
+                            onClick={() => deleteProduct(row._id)}>
                             Delete
                           </Button>
                         </ButtonGroup>
