@@ -13,6 +13,7 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
+import { postGameProduct } from "../service/fectch";
 
 export default function ProductCreate() {
   const [prod_img, setProdImg] = useState<string>("");
@@ -23,6 +24,15 @@ export default function ProductCreate() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    postGameProduct(
+      dataLine,
+      prod_img,
+      prod_name,
+      prod_desc,
+      Number.parseInt(prod_price)
+    );
+
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 

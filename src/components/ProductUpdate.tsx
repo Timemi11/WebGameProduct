@@ -36,7 +36,14 @@ export default function ProductUpdate() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //ป้องกันการ refresh หน้าเว็บเมื่อ submit
-    putGameProduct(dataLine, id);
+    putGameProduct(
+      dataLine,
+      prod_img,
+      prod_name,
+      prod_desc,
+      Number.parseInt(prod_price),
+      id
+    );
 
     // const myHeaders = new Headers();
     // myHeaders.append("Content-Type", "application/json");

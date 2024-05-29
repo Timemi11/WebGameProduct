@@ -32,21 +32,27 @@ export const getGameProductId = (id: string | undefined) => {
     .catch((error: Error) => console.error(error));
 };
 
-export const putGameProduct = (data: any, paramId: any) => {
+export const putGameProduct = (
+  data: any,
+  prod_img: string,
+  prod_name: string,
+  prod_desc: string,
+  prod_price: number,
+  paramId: string | undefined
+) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
-  const raw = JSON.stringify(
-    data
-    // pictureUrl: dataLine?.pictureUrl,
-    // userId: dataLine?.userId,
-    // displayName: dataLine?.displayName,
-    // statusMessage: dataLine?.statusMessage,
-    // prod_img: prod_img,
-    // prod_name: prod_name,
-    // prod_desc: prod_desc,
-    // prod_price: prod_price,
-  );
+  const raw = JSON.stringify({
+    pictureUrl: data?.pictureUrl,
+    userId: data?.userId,
+    displayName: data?.displayName,
+    statusMessage: data?.statusMessage,
+    prod_img: prod_img,
+    prod_name: prod_name,
+    prod_desc: prod_desc,
+    prod_price: prod_price,
+  });
 
   const requestOptions: RequestInit = {
     method: "PUT",
@@ -62,4 +68,43 @@ export const putGameProduct = (data: any, paramId: any) => {
       window.location.href = "/admin";
     })
     .catch((error: Error) => console.error(error));
+};
+
+export const postGameProduct = (
+  data: any,
+  prod_img: string,
+  prod_name: string,
+  prod_desc: string,
+  prod_price: number
+) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    pictureUrl: data?.pictureUrl,
+    userId: data?.userId,
+    displayName: data?.displayName,
+    statusMessage: data?.statusMessage,
+    prod_img: prod_img,
+    prod_name: prod_name,
+    prod_desc: prod_desc,
+    prod_price: prod_price,
+  });
+
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch(ngrokDomain + "/products", requestOptions)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then(() => {
+      alert("เพิ่มข้อมูล Product แล้ว T0T");
+      window.location.href = "/admin";
+    })
+    .catch((error) => console.error(error));
 };
