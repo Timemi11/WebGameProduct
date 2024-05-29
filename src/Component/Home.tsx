@@ -1,6 +1,7 @@
 import React from "react";
 import videobg from "../assets/v4.mp4";
 import "./customarrow.css";
+import "../custom.d.ts";
 export default function Home() {
   return (
     <div className="container mx-auto">
