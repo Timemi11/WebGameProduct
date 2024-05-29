@@ -34,19 +34,19 @@ export default function Navbar() {
     setInterval(initLiff, 2000);
   }, []);
 
-  const btnLogin = useCallback(() => {
+  const btnLogin = () => {
     liff.login();
-  }, []);
+  };
 
-  const goAdminPage = useCallback(() => {
+  const goAdminPage = () => {
     window.location.href = "/admin";
-  }, []);
+  };
 
-  const btnLogOut = useCallback(() => {
+  const btnLogOut = () => {
     console.log("Logout");
     liff.logout();
     window.location.href = "/user";
-  }, []);
+  };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
