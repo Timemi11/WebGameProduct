@@ -28,7 +28,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const initLiff = async () => {
-      setIsLogin(liff.isLoggedIn());
+      if (liff.isLoggedIn()) setIsLogin(true);
     };
     // initLiff();
     setInterval(initLiff, 2000); //delay แสดงการเปลี่ยน navbar หลัง login
