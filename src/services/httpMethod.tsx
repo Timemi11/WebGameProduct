@@ -12,10 +12,10 @@ export const getGameProduct = () => {
   };
 
   return fetch(endpoint + "/products", requestOptions)
-    .then((response: Response) => {
-      console.log(response.json());
-      return response.json();
-    })
+    .then((response: Response) =>
+      // console.log(response.json());
+      response.json()
+    )
     .then((result) => result)
     .catch((error: Error) => console.error(error));
 };
