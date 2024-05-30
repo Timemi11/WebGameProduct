@@ -27,7 +27,11 @@ export default function Navbar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    setIsLogin(liff.isLoggedIn());
+    const initLiff = async () => {
+      setIsLogin(liff.isLoggedIn());
+    };
+    // initLiff();
+    setInterval(initLiff, 2000); //delay แสดงการเปลี่ยน navbar หลัง login
   }, []);
 
   const btnLogin = () => {
