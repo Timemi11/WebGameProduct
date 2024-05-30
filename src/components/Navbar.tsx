@@ -31,7 +31,8 @@ export default function Navbar() {
       setIsLogin(liff.isLoggedIn());
       liff.isLoggedIn();
     };
-    setInterval(initLiff, 2000);
+    initLiff();
+    // setInterval(initLiff, 2000);
   }, []);
 
   const btnLogin = () => {
