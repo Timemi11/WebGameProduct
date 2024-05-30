@@ -1,4 +1,5 @@
 import React from "react";
+// import videobg from "../../public/assets/v1.mp4";
 import videobg from "../assets/v1.mp4";
 import "../assets/Home.css";
 import "../assets/Loading.css";

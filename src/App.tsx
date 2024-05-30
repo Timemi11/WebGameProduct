@@ -2,10 +2,10 @@ import React, { useEffect, useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Product from "./components/Product";
-import ProductCreate from "./components/ProductCreate";
-import ProductUpdate from "./components/ProductUpdate";
-import ShowGameProduct from "./components/ShowGameProduct";
+import Product from "./components/AdminPage";
+import ProductCreate from "./components/AdminCreate";
+import ProductUpdate from "./components/AdminEdit";
+import ShowGameProduct from "./components/BrowsePage";
 import liff from "@line/liff";
 import { GameProduct } from "./type/items";
 import Home from "./components/Home";
@@ -25,7 +25,7 @@ const App: React.FC = () => {
       statusMessage: string | "";
     };
     setDataLine({
-      _id: "",
+      id: "",
       pictureUrl,
       userId,
       displayName,
@@ -56,7 +56,7 @@ const App: React.FC = () => {
     };
     initLiff();
   }, []);
- 
+
   return (
     <GetProfile.Provider value={dataLine}>
       <Navbar />

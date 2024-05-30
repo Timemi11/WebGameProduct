@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",                              /* Specify what module code is generated. */
+    "jsx": "react-jsx",                              /* Specify what module code is generated. */
     "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     "outDir": "./dist",   
   },

@@ -3,7 +3,7 @@ import liff from "@line/liff";
 import { GameProduct } from "../type/items";
 import "../assets/Home.css";
 import "../assets/Loading.css";
-import { sendMessageToLine } from "../service/fectch";
+import { sendMessageToLine } from "../services/httpMethod";
 
 // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
 //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`

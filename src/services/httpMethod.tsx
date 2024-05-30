@@ -1,5 +1,5 @@
 import { GameProduct } from "../type/items";
-import { ngrokDomain } from "./ngrokdomain";
+import { endpoint } from "./apiEndpoint";
 
 export const getGameProduct = () => {
   const myHeaders = new Headers();
@@ -11,8 +11,11 @@ export const getGameProduct = () => {
     redirect: "follow",
   };
 
-  return fetch(ngrokDomain + "/products", requestOptions)
-    .then((response: Response) => response.json())
+  return fetch(endpoint + "/products", requestOptions)
+    .then((response: Response) => {
+      console.log(response.json());
+      return response.json();
+    })
     .then((result) => result)
     .catch((error: Error) => console.error(error));
 };
@@ -26,13 +29,20 @@ export const getGameProductId = (id: string | undefined) => {
     redirect: "follow",
   };
 
-  return fetch(ngrokDomain + "/products/" + id, requestOptions)
+  return fetch(endpoint + "/products/" + id, requestOptions)
     .then((response: Response) => response.json())
     .then((result) => result)
     .catch((error: Error) => console.error(error));
 };
 
-export const putGameProduct = ( data: any, prod_img: string,prod_name: string, prod_desc: string, prod_price: number, paramId: string | undefined) => {
+export const putGameProduct = (
+  data: any,
+  prod_img: string,
+  prod_name: string,
+  prod_desc: string,
+  prod_price: number,
+  paramId: string | undefined
+) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -54,7 +64,7 @@ export const putGameProduct = ( data: any, prod_img: string,prod_name: string, p
     redirect: "follow",
   };
 
-  fetch(ngrokDomain + "/products/" + paramId, requestOptions)
+  fetch(endpoint + "/products/" + paramId, requestOptions)
     .then((response: Response) => response.json())
     .then(() => {
       alert("แก้ไขข้อมูล Product แล้ว T0T");
@@ -63,7 +73,13 @@ export const putGameProduct = ( data: any, prod_img: string,prod_name: string, p
     .catch((error: Error) => console.error(error));
 };
 
-export const postGameProduct = ( data: any, prod_img: string, prod_name: string, prod_desc: string, prod_price: number) => {
+export const postGameProduct = (
+  data: any,
+  prod_img: string,
+  prod_name: string,
+  prod_desc: string,
+  prod_price: number
+) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -85,7 +101,7 @@ export const postGameProduct = ( data: any, prod_img: string, prod_name: string,
     redirect: "follow",
   };
 
-  fetch(ngrokDomain + "/products", requestOptions)
+  fetch(endpoint + "/products", requestOptions)
     .then((response: Response) => {
       return response.json();
     })
@@ -97,48 +113,51 @@ export const postGameProduct = ( data: any, prod_img: string, prod_name: string,
 };
 
 export const deleteProduct = (id: string) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
 
-    const requestOptions: RequestInit = {
-      method: "DELETE",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(ngrokDomain + "/products/" + id, requestOptions)
-      .then((response) => response.json())
-      .then(() => getGameProduct())
-      .catch((error) => console.error(error));
+  const requestOptions: RequestInit = {
+    method: "DELETE",
+    headers: myHeaders,
+    redirect: "follow",
   };
 
-  export const sendMessageToLine = async (product:GameProduct,liffurl:string ) => {
-    try {
-      const response = await fetch(
-        ngrokDomain + `/sent-gameproduct/${product?.userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // ! Bearer ต่อด้วย  [Channel access token] ของ messagesing api
-            Authorization:
-              "Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
-          },
-          body: JSON.stringify({
-            prod_id: product._id,
-            prod_img: product.prod_img,
-            prod_name: product.prod_name,
-            prod_desc: product.prod_desc,
-            prod_price: product.prod_price,
-            url: liffurl,
-          }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+  fetch(endpoint + "/products/" + id, requestOptions)
+    .then((response) => response.json())
+    .then(() => getGameProduct())
+    .catch((error) => console.error(error));
+};
+
+export const sendMessageToLine = async (
+  product: GameProduct,
+  liffurl: string
+) => {
+  try {
+    const response = await fetch(
+      endpoint + `/sent-gameproduct/${product?.userId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // ! Bearer ต่อด้วย  [Channel access token] ของ messagesing api
+          Authorization:
+            "Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
+        },
+        body: JSON.stringify({
+          prod_id: product.id,
+          prod_img: product.prod_img,
+          prod_name: product.prod_name,
+          prod_desc: product.prod_desc,
+          prod_price: product.prod_price,
+          url: liffurl,
+        }),
       }
-      return await response.json();
-    } catch (error) {
-      throw error;
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};

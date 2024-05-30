@@ -18,14 +18,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "../assets/Home.css";
 import "../assets/Loading.css";
 import { GameProduct } from "../type/items";
-import { getGameProduct, deleteProduct } from "../service/fectch";
+import { getGameProduct, deleteProduct } from "../services/httpMethod";
 
-export default function Product() {
+export default function Admin() {
   const [items, setItems] = useState<GameProduct[]>([]);
-
-  const goToEdit = (id: string) => {
-    window.location.href = "/update/" + id;
-  };
 
   async function get() {
     const data = await getGameProduct();
@@ -105,7 +101,7 @@ export default function Product() {
                 <TableBody>
                   {items.map((row: GameProduct) => (
                     <TableRow
-                      key={row._id}
+                      key={row.id}
                       sx={{
                         "&:last-child td, &:last-child th": { border: 0 },
                       }}>
@@ -113,10 +109,13 @@ export default function Product() {
                         className="font-custom"
                         component="th"
                         scope="row">
-                        {row._id}
+                        {row.id}
                       </TableCell>
                       <TableCell align="right">
-                        <img className="rounded-lg" src={row.prod_img}></img>
+                        <img
+                          alt="productImage"
+                          className="rounded-lg"
+                          src={row.prod_img}></img>
                       </TableCell>
                       <TableCell align="right" className="font-custom">
                         {row.prod_name}
@@ -138,7 +137,10 @@ export default function Product() {
                         {row.prod_price} บาท
                       </TableCell>
                       <TableCell align="right" className="font-custom">
-                        <img className="rounded-lg" src={row.pictureUrl}></img>
+                        <img
+                          alt="AdminImage"
+                          className="rounded-lg"
+                          src={row.pictureUrl}></img>
                       </TableCell>
                       <TableCell align="right" className="font-custom">
                         {row.userId}
@@ -160,14 +162,16 @@ export default function Product() {
                             sx={{ marginRight: 1 }}
                             variant="contained"
                             color="warning"
-                            onClick={() => goToEdit(row._id)}>
+                            onClick={() => {
+                              window.location.href = "/update/" + row.id;
+                            }}>
                             Edit
                           </Button>
                           <Button
                             variant="contained"
                             color="error"
                             startIcon={<DeleteIcon />}
-                            onClick={() => deleteProduct(row._id)}>
+                            onClick={() => deleteProduct(row.id)}>
                             Delete
                           </Button>
                         </ButtonGroup>
