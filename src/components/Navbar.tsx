@@ -31,8 +31,8 @@ export default function Navbar() {
       setIsLogin(liff.isLoggedIn());
       liff.isLoggedIn();
     };
-    initLiff();
-    // setInterval(initLiff, 2000);
+    // initLiff();
+    setInterval(initLiff, 2000); //delay แสดงการเปลี่ยน navbar หลัง login
   }, []);
 
   const btnLogin = () => {
