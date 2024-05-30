@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import liff from "@line/liff";
 import { ngrokDomain } from "../service/ngrokdomain";
 import { GameProduct } from "../type/items";
-import { GetProfile } from "../App";
 import "../assets/Home.css";
 import "../assets/Loading.css";
+import { sendMessageToLine } from "../service/fectch";
+
+// !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
+//  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
 
 type ModalProps = {
   handleToggleModal: () => void;
@@ -16,42 +19,7 @@ type ModalProps = {
 export default function Modal({ handleToggleModal, product }: ModalProps) {
   const liffId = "2005244347-lY246dm4";
   const liffurl = "https://liff.line.me/2005244347-lY246dm4";
-  const dataLine = useContext<GameProduct | null>(GetProfile);
   const [isLoading, setisLoading] = useState(false);
-
-  // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
-  //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
-
-  const sendMessageToLine = async () => {
-    try {
-      const response = await fetch(
-        ngrokDomain + `/sent-gameproduct/${dataLine?.userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // ! Bearer ต่อด้วย  [Channel access token] ของ messagesing api
-            Authorization:
-              "Bearer eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
-          },
-          body: JSON.stringify({
-            prod_id: product._id,
-            prod_img: product.prod_img,
-            prod_name: product.prod_name,
-            prod_desc: product.prod_desc,
-            prod_price: product.prod_price,
-            url: liffurl,
-          }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      throw error;
-    }
-  };
 
   const logInBeforeBuy = () => {
     liff
@@ -63,8 +31,9 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
           liff.login();
         } else {
           setisLoading(true); //ตั้งเวลา loading เมื่อกดสั่งซื้อ
-          sendMessageToLine();
+          sendMessageToLine(product, liffurl);
           setInterval(() => {
+            //loadingเสร็จ ประมาณ 2 วินาที
             setisLoading(false);
             if (liff.getContext()?.type === "external")
               window.location.href = "user";

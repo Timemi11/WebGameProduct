@@ -15,7 +15,6 @@ import { useState, useEffect } from "react";
 import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import "../assets/Home.css";
 import "../assets/Loading.css";
 import { GameProduct } from "../type/items";

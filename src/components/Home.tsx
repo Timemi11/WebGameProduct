@@ -5,11 +5,9 @@ import "../assets/Loading.css";
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
+    <div className="container w-full ">
       <div className="overlay"></div>
-      <div
-        style={{ width: "100%", height: "100vh" }}
-        className="youtube-clip flex gap-y-16 items-center justify-center">
+      <div className="clip flex w-dvw h-dvh gap-y-16 items-center justify-center ">
         <video
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
           src={videobg}

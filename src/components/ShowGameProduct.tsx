@@ -52,6 +52,7 @@ export default function ShowGameProduct() {
               className="details w-full h-full flex flex-col justify-center items-center text-center p-4 rounded-lg">
               <h3 className="text-2xl font-semibold text-center ">
                 {items.prod_name}
+     
               </h3>
               <div className="flex flex-col ">
                 <p className="text-red-700 line-through">

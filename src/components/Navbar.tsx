@@ -29,6 +29,7 @@ export default function Navbar() {
   useEffect(() => {
     const initLiff = async () => {
       setIsLogin(liff.isLoggedIn());
+      liff.isLoggedIn();
     };
     setInterval(initLiff, 2000);
   }, []);
