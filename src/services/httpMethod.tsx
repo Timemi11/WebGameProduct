@@ -11,22 +11,24 @@ export const getGameProduct = () => {
     redirect: "follow",
   };
 
+  type beforeTypeGameProduct = {
+    _id: string;
+    pictureUrl: string;
+    userId: string;
+    displayName: string;
+    statusMessage: string;
+    prod_img: string;
+    prod_name: number;
+    prod_desc: string;
+    prod_price: string;
+    update_at: string;
+  };
+
   return fetch(endpoint + "/products", requestOptions)
     .then((response: Response) => response.json())
     .then((result) => {
-      const GameProduct = result.map(
-        (items: {
-          _id: string;
-          pictureUrl: string;
-          userId: string;
-          displayName: string;
-          statusMessage: string;
-          prod_img: string;
-          prod_name: number;
-          prod_desc: string;
-          prod_price: string;
-          update_at: string;
-        }) => ({
+      const convertedTypeGameProduct = result.map(
+        (items: beforeTypeGameProduct) => ({
           id: items._id,
           pictureUrl: items.pictureUrl,
           userId: items.userId,
@@ -39,7 +41,7 @@ export const getGameProduct = () => {
           update_at: items.update_at,
         })
       );
-      return GameProduct;
+      return convertedTypeGameProduct;
     })
     .catch((error: Error) => console.error(error));
 };
