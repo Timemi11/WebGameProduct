@@ -5,7 +5,7 @@ import "../assets/Loading.css";
 
 export default function Home() {
   return (
-    <div className="container w-full ">
+    <div className="container w-full">
       <div className="overlay"></div>
       <div className="clip flex w-dvw h-dvh gap-y-16 items-center justify-center ">
         <video
