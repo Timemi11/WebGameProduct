@@ -12,11 +12,35 @@ export const getGameProduct = () => {
   };
 
   return fetch(endpoint + "/products", requestOptions)
-    .then((response: Response) =>
-      // console.log(response.json());
-      response.json()
-    )
-    .then((result) => result)
+    .then((response: Response) => response.json())
+    .then((result) => {
+      const GameProduct = result.map(
+        (items: {
+          _id: string;
+          pictureUrl: string;
+          userId: string;
+          displayName: string;
+          statusMessage: string;
+          prod_img: string;
+          prod_name: number;
+          prod_desc: string;
+          prod_price: string;
+          update_at: string;
+        }) => ({
+          id: items._id,
+          pictureUrl: items.pictureUrl,
+          userId: items.userId,
+          displayName: items.displayName,
+          statusMessage: items.statusMessage,
+          prod_img: items.prod_img,
+          prod_name: items.prod_name,
+          prod_desc: items.prod_desc,
+          prod_price: items.prod_price,
+          update_at: items.update_at,
+        })
+      );
+      return GameProduct;
+    })
     .catch((error: Error) => console.error(error));
 };
 export const getGameProductId = (id: string | undefined) => {
