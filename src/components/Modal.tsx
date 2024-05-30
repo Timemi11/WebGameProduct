@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import liff from "@line/liff";
-import { ngrokDomain } from "../service/ngrokdomain";
 import { GameProduct } from "../type/items";
 import "../assets/Home.css";
 import "../assets/Loading.css";
