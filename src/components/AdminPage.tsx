@@ -29,7 +29,7 @@ export default function Admin() {
   }
   useEffect(() => {
     get();
-  }, []);
+  }, [items]);
 
   return (
     <React.Fragment>
