@@ -32,7 +32,7 @@ export const sendMessageToLine = async (
         prod_originalprice: product.original_price,
         prod_finalprice: product.final_price,
         url: liffurl,
-        steamurl: steamUrlGame,
+        // steamurl: steamUrlGame,
       }),
     });
     if (!response.ok) {
