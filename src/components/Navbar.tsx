@@ -107,10 +107,6 @@ export default function Navbar() {
                     </MenuItem>,
                   ]
                 : [
-                    <MenuItem key="admin" onClick={goAdminPage}>
-                      Admin
-                    </MenuItem>,
-
                     <MenuItem key="logout" onClick={btnLogOut}>
                       LogOut
                     </MenuItem>,
@@ -161,12 +157,6 @@ export default function Navbar() {
                   />
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
-                  </Button>
-                  <Button
-                    variant="contained"
-                    style={{ backgroundColor: "#ef8f2f" }}
-                    onClick={goAdminPage}>
-                    Admin
                   </Button>
                 </>
               )}
