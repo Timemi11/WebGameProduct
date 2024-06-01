@@ -2,19 +2,16 @@ import React, { useEffect, useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Product from "./components/AdminPage";
-import ProductCreate from "./components/AdminCreate";
-import ProductUpdate from "./components/AdminEdit";
 import ShowGameProduct from "./components/BrowsePage";
 import liff from "@line/liff";
-import { GameProduct } from "./type/items";
+import { Profile } from "./type/Items";
 import Home from "./components/Home";
 
-export const GetProfile = createContext<GameProduct | null>(null);
+export const GetProfile = createContext<Profile | null>(null);
 
 const App: React.FC = () => {
   const liffId = "2005244347-lY246dm4";
-  const [dataLine, setDataLine] = useState<GameProduct | null>(null);
+  const [dataLine, setDataLine] = useState<Profile | null>(null);
 
   const getProfile = async (): Promise<void> => {
     const profile = await liff.getProfile();
@@ -25,16 +22,10 @@ const App: React.FC = () => {
       statusMessage: string | "";
     };
     setDataLine({
-      id: "",
       pictureUrl,
       userId,
       displayName,
       statusMessage,
-      prod_img: "",
-      prod_name: "",
-      prod_desc: "",
-      prod_price: 0,
-      update_at: "",
     });
   };
 
@@ -62,10 +53,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="user" element={<ShowGameProduct />} />
-        <Route path="admin" element={<Product />} />
-        <Route path="create" element={<ProductCreate />} />
-        <Route path="update/:id" element={<ProductUpdate />} />
+        <Route path="/user" element={<ShowGameProduct />} />
         <Route />
       </Routes>
     </GetProfile.Provider>

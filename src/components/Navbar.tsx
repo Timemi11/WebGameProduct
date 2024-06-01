@@ -2,7 +2,7 @@ import * as React from "react";
 import liff from "@line/liff";
 import { useContext, useEffect, useState } from "react";
 import { GetProfile } from "../App";
-import { GameProduct } from "../type/items";
+import { Profile } from "../type/Items";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -20,7 +20,7 @@ import {
 } from "@mui/material/";
 
 export default function Navbar() {
-  const dataLine = useContext<GameProduct | null>(GetProfile);
+  const dataLine = useContext<Profile | null>(GetProfile);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();

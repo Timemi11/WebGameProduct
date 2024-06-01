@@ -19,13 +19,16 @@
   }
   @keyframes s3 {to{transform: rotate(1turn)}}
 
-  .image img{
+  .image img, .image-big img{
     transform: scale(1.0);
     transition: transform 1s ease-out;
     cursor: pointer;
   }
   .image img:hover{
     transform: scale(1.1);
+  }
+  .image-big img:hover{
+    transform: scale(1.05);
   }
 
 
