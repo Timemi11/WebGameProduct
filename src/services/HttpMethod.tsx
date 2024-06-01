@@ -31,7 +31,6 @@ export const sendMessageToLine = async (
         prod_name: product.name,
         prod_desc: product.name,
         prod_origiprice: product.original_price,
-        prod_finalprice: product.final_price,
         url: liffurl,
         steamurl: steamUrlGame,
       }),
