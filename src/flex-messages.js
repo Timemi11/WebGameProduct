@@ -415,6 +415,15 @@ app.listen(port, () => {
 });
 
 
+user:1 access to fetch at 
+'https://archive-rouge-five.vercel.app/sent-gameproduct/uee534050cb274b81e66a9f0333932612' from origin 'https://web-game-product-8dib.vercel.app' has been blocked by cors policy: no 'access-control-allow-origin' header is present on the requested resource. 
+if an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with cors disabled. httpmethod.tsx:20 post https://archive-rouge-five.vercel.app/sent-gameproduct/uee534050cb274b81e66a9f0333932612 
+net::err_failed 500 (internal server error) ec @ httpmethod.tsx:20 (anonymous) 
+@ modal.tsx:35 promise.then (async) onclick @ modal.tsx:30 me @ react-dom.production.min.js:54 ue @ react-dom.production.min.js:54 (anonymous) @ react-dom.production.min.js:55 fr @ react-dom.production.min.js:105 zr @ react-dom.production.min.js:106 (anonymous) @ react-dom.production.min.js:117 
+uu @ react-dom.production.min.js:273 oe @ react-dom.production.min.js:52 vr @ react-dom.production.min.js:109 gt @ react-dom.production.min.js:74 $t @ react-dom.production.min.js:73 show 11 more frames show less httpmethod.tsx:20 uncaught (in promise) typeerror: failed to fetch at ec (httpmethod.tsx:20:28) at modal.tsx:35:11
+
+
+
 
 
 */
