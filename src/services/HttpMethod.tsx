@@ -1,5 +1,5 @@
 import { GameInfo, SteamGame } from "../type/Items";
-import { endpoint, endpointSteam } from "./ApiEndpoint";
+import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
 const mapItems = (items: any) =>
   items.map((item: any) => ({
@@ -29,10 +29,10 @@ export const sendMessageToLine = async (
         prod_id: product.id,
         prod_img: product.large_capsule_image,
         prod_name: product.name,
-        prod_desc: product.name,
-        prod_price: product.original_price,
+        prod_originalprice: product.original_price,
+        prod_finalprice: product.final_price,
         url: liffurl,
-        steamurl: endpointSteam,
+        steamurl: steamUrlGame,
       }),
     });
     if (!response.ok) {
