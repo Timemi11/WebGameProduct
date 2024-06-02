@@ -10,12 +10,13 @@ import "../assets/Pagination.css";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
-type CarouselProps = {
+const GameCarousel = ({
+  gameSteam,
+  steamUrlGame,
+}: {
   gameSteam: SteamGame | undefined;
   steamUrlGame: string;
-};
-
-const GameCarousel = ({ gameSteam, steamUrlGame }: CarouselProps) => {
+}) => {
   return (
     <div className="carousel flex overflow-auto">
       <Swiper

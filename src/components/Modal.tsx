@@ -9,14 +9,15 @@ import { GetProfile } from "../App";
 // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
 //  * ตัวอย่าง  `http://localhost:8080/webhook/${dataLine?.userId}?_id=${product._id}&param1=value1&param2=value2`
 
-type ModalProps = {
-  handleToggleModal: () => void;
-  product: GameInfo;
-};
-
 // * userId Uee534050cb274b81e66a9f0333932612
 
-export default function Modal({ handleToggleModal, product }: ModalProps) {
+export default function Modal({
+  handleToggleModal,
+  product,
+}: {
+  handleToggleModal: () => void;
+  product: GameInfo;
+}) {
   const liffId = "2005244347-lY246dm4";
   const liffurl = "https://liff.line.me/2005244347-lY246dm4";
   const [isLoading, setisLoading] = useState(false);
