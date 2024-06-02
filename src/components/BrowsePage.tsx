@@ -42,7 +42,6 @@ export default function ShowGameProduct() {
         เกมล่าสุด
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center gap-8 ">
-        {/* GameProduct */}
         {gameSteam?.featured_mac.map((items, ind) => (
           <div
             key={ind}
