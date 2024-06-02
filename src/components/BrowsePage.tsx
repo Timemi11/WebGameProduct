@@ -3,14 +3,15 @@ import Modal from "./Modal";
 import { GameInfo, SteamGame } from "../type/Items";
 import { getFeatureGameSteam } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
+import GameCarousel from "./GameCarosel";
 
 export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const handleToggleModal = (product?: GameInfo) => {
-    setSelectedProduct(product);
     setIsDetail(!isDetail);
+    setSelectedProduct(product);
   };
 
   async function get() {
@@ -30,19 +31,16 @@ export default function ShowGameProduct() {
           backgroundColor: "rgb(104, 66, 255)",
         }}
         className="text-3xl text-white text-center shadow-md p-4 rounded-lg  font-semibold mb-8 ">
-        เกมของเรา
+        เกมแนะนำ
       </h1>
-      <div className="image-big featured_win w-full ">
-        <a
-          className="w-full "
-          href={`${steamUrlGame} ${gameSteam?.featured_win[0].id}`}>
-          <img
-            src={gameSteam?.featured_win[0].large_capsule_image}
-            alt="steamgame"
-            className="w-7/12 object-cover rounded-lg"
-          />
-        </a>
-      </div>
+      <GameCarousel gameSteam={gameSteam} steamUrlGame={steamUrlGame} />
+      <h1
+        style={{
+          backgroundColor: "rgb(104, 66, 255)",
+        }}
+        className="text-3xl text-white text-center shadow-md p-4 rounded-lg  font-semibold my-8 ">
+        เกมล่าสุด
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center gap-8 ">
         {/* GameProduct */}
         {gameSteam?.featured_mac.map((items, ind) => (
@@ -81,9 +79,9 @@ export default function ShowGameProduct() {
               )}
 
               <button
-                // onClick={() => handleToggleModal(items)}
+                onClick={() => handleToggleModal(items)}
                 className="mt-4 font-extrabold bg-violet-800 hover:bg-violet-700 text-white px-4 py-2 rounded-md">
-                รายละเอียดเพิ่มเติม
+                รายละเอียด
               </button>
             </div>
           </div>

@@ -1,0 +1,19 @@
+
+.carousel{
+    user-select:none ;
+}
+
+.swiper-pagination-bullet-active{
+    background-color: white;
+}
+
+.swiper-button-prev,.swiper-button-next {
+    transition: transform 0.3s ease;
+    padding: 30px 20px ;
+    color: white;
+}
+  
+  .swiper-button-prev:hover,.swiper-button-next:hover {
+    background-color: #5c5a5a;
+    transform: scale(1.2);
+  }

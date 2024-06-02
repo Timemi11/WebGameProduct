@@ -32,7 +32,7 @@ export default function Modal({ handleToggleModal, product }: ModalProps) {
           liff.login();
         } else {
           setisLoading(true); //ตั้งเวลา loading เมื่อกดสั่งซื้อ
-          sendMessageToLine(product, liffurl,proflie?.userId);
+          sendMessageToLine(product, liffurl, proflie?.userId);
           setInterval(() => {
             //loadingเสร็จ ประมาณ 2 วินาที
             setisLoading(false);
