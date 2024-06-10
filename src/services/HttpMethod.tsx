@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GameInfo, SteamGame } from "../type/Items";
+import { GameInfo, } from "../type/Items";
 import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
 const mapItems = (items: any) =>
