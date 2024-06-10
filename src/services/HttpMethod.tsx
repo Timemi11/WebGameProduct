@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GameInfo, } from "../type/Items";
+import { GameInfo } from "../type/Items";
 import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
 const mapItems = (items: any) =>
@@ -37,7 +37,8 @@ export const sendMessageToLine = async (
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: process.env.AUTHEN || "",
+          Authorization:
+            "eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
         },
       }
     );
