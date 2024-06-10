@@ -1,4 +1,4 @@
-export const endpoint = "https://archive-rouge-five.vercel.app";
+export const endpoint = "https://back-endof-web-game-main.vercel.app";
 export const endpointSteam = "https://steam-api-psi.vercel.app";
 export const steamUrlGame = "https://store.steampowered.com/app/";
 
