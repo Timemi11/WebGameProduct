@@ -1,6 +1,6 @@
 # ลองเล่น
 
-ArtPhunsup
+ArtPhunsup2
 
 https://web-game-product-8dib.vercel.app/
 
