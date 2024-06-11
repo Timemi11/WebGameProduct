@@ -30,13 +30,13 @@ export default function Home() {
   }
 
   useEffect(() => {
+    // เช็ค member ตรงนี้หลังเข้าหน้า home ถ้ามีแล้วก็จะขึ้นมาแสดง ถ้าไม่มีก็จะเก็บไว้ก่อน
     if (dataLine) {
       getMemberId(dataLine?.userId).then((r) => {
-        console.log(r);
-        if (r) {
-          console.log("found");
-        } else {
+        if (!r) {
           create(dataLine?.userId || "", dataLine?.displayName || "");
+        } else {
+          console.log("Found userMember => " + r);
         }
       });
     }
