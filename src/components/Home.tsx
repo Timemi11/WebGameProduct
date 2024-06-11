@@ -22,8 +22,11 @@ export default function Home() {
 
   useEffect(() => {
     get();
-    create(dataLine?.userId || "", dataLine?.displayName || "");
   }, []);
+
+  useEffect(() => {
+    if (dataLine) create(dataLine?.userId, dataLine?.displayName);
+  }, [dataLine]);
 
   return (
     <div className="container w-full">
