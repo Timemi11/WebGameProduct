@@ -16,7 +16,7 @@ export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
 
   const [member, setMember] = useState<Member[] | null>();
-  const [found, setFound] = useState(null);
+  const [found, setFound] = useState();
 
   // check userId wishlist
   async function get() {
@@ -29,9 +29,12 @@ export default function Home() {
   useEffect(() => {
     get().then(() => {
       member?.map((items) => {
-        setFound(items.match(dataLine?.userId))
+         setFound(items.match(dataLine?.userId));
+         if(found !== undefined || found !== null){
+          return found
+         }
       })
-      if (found === null) {
+      if (found === undefined || found === null) {
         console.log('1' + found)
         if (dataLine) {
           console.log('2' + found)
