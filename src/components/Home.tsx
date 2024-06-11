@@ -7,6 +7,7 @@ import { Profile } from "../type/Items";
 import { createMember, getMember } from "../services/HttpMethod";
 
 type Member = {
+  match(userId: string | undefined): React.SetStateAction<undefined>;
   userId: string;
   displayName: string;
 };
@@ -14,7 +15,9 @@ type Member = {
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [member, setMember] = useState<Member[] | null>();
+
   const [haveMember, setHaveMember] = useState<boolean | undefined>(false);
+
   // check userId wishlist
   async function get() {
     const info = await getMember(); //ข้อมูลของ user ใน userMember
@@ -35,6 +38,7 @@ export default function Home() {
         console.log(haveMember);
       }
     }
+
   }, [dataLine]);
 
   return (
