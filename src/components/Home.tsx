@@ -9,17 +9,21 @@ import { createMember, getMember } from "../services/HttpMethod";
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [member, setMember] = useState();
+  const [newUserId,setNewUserId] = useState<string>();
 
   // check userId wishlist
   async function get() {
     const info = await getMember();
     setMember(info);
+    setNewUserId(info.userId);
   }
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
   }
   useEffect(() => {
-    get(); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
+    get().then(()=>{
+      console.log(newUserId)
+    }) //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
     if (dataLine) create(dataLine?.userId, dataLine?.displayName);
   }, [dataLine]);
 
