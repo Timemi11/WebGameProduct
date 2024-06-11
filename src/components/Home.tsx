@@ -14,7 +14,7 @@ type Member = {
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [member, setMember] = useState<Member[] | null>();
-  const [haveMember, setHaveMember] = useState<boolean | undefined>(false);
+  const [haveMember, setHaveMember] = useState<boolean | undefined>();
   // check userId wishlist
   async function get() {
     const info = await getMember(); //ข้อมูลของ user ใน userMember
