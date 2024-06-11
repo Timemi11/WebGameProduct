@@ -1,25 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import videobg from "../assets/v1.mp4";
 import "../assets/Home.css";
 import "../assets/Loading.css";
 import { GetProfile } from "../App";
 import { Profile } from "../type/Items";
-import { createMember, getMember, getMemberById } from "../services/HttpMethod";
-
-type Member = {
-  userId: string;
-  displayName: string;
-};
+import { createMember, getMemberById } from "../services/HttpMethod";
 
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
-  const [member, setMember] = useState<Member[] | null>();
 
   // check userId wishlist
-  async function get() {
-    const info = await getMember(); //ข้อมูลของ user ใน userMember
-    setMember(info);
-  }
+  // async function get() {
+  //   const info = await getMember(); //ข้อมูลของ user ใน userMember
+  //   setMember(info);
+  // }
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
   }
