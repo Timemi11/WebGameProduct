@@ -33,7 +33,7 @@ export default function Home() {
           create(dataLine?.userId || "", dataLine?.displayName || "");
         } else {
           //มีแล้ว แสดงข้อมูลออกมา
-          console.log("Found userMembe ");
+          console.log("Found userMember ");
           console.log(r);
         }
       });
