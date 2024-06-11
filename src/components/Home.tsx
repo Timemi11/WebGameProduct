@@ -32,7 +32,9 @@ export default function Home() {
         setFound(items.match(dataLine?.userId))
       })
       if (found === null) {
+        console.log('1' + found)
         if (dataLine) {
+          console.log('2' + found)
           create(dataLine?.userId, dataLine?.displayName);
         }
       }
