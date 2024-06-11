@@ -22,7 +22,8 @@ export default function Home() {
   }
   useEffect(() => {
     get().then(()=>{
-      console.log(newUserId)
+      console.log("member " + member)
+      console.log("member.userId" + newUserId) 
     }) //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
     if (dataLine) create(dataLine?.userId, dataLine?.displayName);
   }, [dataLine]);
