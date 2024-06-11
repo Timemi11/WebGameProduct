@@ -15,14 +15,14 @@ export default function Home() {
     const info = await getMember();
     setMember(info);
   }
-  async function create() {
-    await createMember(dataLine?.userId || "", dataLine?.displayName || "");
+  async function create(userId: string, displayName: string) {
+    await createMember(userId || "", displayName || "");
   }
   console.log(dataLine?.userId);
 
   useEffect(() => {
     get();
-    create();
+    create(dataLine?.userId || "", dataLine?.displayName || "");
   }, []);
 
   return (
