@@ -28,9 +28,12 @@ export default function Home() {
     if (dataLine) {
       getMemberId(dataLine?.userId).then((r) => {
         if (!r) {
+          //ไม่มีเก็บ
+          alert("ยินดีต้อนรับเราทำการเพิ่มคุณเป็นสมาชิกแล้วเรียกร้อย");
           create(dataLine?.userId || "", dataLine?.displayName || "");
         } else {
-          console.log("Found userMember => ");
+          //มีแล้ว แสดงข้อมูลออกมา
+          console.log("Found userMembe ");
           console.log(r);
         }
       });
