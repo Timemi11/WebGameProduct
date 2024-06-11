@@ -20,7 +20,6 @@ export default function Home() {
   async function get() {
     const info = await getMember(); //ข้อมูลของ user ใน userMember
     setMember(info);
-    setNewUserId(info.userId);
   }
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
@@ -28,12 +27,13 @@ export default function Home() {
   useEffect(() => {
     get().then(() => {
       member?.map((items) => {
-        console.log(items.userId);
+        if(items.userId !== dataLine?.userId){
+          if (dataLine) {
+            create(dataLine?.userId, dataLine?.displayName);
+          }
+        }
       });
     }); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
-    if (dataLine) {
-      // create(dataLine?.userId, dataLine?.displayName);
-    }
   }, [dataLine]);
 
   return (
