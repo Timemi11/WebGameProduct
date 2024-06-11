@@ -7,6 +7,7 @@ import { Profile } from "../type/Items";
 import { createMember, getMember } from "../services/HttpMethod";
 
 type Member = {
+  match(userId: string | undefined): React.SetStateAction<undefined>;
   userId: string;
   displayName: string;
 };
@@ -35,6 +36,7 @@ export default function Home() {
         console.log(haveMember);
       }
     }
+
   }, [dataLine]);
 
   return (
