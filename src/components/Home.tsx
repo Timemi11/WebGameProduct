@@ -6,21 +6,32 @@ import { GetProfile } from "../App";
 import { Profile } from "../type/Items";
 import { createMember, getMember } from "../services/HttpMethod";
 
+type Member = {
+  userId: string;
+  displayName: string;
+};
+
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
-  const [member, setMember] = useState();
+  const [member, setMember] = useState<Member[] | null>();
 
   // check userId wishlist
   async function get() {
-    const info = await getMember();
+    const info = await getMember(); //ข้อมูลของ user ใน userMember
     setMember(info);
   }
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
   }
   useEffect(() => {
-    get(); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
-    if (dataLine) create(dataLine?.userId, dataLine?.displayName);
+    get().then(() => {
+      member?.map((items) => {
+        console.log(items.userId);
+      });
+    }); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
+    if (dataLine) {
+      // create(dataLine?.userId, dataLine?.displayName);
+    }
   }, [dataLine]);
 
   return (
