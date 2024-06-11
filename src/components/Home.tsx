@@ -7,6 +7,7 @@ import { Profile } from "../type/Items";
 import { createMember, getMember } from "../services/HttpMethod";
 
 type Member = {
+  match(userId: string | undefined): React.SetStateAction<undefined>;
   userId: string;
   displayName: string;
 };
@@ -15,6 +16,7 @@ export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
 
   const [member, setMember] = useState<Member[] | null>();
+  const [found, setFound] = useState();
 
   // check userId wishlist
   async function get() {
@@ -27,12 +29,20 @@ export default function Home() {
   useEffect(() => {
     get().then(() => {
       member?.map((items) => {
-        if(items.userId !== dataLine?.userId){
-          if (dataLine) {
-            create(dataLine?.userId, dataLine?.displayName);
-          }
+        setFound(items.match(dataLine?.userId))
+      })
+      if (found === null) {
+        if (dataLine) {
+          create(dataLine?.userId, dataLine?.displayName);
         }
-      });
+      }
+      // member?.map((items) => {
+      //   if(items.userId !== dataLine?.userId){
+      //     if (dataLine) {
+      //       create(dataLine?.userId, dataLine?.displayName);
+      //     }
+      //   }
+      // });
     }); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
   }, [dataLine]);
 
