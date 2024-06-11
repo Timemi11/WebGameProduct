@@ -65,8 +65,21 @@ export const getMember = async () => {
   } catch (err) {}
 };
 
-
-
+export const getMemberById = async (userId: string) => {
+  try {
+    const response = await axios.get(
+      `${endpoint}/usermember/userid/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const createMember = async (
   userId: string | "",

@@ -4,7 +4,7 @@ import "../assets/Home.css";
 import "../assets/Loading.css";
 import { GetProfile } from "../App";
 import { Profile } from "../type/Items";
-import { createMember, getMember } from "../services/HttpMethod";
+import { createMember, getMember, getMemberById } from "../services/HttpMethod";
 
 type Member = {
   userId: string;
@@ -14,7 +14,7 @@ type Member = {
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [member, setMember] = useState<Member[] | null>();
-  const [haveMember, setHaveMember] = useState<boolean>();
+
   // check userId wishlist
   async function get() {
     const info = await getMember(); //ข้อมูลของ user ใน userMember
@@ -23,23 +23,17 @@ export default function Home() {
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
   }
-  useEffect(() => {
-    get().then(() => {
-      const flag = member?.some((items) => items.userId === dataLine?.userId);
-      setHaveMember(flag);
-      console.log("after assign => " + flag);
-      console.log("after assign => " + haveMember);
-    }); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
 
-    if (dataLine) {
-      if (haveMember) {
-        // console.log(haveMember);
-      } else {
-        // console.log(haveMember);
-        create(dataLine.userId, dataLine.displayName);
-      }
-    }
-  }, [dataLine, haveMember]);
+  async function getMemberId(userId: string) {
+    const info = await getMemberById(userId); //ข้อมูลของ user ใน userMember
+    return info;
+  }
+
+  useEffect(() => {
+    getMemberId(dataLine?.userId || "").then((r) => {
+      console.log(r);
+    });
+  }, [dataLine]);
 
   return (
     <div className="container w-full">
