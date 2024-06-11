@@ -14,9 +14,9 @@ type Member = {
 
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
-
   const [member, setMember] = useState<Member[] | null>();
-  const [found, setFound] = useState();
+
+  const [haveMember, setHaveMember] = useState<boolean | undefined>(false);
 
   // check userId wishlist
   async function get() {
@@ -28,29 +28,17 @@ export default function Home() {
   }
   useEffect(() => {
     get().then(() => {
-      member?.map((items) => {
-         setFound(items.match(dataLine?.userId));
-         console.log(items.match(dataLine?.userId))
-         if(found !== undefined || found !== null){
-          return found
-         }
-      })
-      if (found === undefined || found === null) {
-        console.log('1' + found)
-        if (dataLine) {
-          console.log('2' + found)
-          create(dataLine?.userId, dataLine?.displayName);
-        }
-      }
-      console.log('Found '+ found)
-      // member?.map((items) => {
-      //   if(items.userId !== dataLine?.userId){
-      //     if (dataLine) {
-      //       create(dataLine?.userId, dataLine?.displayName);
-      //     }
-      //   }
-      // });
+      setHaveMember(member?.some((items) => items.userId === dataLine?.userId));
     }); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
+
+    if (dataLine) {
+      if (haveMember) {
+        console.log(haveMember);
+      } else {
+        console.log(haveMember);
+      }
+    }
+
   }, [dataLine]);
 
   return (
