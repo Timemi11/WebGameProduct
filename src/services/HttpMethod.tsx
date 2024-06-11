@@ -47,6 +47,44 @@ export const sendMessageToLine = async (
     throw error;
   }
 };
+// route.get("/usermember", userMemberController.getUserMember);
+// route.get("/usermember/:id", userMemberController.findUserMemberById);
+// route.get("/usermember/userid/:id", userMemberController.findUserMemberByUserId);
+// route.post("/usermember", userMemberController.createProduct);
+// route.put("/usermember/userid/:id",userMemberController.updateUserMember);
+// route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
+
+export const getMember = async () => {
+  try {
+    const response = await axios.get(`${endpoint}/usermember`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (err) {}
+};
+
+export const createMember = async (
+  userId: string | "",
+  dpName: string | ""
+) => {
+  try {
+    const response = await axios.post(
+      `${endpoint}/usermember`,
+      {
+        userId: userId,
+        displayName: dpName,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {}
+};
 
 export const getFeatureGameSteam = async () => {
   try {
@@ -61,7 +99,7 @@ export const getFeatureGameSteam = async () => {
     const mappedFeaturedWin = mapItems(featured_win);
     const mappedFeaturedLinux = mapItems(featured_linux);
     const mappedFeaturedMac = mapItems(featured_mac);
-    
+
     return {
       large_capsules: mappedLargeCapsules,
       featured_win: mappedFeaturedWin,
@@ -70,7 +108,7 @@ export const getFeatureGameSteam = async () => {
     };
   } catch (error) {
     console.error(error);
-    throw error; 
+    throw error;
   }
 };
 

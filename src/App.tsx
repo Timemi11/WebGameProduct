@@ -48,6 +48,12 @@ const App: React.FC = () => {
     initLiff();
   }, []);
 
+  
+
+
+
+
+
   return (
     <GetProfile.Provider value={dataLine}>
       <Navbar />

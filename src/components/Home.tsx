@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import videobg from "../assets/v1.mp4";
 import "../assets/Home.css";
 import "../assets/Loading.css";
+import { GetProfile } from "../App";
+import { Profile } from "../type/Items";
+import { createMember, getMember } from "../services/HttpMethod";
 
 export default function Home() {
+  const dataLine = useContext<Profile | null>(GetProfile);
+  const [member, setMember] = useState();
+
+  // check userId wishlist
+  async function get() {
+    const info = await getMember();
+    setMember(info);
+  }
+  async function create() {
+    await createMember(dataLine?.userId || "", dataLine?.displayName || "");
+  }
+  console.log(dataLine?.userId);
+
+  useEffect(() => {
+    get();
+    create();
+  }, []);
+
   return (
     <div className="container w-full">
       <div className="overlay"></div>
