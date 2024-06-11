@@ -30,20 +30,16 @@ export default function Home() {
   }
 
   useEffect(() => {
+    // เช็ค member ตรงนี้หลังเข้าหน้า home ถ้ามีแล้วก็จะขึ้นมาแสดง ถ้าไม่มีก็จะเก็บไว้ก่อน
     if (dataLine) {
-      getMemberId(dataLine?.userId).then((data) => {
-        if (data.message && data.message === 'User not found') {
-          console.log('Create');
-        } else {
-          console.log('Found');
-        }
 
-        // console.log(r);
-        // if (r) {
-        //   console.log("found");
-        // } else {
-        //   create(dataLine?.userId || "", dataLine?.displayName || "");
-        // }
+      getMemberId(dataLine?.userId).then((r) => {
+        if (!r) {
+          create(dataLine?.userId || "", dataLine?.displayName || "");
+        } else {
+          console.log("Found userMember => " + r);
+
+        }
       });
     }
   }, [dataLine]);
