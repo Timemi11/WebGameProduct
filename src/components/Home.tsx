@@ -16,7 +16,7 @@ export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
 
   const [member, setMember] = useState<Member[] | null>();
-  const [found, setFound] = useState();
+  const [found, setFound] = useState(null);
 
   // check userId wishlist
   async function get() {
