@@ -77,7 +77,7 @@ export const getMemberById = async (userId: string) => {
     );
     return response.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -98,7 +98,7 @@ export const createMember = async (
         },
       }
     );
-    return response.data;
+    return response;
   } catch (err) {}
 };
 
