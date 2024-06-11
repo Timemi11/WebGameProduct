@@ -55,14 +55,13 @@ export const getFeatureGameSteam = async () => {
         "Content-Type": "application/json",
       },
     });
-    // แยกข้อมูลและแม็ปรูปแบบ
     const { large_capsules, featured_win, featured_linux, featured_mac } =
       response.data;
     const mappedLargeCapsules = mapItems(large_capsules);
     const mappedFeaturedWin = mapItems(featured_win);
     const mappedFeaturedLinux = mapItems(featured_linux);
     const mappedFeaturedMac = mapItems(featured_mac);
-    // ส่งข้อมูลที่แม็ปแล้วกลับ
+    
     return {
       large_capsules: mappedLargeCapsules,
       featured_win: mappedFeaturedWin,
@@ -71,7 +70,7 @@ export const getFeatureGameSteam = async () => {
     };
   } catch (error) {
     console.error(error);
-    throw error; // ส่งข้อผิดพลาดออกไปให้ caller จัดการ
+    throw error; 
   }
 };
 
