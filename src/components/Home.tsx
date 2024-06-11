@@ -36,7 +36,8 @@ export default function Home() {
         if (!r) {
           create(dataLine?.userId || "", dataLine?.displayName || "");
         } else {
-          console.log("Found userMember => " + r);
+          console.log("Found userMember => ");
+          console.log(r);
         }
       });
     }
