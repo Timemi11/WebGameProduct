@@ -30,14 +30,16 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getMemberId(dataLine?.userId || "").then((r) => {
-      console.log(r);
-      if (r) {
-        console.log("found");
-      } else {
-      }
-      // create(dataLine?.userId || "", dataLine?.displayName || "");
-    });
+    if (dataLine) {
+      getMemberId(dataLine?.userId).then((r) => {
+        console.log(r);
+        if (r) {
+          console.log("found");
+        } else {
+        }
+        // create(dataLine?.userId || "", dataLine?.displayName || "");
+      });
+    }
   }, [dataLine]);
 
   return (
