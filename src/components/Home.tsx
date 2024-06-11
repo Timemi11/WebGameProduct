@@ -30,6 +30,7 @@ export default function Home() {
     get().then(() => {
       member?.map((items) => {
          setFound(items.match(dataLine?.userId));
+         console.log(items.match(dataLine?.userId))
          if(found !== undefined || found !== null){
           return found
          }
