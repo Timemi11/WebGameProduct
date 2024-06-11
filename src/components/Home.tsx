@@ -36,8 +36,8 @@ export default function Home() {
         if (r) {
           console.log("found");
         } else {
+          create(dataLine?.userId || "", dataLine?.displayName || "");
         }
-        // create(dataLine?.userId || "", dataLine?.displayName || "");
       });
     }
   }, [dataLine]);
