@@ -38,6 +38,7 @@ export default function Home() {
           create(dataLine?.userId, dataLine?.displayName);
         }
       }
+      console.log('Found '+ found)
       // member?.map((items) => {
       //   if(items.userId !== dataLine?.userId){
       //     if (dataLine) {
