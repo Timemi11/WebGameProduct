@@ -29,7 +29,7 @@ export default function Home() {
       getMemberId(dataLine?.userId).then((r) => {
         if (!r) {
           //ไม่มีเก็บ
-          alert("ยินดีต้อนรับเราทำการเพิ่มคุณเป็นสมาชิกแล้วเรียกร้อย");
+          alert("ยินดีต้อนรับเราทำการเพิ่มคุณเป็นสมาชิกแล้วเรียบร้อย");
           create(dataLine?.userId || "", dataLine?.displayName || "");
         } else {
           //มีแล้ว แสดงข้อมูลออกมา
