@@ -14,7 +14,7 @@ type Member = {
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [member, setMember] = useState<Member[] | null>();
-  const [haveMember, setHaveMember] = useState<boolean | undefined>();
+  const [haveMember, setHaveMember] = useState<boolean>();
   // check userId wishlist
   async function get() {
     const info = await getMember(); //ข้อมูลของ user ใน userMember
@@ -25,17 +25,21 @@ export default function Home() {
   }
   useEffect(() => {
     get().then(() => {
-      setHaveMember(member?.some((items) => items.userId === dataLine?.userId));
+      const flag = member?.some((items) => items.userId === dataLine?.userId);
+      setHaveMember(flag);
+      console.log("after assign => " + flag);
+      console.log("after assign => " + haveMember);
     }); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
 
     if (dataLine) {
       if (haveMember) {
-        console.log(haveMember);
+        // console.log(haveMember);
       } else {
-        console.log(haveMember);
+        // console.log(haveMember);
+        create(dataLine.userId, dataLine.displayName);
       }
     }
-  }, [dataLine]);
+  }, [dataLine, haveMember]);
 
   return (
     <div className="container w-full">
