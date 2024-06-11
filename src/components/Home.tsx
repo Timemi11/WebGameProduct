@@ -31,13 +31,19 @@ export default function Home() {
 
   useEffect(() => {
     if (dataLine) {
-      getMemberId(dataLine?.userId).then((r) => {
-        console.log(r);
-        if (r) {
-          console.log("found");
+      getMemberId(dataLine?.userId).then((data) => {
+        if (data.message && data.message === 'User not found') {
+          console.log('Create');
         } else {
-          create(dataLine?.userId || "", dataLine?.displayName || "");
+          console.log('Found');
         }
+
+        // console.log(r);
+        // if (r) {
+        //   console.log("found");
+        // } else {
+        //   create(dataLine?.userId || "", dataLine?.displayName || "");
+        // }
       });
     }
   }, [dataLine]);
