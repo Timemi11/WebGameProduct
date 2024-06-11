@@ -18,13 +18,8 @@ export default function Home() {
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
   }
-  console.log(dataLine?.userId);
-
   useEffect(() => {
-    get();
-  }, []);
-
-  useEffect(() => {
+    get(); //ทำ 2ครั้งนะ เพราะยังไม่มีข้อมูลจาก dataLine
     if (dataLine) create(dataLine?.userId, dataLine?.displayName);
   }, [dataLine]);
 
