@@ -20,7 +20,7 @@ export default function ShowGameProduct() {
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const dataLine = useContext<Profile | null>(GetProfile);
-  const [wishList, setWishList] = useState();
+  const [wishList, setWishList] = useState([]);
 
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
@@ -36,7 +36,9 @@ export default function ShowGameProduct() {
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
 
-    console.log(wishList);
+    // setWishList([...wishList, newwishList]);
+
+    // 1.
 
     // await updateWishlist(info as Wishlist, dataLine?.userId || "");
     // console.log("info");
@@ -57,10 +59,10 @@ export default function ShowGameProduct() {
 
   useEffect(() => {
     get();
-
     getMemberId(dataLine?.userId || "").then((result) => {
       setWishList(result["wishList"]);
     });
+    // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
   }, [dataLine, wishList]);
 
   // const handleFavorites = (item: GameInfo) => {
