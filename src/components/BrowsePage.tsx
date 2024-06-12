@@ -70,8 +70,8 @@ export default function ShowGameProduct() {
         {gameSteam?.featured_win.map((items, ind) => (
           <div
             key={ind}
-            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
-            <div className="image w-46 h-full mb-4 flex justify-center items-center">
+            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg relative">
+            <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"
@@ -139,7 +139,7 @@ export default function ShowGameProduct() {
         {gameSteam?.featured_linux.map((items, ind) => (
           <div
             key={ind}
-            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
+            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg relative">
             <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
               <img
                 src={items.large_capsule_image}
