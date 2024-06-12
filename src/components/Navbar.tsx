@@ -156,9 +156,9 @@ export default function Navbar() {
                     onClick={() => goToFavPage()}
                   />
                   {/* <button
-                    onClick={() => plsLogin()}
+                    // onClick={() => plsLogin()}
                     className={` p-2 rounded-full bg-red-500`}>
-                    ❤️
+                    <FontAwesomeIcon icon={solidHeart} style={{ color: "white" }} />
                   </button> */}
                   <Button
                     variant="contained"
@@ -183,7 +183,7 @@ export default function Navbar() {
                   <button
                     onClick={() => goToFavPage()}
                     className={`p-2 rounded-full "bg-red-500"`}>
-                    <FontAwesomeIcon icon={solidHeart} style={{ color: "red" }} />
+                    <FontAwesomeIcon icon={solidHeart} style={{ color: "white" }} />
                   </button>
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
