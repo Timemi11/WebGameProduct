@@ -110,7 +110,7 @@ export const updateUserWishlist = async (
     const response = await axios.put(
       `${endpoint}/usermember/userid/${userId}`,
       {
-        steamdata,
+        wishList: steamdata,
       },
       {
         headers: {
