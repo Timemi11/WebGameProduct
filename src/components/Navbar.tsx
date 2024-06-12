@@ -64,7 +64,7 @@ export default function Navbar() {
 
   const goToFavPage = () => {
     window.location.href = "/fav";
-  }
+  };
 
   // const plsLogin = () => {
   //   setOpenModal(true);
@@ -79,21 +79,8 @@ export default function Navbar() {
       <AppBar
         style={{ backgroundColor: "rgba(33, 34, 51, 0.9)" }}
         position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={isMobile ? handleMenuOpen : undefined}>
-            {isMobile && <MenuIcon />}
-          </IconButton>
-          <Typography
-            style={{ fontSize: "20px" }}
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography style={{ fontSize: "20px" }} variant="h6" component="div">
             <a className="font-extrabold flex items-center gap-x-2 " href="/">
               <img
                 style={{ width: "30px", height: "30px" }}
@@ -103,7 +90,15 @@ export default function Navbar() {
               GameProductShop
             </a>
           </Typography>
-
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={isMobile ? handleMenuOpen : undefined}>
+            {isMobile && <MenuIcon />}
+          </IconButton>
           {isMobile ? (
             <Menu
               anchorEl={anchorEl}
@@ -111,34 +106,34 @@ export default function Navbar() {
               onClose={handleMenuClose}>
               {!isLogin
                 ? [
-                  <MenuItem key="login" onClick={btnLogin}>
-                    Login
-                  </MenuItem>,
-                  <MenuItem key="avatar">
-                    <Avatar
-                      alt="Profile Picture"
-                      src={dataLine?.pictureUrl}
-                      sx={{ mr: 2 }}
-                    />
-                  </MenuItem>,
-                ]
+                    <MenuItem key="login" onClick={btnLogin}>
+                      Login
+                    </MenuItem>,
+                    <MenuItem key="avatar">
+                      <Avatar
+                        alt="Profile Picture"
+                        src={dataLine?.pictureUrl}
+                        sx={{ mr: 2 }}
+                      />
+                    </MenuItem>,
+                  ]
                 : [
-                  <MenuItem key="logout" onClick={btnLogOut}>
-                    LogOut
-                  </MenuItem>,
-                  <MenuItem key="img">
-                    <img
-                      width="50px"
-                      height="50px"
-                      style={{ borderRadius: "2rem", marginRight: "10px" }}
-                      src={dataLine?.pictureUrl}
-                      alt="User"
-                    />
-                  </MenuItem>,
-                  <MenuItem key="displayName">
-                    <p>{dataLine?.displayName}</p>
-                  </MenuItem>,
-                ]}
+                    <MenuItem key="logout" onClick={btnLogOut}>
+                      LogOut
+                    </MenuItem>,
+                    <MenuItem key="img">
+                      <img
+                        width="50px"
+                        height="50px"
+                        style={{ borderRadius: "2rem", marginRight: "10px" }}
+                        src={dataLine?.pictureUrl}
+                        alt="User"
+                      />
+                    </MenuItem>,
+                    <MenuItem key="displayName">
+                      <p>{dataLine?.displayName}</p>
+                    </MenuItem>,
+                  ]}
             </Menu>
           ) : (
             <ButtonGroup
@@ -180,7 +175,7 @@ export default function Navbar() {
                   />
                   <button
                     onClick={() => goToFavPage()}
-                    className={`absolute top-2 right-2 p-2 rounded-full "bg-red-500"`}>
+                    className={` p-2 rounded-full "bg-red-500"`}>
                     ❤️
                   </button>
                   <Button variant="contained" color="error" onClick={btnLogOut}>
