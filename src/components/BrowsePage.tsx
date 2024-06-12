@@ -4,12 +4,17 @@ import { GameInfo, SteamGame } from "../type/Items";
 import { getFeatureGameSteam, getGameSteamById } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 
 export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
-  const [steamitems, setSteamItems] = useState();
+
+  const [favorites, setFavorites] = useState<Set<number>>(new Set());
+
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
@@ -29,6 +34,20 @@ export default function ShowGameProduct() {
   useEffect(() => {
     get();
   }, []);
+
+  const handleFavorite = (item: GameInfo) => {
+    console.log("Favorited:", item.id);
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(item.id)) {
+        newFavorites.delete(item.id);
+      } else {
+        newFavorites.add(item.id);
+      }
+      console.log("Set:", newFavorites);
+      return newFavorites;
+    });
+  };
 
   return (
     <div className=" container mx-auto p-8 ">
@@ -58,6 +77,14 @@ export default function ShowGameProduct() {
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
+
+                <button
+                onClick={() => handleFavorite(items)}
+                className={`absolute top-1 right-1 p-1`}>
+                <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
+              </button>
+
+
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
@@ -113,11 +140,19 @@ export default function ShowGameProduct() {
             key={ind}
             className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
             <div className="image w-46 h-full mb-4 flex justify-center items-center">
+
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
+
+                <button
+                onClick={() => handleFavorite(items)}
+                className={`absolute top-1 right-1 p-1`}>
+                <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
+              </button>
+
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
@@ -171,13 +206,18 @@ export default function ShowGameProduct() {
         {gameSteam?.featured_mac.map((items, ind) => (
           <div
             key={ind}
-            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
-            <div className="image w-46 h-full mb-4 flex justify-center items-center">
+            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg relative">
+            <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
+                <button
+                onClick={() => handleFavorite(items)}
+                className={`absolute top-1 right-1 p-1`}>
+                <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
+              </button>
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
