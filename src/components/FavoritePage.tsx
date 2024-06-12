@@ -45,7 +45,7 @@ export default function ShowGameProduct() {
 
   useEffect(() => {
     get();
-  }, []);
+  }, [dataLine]);
 
   // const handleFavorite = (item: GameInfo) => {
   //     setFavorites(prev => {
