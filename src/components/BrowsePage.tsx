@@ -29,25 +29,27 @@ export default function ShowGameProduct() {
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
     setSteamItems(info);
+    console.log("res" + info);
+    console.log("steam" + steamItems);
   }
 
   useEffect(() => {
     get();
   }, []);
 
-  const handleFavorite = (item: GameInfo) => {
-    console.log("Favorited:", item.id);
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(item.id)) {
-        newFavorites.delete(item.id);
-      } else {
-        newFavorites.add(item.id);
-      }
-      console.log("Set:", newFavorites);
-      return newFavorites;
-    });
-  };
+  // const handleFavorites = (item: GameInfo) => {
+  //   console.log("Favorited:", item.id);
+  //   setFavorites((prev) => {
+  //     const newFavorites = new Set(prev);
+  //     if (newFavorites.has(item.id)) {
+  //       newFavorites.delete(item.id);
+  //     } else {
+  //       newFavorites.add(item.id);
+  //     }
+  //     console.log("Set:", newFavorites);
+  //     return newFavorites;
+  //   });
+  // };
 
   return (
     <div className=" container mx-auto p-8 ">
@@ -79,7 +81,9 @@ export default function ShowGameProduct() {
                 className="object-cover rounded-lg"></img>
 
               <button
-                onClick={() => handleFavorite(items)}
+                onClick={() => {
+                  getFavorites(items.id);
+                }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={favorites.has(items.id) ? solidHeart : regularHeart}
@@ -145,10 +149,10 @@ export default function ShowGameProduct() {
                 src={items.large_capsule_image}
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
-                className="object-cover rounded-lg"></img>
+                className="object-cover rounded-lg "></img>
 
               <button
-                onClick={() => handleFavorite(items)}
+                onClick={() => getFavorites(items.id)}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={favorites.has(items.id) ? solidHeart : regularHeart}
@@ -216,7 +220,7 @@ export default function ShowGameProduct() {
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
               <button
-                onClick={() => handleFavorite(items)}
+                onClick={() => getFavorites(items.id)}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={favorites.has(items.id) ? solidHeart : regularHeart}
