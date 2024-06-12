@@ -118,7 +118,7 @@ export const createMember = async (
 };
 
 export const updateUserWishlist = async (
-  wishList: Wishlist,
+  wishList: Wishlist[],
   userId: string
 ) => {
   try {

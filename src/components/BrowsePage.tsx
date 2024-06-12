@@ -35,22 +35,24 @@ export default function ShowGameProduct() {
 
   // get info steam game before sent to favorite
   async function getFavorites(appId: number) {
-    const info:Wishlist = await getGameSteamById(appId);
+    const info: Wishlist = await getGameSteamById(appId);
 
     const arrApp = await getAllAppId(dataLine?.userId || "", appId);
 
-
     if (arrApp === undefined) {
       console.log("create");
-      setWishList([...wishList,info]);
-      await updateWishlist(info as Wishlist, dataLine?.userId || "");
+      alert("เพิ่มแล้วววว");
+      setWishList([...wishList, info]);
+      const wishList1 = [...wishList, info];
+      await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม
       console.log(appId);
+      alert("มีอยู่แล้วจ้าาา");
     }
   }
 
-  async function updateWishlist(info: Wishlist, userId: string | "") {
+  async function updateWishlist(info: Wishlist[], userId: string | "") {
     const res = await updateUserWishlist(info, userId);
     console.log(res);
   }
