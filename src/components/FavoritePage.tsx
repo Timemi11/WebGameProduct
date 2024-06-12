@@ -73,6 +73,7 @@ export default function ShowGameProduct() {
     console.log("deleteFav:", item.appId);
     const appId = String(item.appId)
     const info = await deleteUserWishlistOneApp(dataLine?.userId || "",appId);
+    window.location.reload();
   };
 
   return (
