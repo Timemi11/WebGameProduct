@@ -3,6 +3,8 @@ import liff from "@line/liff";
 import { useContext, useEffect, useState } from "react";
 import { GetProfile } from "../App";
 import { Profile } from "../type/Items";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -180,8 +182,8 @@ export default function Navbar() {
                   />
                   <button
                     onClick={() => goToFavPage()}
-                    className={`absolute top-2 right-2 p-2 rounded-full "bg-red-500"`}>
-                    ❤️
+                    className={`p-2 rounded-full "bg-red-500"`}>
+                    <FontAwesomeIcon icon={solidHeart} style={{ color: "red" }} />
                   </button>
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
