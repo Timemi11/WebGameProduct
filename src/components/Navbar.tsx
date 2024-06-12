@@ -154,14 +154,7 @@ export default function Navbar() {
                     className={` p-2 rounded-full bg-red-500`}>
                     ❤️
                   </button> */}
-                  <FavoriteIcon
-                    sx={{
-                      color: "red",
-                      cursor: "pointer",
-                      textAlign: "center",
-                      fontSize: "30px",
-                    }}
-                    onClick={() => goToFavPage()}></FavoriteIcon>
+
                   <Button
                     variant="contained"
                     style={{
@@ -182,11 +175,14 @@ export default function Navbar() {
                     alt="User"
                     onClick={() => goToFavPage()}
                   />
-                  <button
-                    onClick={() => goToFavPage()}
-                    className={` p-2 rounded-full bg-red-500`}>
-                    ❤️
-                  </button>
+                  <FavoriteIcon
+                    sx={{
+                      color: "red",
+                      cursor: "pointer",
+                      textAlign: "center",
+                      fontSize: "30px",
+                    }}
+                    onClick={() => goToFavPage()}></FavoriteIcon>
 
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
