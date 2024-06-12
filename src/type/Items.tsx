@@ -27,7 +27,7 @@ type DatainWishlists = {
 };
 
 export type Wishlist = {
-  wishList: DatainWishlists;
+  wishList: DatainWishlists[];
 };
 
 export type SteamGame = {
