@@ -12,7 +12,7 @@ export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
-
+  const [steamItems, setSteamItems] = useState();
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
 
   const handleToggleModal = (product?: GameInfo) => {
@@ -37,7 +37,7 @@ export default function ShowGameProduct() {
 
   const handleFavorite = (item: GameInfo) => {
     console.log("Favorited:", item.id);
-    setFavorites(prev => {
+    setFavorites((prev) => {
       const newFavorites = new Set(prev);
       if (newFavorites.has(item.id)) {
         newFavorites.delete(item.id);
@@ -78,13 +78,14 @@ export default function ShowGameProduct() {
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
 
-                <button
+              <button
                 onClick={() => handleFavorite(items)}
                 className={`absolute top-1 right-1 p-1`}>
-                <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
+                <FontAwesomeIcon
+                  icon={favorites.has(items.id) ? solidHeart : regularHeart}
+                  style={{ color: "red" }}
+                />
               </button>
-
-
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
@@ -140,19 +141,20 @@ export default function ShowGameProduct() {
             key={ind}
             className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
             <div className="image w-46 h-full mb-4 flex justify-center items-center">
-
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
 
-                <button
+              <button
                 onClick={() => handleFavorite(items)}
                 className={`absolute top-1 right-1 p-1`}>
-                <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
+                <FontAwesomeIcon
+                  icon={favorites.has(items.id) ? solidHeart : regularHeart}
+                  style={{ color: "red" }}
+                />
               </button>
-
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
@@ -213,10 +215,13 @@ export default function ShowGameProduct() {
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
-                <button
+              <button
                 onClick={() => handleFavorite(items)}
                 className={`absolute top-1 right-1 p-1`}>
-                <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
+                <FontAwesomeIcon
+                  icon={favorites.has(items.id) ? solidHeart : regularHeart}
+                  style={{ color: "red" }}
+                />
               </button>
             </div>
             <div

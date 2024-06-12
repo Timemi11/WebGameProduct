@@ -115,6 +115,11 @@ export const getGameSteamById = async (appId: number) => {
     throw error;
   }
 };
+
+
+
+
+
 export const getFeatureGameSteam = async () => {
   try {
     const response = await axios.get(`${endpointSteam}/`, {
