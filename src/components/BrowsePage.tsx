@@ -36,10 +36,6 @@ export default function ShowGameProduct() {
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
 
-    getMemberId(dataLine?.userId || "").then((result) => {
-      setWishList(result["wishList"]);
-    });
-
     console.log(wishList);
 
     // await updateWishlist(info as Wishlist, dataLine?.userId || "");
@@ -61,7 +57,11 @@ export default function ShowGameProduct() {
 
   useEffect(() => {
     get();
-  }, [dataLine]);
+
+    getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
+  }, [dataLine, wishList]);
 
   // const handleFavorites = (item: GameInfo) => {
   //   console.log("Favorited:", item.id);
