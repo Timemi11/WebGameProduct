@@ -42,7 +42,7 @@ export default function ShowGameProduct() {
 
     if (arrApp === undefined) {
       console.log("create");
-      setWishList([...wishList,info]);
+      await setWishList([...wishList,info]);
       console.log(wishList)
       await updateWishlist(info as Wishlist, dataLine?.userId || "");
     } else {
