@@ -38,9 +38,8 @@ export default function ShowGameProduct() {
 
     getMemberId(dataLine?.userId || "").then((result) => {
       setWishList(result["wishList"]);
+      console.log(wishList);
     });
-
-    console.log(wishList);
 
     // await updateWishlist(info as Wishlist, dataLine?.userId || "");
     // console.log("info");
