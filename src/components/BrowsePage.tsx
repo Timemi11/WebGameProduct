@@ -54,7 +54,7 @@ export default function ShowGameProduct() {
 
   async function updateWishlist(info: Wishlist[], userId: string | "") {
     const res = await updateUserWishlist(info, userId);
-    console.log(res);
+    //console.log(res);
   }
 
   async function getMemberId(userId: string) {
