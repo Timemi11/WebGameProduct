@@ -69,6 +69,21 @@ export const getAllAppId = async (userId: string, appid: number) => {
   } catch (err) {}
 };
 
+export const getWishListApp = async (userId: string) => {
+  try {
+    const response = await axios.get(
+      `${endpoint}/usermember/userid/${userId}/appid`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    // const name = mapItems(name);
+    return response.data;
+  } catch (err) {}
+};
+
 export const getMember = async () => {
   try {
     const response = await axios.get(`${endpoint}/usermember`, {

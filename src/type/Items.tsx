@@ -19,7 +19,7 @@ export type beforeTypeGameProduct = {
   update_at: string;
 };
 
-type DatainWishlists = {
+export type DatainWishlists = {
   appId: number;
   image: string;
   name: string;
