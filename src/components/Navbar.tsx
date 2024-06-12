@@ -20,8 +20,9 @@ import {
   Modal,
   Backdrop,
   Fade,
+  colors,
 } from "@mui/material/";
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
 export default function Navbar() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -137,7 +138,7 @@ export default function Navbar() {
             </Menu>
           ) : (
             <ButtonGroup
-              className="flex gap-x-4 p-4 "
+              className="flex gap-x-4 p-4 items-center"
               variant="outlined"
               aria-label="Basic button group">
               {!isLogin ? (
@@ -153,6 +154,14 @@ export default function Navbar() {
                     className={` p-2 rounded-full bg-red-500`}>
                     ❤️
                   </button> */}
+                  <FavoriteIcon
+                    sx={{
+                      color: "red",
+                      cursor: "pointer",
+                      textAlign: "center",
+                      fontSize: "30px",
+                    }}
+                    onClick={() => goToFavPage()}></FavoriteIcon>
                   <Button
                     variant="contained"
                     style={{
@@ -178,6 +187,7 @@ export default function Navbar() {
                     className={` p-2 rounded-full bg-red-500`}>
                     ❤️
                   </button>
+
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
                   </Button>
