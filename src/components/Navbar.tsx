@@ -175,7 +175,7 @@ export default function Navbar() {
                   />
                   <button
                     onClick={() => goToFavPage()}
-                    className={` p-2 rounded-full "bg-red-500"`}>
+                    className={` p-2 rounded-full bg-red-500`}>
                     ❤️
                   </button>
                   <Button variant="contained" color="error" onClick={btnLogOut}>
