@@ -44,18 +44,18 @@ export default function ShowGameProduct() {
       console.log("create");
       await setWishList([...wishList,info]);
       console.log(wishList)
-      const wishList1 = [...wishList,info];
+      const wishList1 : Wishlist[] = [...wishList,info];
       console.log( "Wish 1"+wishList1);
-      await updateWishlist(info as Wishlist, dataLine?.userId || "");
+      await updateWishlist(wishList1 , dataLine?.userId || "");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม
       console.log(appId);
     }
   }
 
-  async function updateWishlist(info: Wishlist, userId: string | "") {
+  async function updateWishlist(info: Wishlist[], userId: string | "") {
     const res = await updateUserWishlist(info, userId);
-    console.log(res);
+    //console.log(res);
   }
 
   async function getMemberId(userId: string) {
