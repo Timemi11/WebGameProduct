@@ -37,11 +37,15 @@ export default function ShowGameProduct() {
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
 
-    // if มี appid ก็ไม่ต้องเพิ่ม
     const arrApp = await getAllAppId(dataLine?.userId || "", appId);
-    console.log(arrApp);
-    // ไม่มี เพิ่ม
-    // await updateWishlist(info as Wishlist, dataLine?.userId || "");
+
+    if (arrApp === undefined) {
+      console.log("create");
+      await updateWishlist(info as Wishlist, dataLine?.userId || "");
+    } else {
+      // if มี appid ก็ไม่ต้องเพิ่ม
+      console.log(appId);
+    }
   }
 
   async function updateWishlist(info: Wishlist, userId: string | "") {
