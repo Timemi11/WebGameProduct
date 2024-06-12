@@ -152,6 +152,26 @@ export const updateUserWishlist = async (
   } catch (err) {}
 };
 
+export const deleteUserWishlistOneApp = async (
+  userId: string,
+  appId: string
+) => {
+  try {
+    const response = await axios.put(
+      `${endpoint}/usermember/userid/${userId}/appid/${appId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {}
+};
+
+
+
+
 export const getGameSteamById = async (appId: number) => {
   try {
     const response = await axios.get(`${endpointSteam}/${appId}`, {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Modal from "./FavPageModal";
 import { GameInfo, SteamGame, Wishlist } from "../type/Items";
-import { getFeatureGameSteam, getWishListApp } from "../services/HttpMethod";
+import { deleteUserWishlistOneApp, getFeatureGameSteam, getWishListApp } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import { Profile, DatainWishlists} from "../type/Items";
 import { GetProfile } from "../App";
@@ -69,8 +69,10 @@ export default function ShowGameProduct() {
     game.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const deleteFav = (item: DatainWishlists) => {
+  const deleteFav = async (item: DatainWishlists) => {
     console.log("deleteFav:", item.appId);
+    const appId = String(item.appId)
+    const info = await deleteUserWishlistOneApp(dataLine?.userId || "",appId);
   };
 
   return (

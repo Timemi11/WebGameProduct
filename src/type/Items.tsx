@@ -20,6 +20,7 @@ export type beforeTypeGameProduct = {
 };
 
 export type DatainWishlists = {
+  id(id: any): unknown;
   appId: number;
   image: string;
   name: string;
