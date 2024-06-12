@@ -61,7 +61,7 @@ export default function ShowGameProduct() {
     getMemberId(dataLine?.userId || "").then((result) => {
       setWishList(result["wishList"]);
     });
-  }, [dataLine, wishList]);
+  }, [dataLine]);
 
   // const handleFavorites = (item: GameInfo) => {
   //   console.log("Favorited:", item.id);
