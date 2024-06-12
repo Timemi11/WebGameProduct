@@ -36,6 +36,8 @@ export default function ShowGameProduct() {
   // get info steam game before sent to favorite
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
+    
+
 
     const arrApp = await getAllAppId(dataLine?.userId || "", appId);
 
@@ -61,12 +63,12 @@ export default function ShowGameProduct() {
   useEffect(() => {
     get();
 
-    // getMemberId(dataLine?.userId || "").then((result) => {
-    //   setWishList(result["wishList"]);
-    // });
+    getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
 
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
-  }, [dataLine]);
+  }, [dataLine, wishList]);
 
   // const handleFavorites = (item: GameInfo) => {
   //   console.log("Favorited:", item.id);

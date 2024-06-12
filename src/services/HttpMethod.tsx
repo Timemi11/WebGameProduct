@@ -52,6 +52,7 @@ export const sendMessageToLine = async (
 // route.get("/usermember/userid/:id", userMemberController.findUserMemberByUserId);
 // route.post("/usermember", userMemberController.createProduct);
 // route.put("/usermember/userid/:id",userMemberController.updateUserMember);
+// route.get("/usermember/userid/:id/appid/:appid",userMemberController.findAppId)
 // route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
 
 export const getAllAppId = async (userId: string, appid: number) => {
