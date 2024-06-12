@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import { GameInfo, SteamGame } from "../type/Items";
-import { getFeatureGameSteam } from "../services/HttpMethod";
+import { getFeatureGameSteam, getGameSteamById } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
 
@@ -9,6 +9,7 @@ export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
+  const [steamitems, setSteamItems] = useState();
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
@@ -18,7 +19,12 @@ export default function ShowGameProduct() {
     const steamGame = (await getFeatureGameSteam()) || undefined;
     setGameSteam(steamGame);
   }
-  console.log(gameSteam);
+
+  // get info steam game before sent to favorite
+  async function getFavorites(appId: number) {
+    const info = await getGameSteamById(appId);
+    setSteamItems(info);
+  }
 
   useEffect(() => {
     get();

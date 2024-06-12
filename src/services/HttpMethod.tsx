@@ -102,6 +102,19 @@ export const createMember = async (
   } catch (err) {}
 };
 
+export const getGameSteamById = async (appId: number) => {
+  try {
+    const response = await axios.get(`${endpointSteam}/${appId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 export const getFeatureGameSteam = async () => {
   try {
     const response = await axios.get(`${endpointSteam}/`, {

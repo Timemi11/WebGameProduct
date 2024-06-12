@@ -37,9 +37,9 @@ export default function Modal({
           setInterval(() => {
             //loadingเสร็จ ประมาณ 2 วินาที
             setisLoading(false);
-            if (liff.getContext()?.type === "external")
-              window.location.href = "user";
-            else liff.closeWindow();
+            if (liff.getContext()?.type === "external") {
+              window.location.reload();
+            } else liff.closeWindow();
           }, 2000);
         }
       });
