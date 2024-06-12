@@ -3,6 +3,8 @@ import liff from "@line/liff";
 import { useContext, useEffect, useState } from "react";
 import { GetProfile } from "../App";
 import { Profile } from "../type/Items";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -150,9 +152,9 @@ export default function Navbar() {
                     onClick={() => goToFavPage()}
                   />
                   {/* <button
-                    onClick={() => plsLogin()}
+                    // onClick={() => plsLogin()}
                     className={` p-2 rounded-full bg-red-500`}>
-                    ❤️
+                    <FontAwesomeIcon icon={solidHeart} style={{ color: "white" }} />
                   </button> */}
                   <FavoriteIcon
                     sx={{
@@ -182,12 +184,14 @@ export default function Navbar() {
                     alt="User"
                     onClick={() => goToFavPage()}
                   />
-                  <button
-                    onClick={() => goToFavPage()}
-                    className={` p-2 rounded-full bg-red-500`}>
-                    ❤️
-                  </button>
-
+                    <FavoriteIcon
+                    sx={{
+                      color: "red",
+                      cursor: "pointer",
+                      textAlign: "center",
+                      fontSize: "30px",
+                    }}
+                    onClick={() => goToFavPage()}></FavoriteIcon>
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
                   </Button>
