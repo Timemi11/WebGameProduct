@@ -48,7 +48,7 @@ export default function Modal({
   return (
     <div className="higher-bg ">
       {!isLoading ? (
-        <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div
             className="overflow-y-auto text-white flex flex-col md:flex-row items-center p-8 rounded-lg  max-w-lg gap-8 md:max-w-4xl w-full "
             style={{
