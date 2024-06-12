@@ -21,7 +21,7 @@ export default function ShowGameProduct() {
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const dataLine = useContext<Profile | null>(GetProfile);
-  const [wishList, setWishList] = useState([]);
+  const [wishList, setWishList] = useState<Wishlist[]>([]);
 
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
@@ -35,9 +35,11 @@ export default function ShowGameProduct() {
 
   // get info steam game before sent to favorite
   async function getFavorites(appId: number) {
-    const info = await getGameSteamById(appId);
+    const info:Wishlist = await getGameSteamById(appId);
 
     const arrApp = await getAllAppId(dataLine?.userId || "", appId);
+
+    setWishList([...wishList,info]);
 
     if (arrApp === undefined) {
       console.log("create");
