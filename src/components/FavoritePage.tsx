@@ -1,27 +1,45 @@
 import React, { useState, useEffect, useContext } from "react";
-import Modal from "./Modal";
-import { GameInfo, SteamGame } from "../type/Items";
-import { getFeatureGameSteam } from "../services/HttpMethod";
+import Modal from "./FavPageModal";
+import { GameInfo, SteamGame, Wishlist } from "../type/Items";
+import { getFeatureGameSteam, getWishListApp } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
-import { Profile } from "../type/Items";
+import { Profile, DatainWishlists} from "../type/Items";
 import { GetProfile } from "../App";
 
 export default function ShowGameProduct() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [isDetail, setIsDetail] = useState<boolean>(false);
-  const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
+  const [selectedProduct, setSelectedProduct] = useState<DatainWishlists>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [favGame, setFavGame] = useState<DatainWishlists[]>([]);
 
-  const handleToggleModal = (product?: GameInfo) => {
+  const fhandleToggleModal = (fproduct?: DatainWishlists) => {
     setIsDetail(!isDetail);
-    setSelectedProduct(product);
+    setSelectedProduct(fproduct);
   };
 
+  // async function get() {
+  //   const steamGame = (await getFeatureGameSteam()) || undefined;
+  //   setGameSteam(steamGame);
+  // console.log(steamGame)
+  // }
+
   async function get() {
-    const steamGame = (await getFeatureGameSteam()) || undefined;
-    setGameSteam(steamGame);
+    const myWishList = await getWishListApp(dataLine?.userId || "");
+    console.log(myWishList)
+    if (myWishList) {
+      // Check if myWishList is an array or a single object
+      if (Array.isArray(myWishList)) {
+        setFavGame(myWishList); // If myWishList is already an array
+      } else {
+        setFavGame([myWishList]); // Wrap myWishList in an array if it's a single object
+      }
+      console.log(myWishList);
+    } else {
+      console.error("Failed to fetch wishlist data.");
+    }
   }
 
   useEffect(() => {
@@ -46,12 +64,12 @@ export default function ShowGameProduct() {
     setSearchQuery(e.target.value);
   };
 
-  const filteredGames = gameSteam?.featured_mac.filter((game) =>
+  const filteredGames = gameSteam?.featured_mac?.filter((game) =>
     game.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const deleteFav = (item: GameInfo) => {
-    console.log("deleteFav:", item.id);
+  const deleteFav = (item: DatainWishlists) => {
+    console.log("deleteFav:", item.appId);
   };
 
   return (
@@ -69,24 +87,24 @@ export default function ShowGameProduct() {
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="ค้นหาเกมด้วยชื่อ"
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full h-full p-2 border border-gray-300 rounded-lg"
         />
       </div>
       <div className="block block-cols-1 sm:block-cols-2 md:block-cols-3 lg:block-cols-4 xl:block-cols-5 place-items-center gap-8">
-        {filteredGames?.map((items, ind) => (
+        {favGame?.map((items, ind) => (
           <div
             key={ind}
             className="flex flex-row items-start justify-center text-white p-4 shadow-2xl rounded-lg relative">
             <div className="image w-46 h-full flex justify-center items-center relative">
               <img
-                src={items.large_capsule_image}
+                src={items.image}
                 alt="prod_img"
-                onClick={() => handleToggleModal(items)}
+                onClick={() => fhandleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
-              className="details w-full h-full ml-4 flex flex-col justify-center items-center text-center p-[61px] rounded-lg relative">
+              className="details w-full h-full ml-4 flex flex-col justify-center items-center text-center p-[22px] rounded-lg relative">
               <button
                 onClick={() => deleteFav(items)}
                 className="absolute top-2 right-2 text-gray-400 underline">
@@ -95,24 +113,10 @@ export default function ShowGameProduct() {
               <h3 className="text-2xl font-semibold text-center">
                 {items.name}
               </h3>
-              {items.discount_percent === 0 ? (
-                <p className="text-green-400 text-xl">
-                  {items.original_price === 0 || items.original_price === null
-                    ? "ฟรี"
-                    : "ราคา " + items.original_price / 100}
-                </p>
-              ) : (
-                <div className="flex flex-col">
-                  <p className="text-red-700 line-through">
-                    ราคาเดิม {items.original_price / 100} บาท
-                  </p>
-                  <p className="text-green-400 text-xl">
-                    ลดเหลือ {(items.final_price / 100).toFixed(0)} บาท
-                  </p>
-                </div>
-              )}
+              <p className="text-green-400 text-xl">{items.price.formattedPrice}</p>
+              
               <button
-                onClick={() => handleToggleModal(items)}
+                onClick={() => fhandleToggleModal(items)}
                 className="mt-4 font-extrabold bg-violet-800 hover:bg-violet-700 text-white px-4 py-2 rounded-md">
                 รายละเอียด
               </button>
@@ -122,7 +126,7 @@ export default function ShowGameProduct() {
         {/* เปิด modal */}
         {isDetail && selectedProduct && (
           <Modal
-            handleToggleModal={handleToggleModal}
+            handleToggleModal={fhandleToggleModal}
             product={selectedProduct}
           />
         )}

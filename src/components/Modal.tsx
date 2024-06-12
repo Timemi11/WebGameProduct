@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import liff from "@line/liff";
-import { GameInfo, Profile } from "../type/Items";
+import { GameInfo, Profile, DatainWishlists } from "../type/Items";
 import "../assets/Home.css";
 import "../assets/Loading.css";
 import { sendMessageToLine } from "../services/HttpMethod";
