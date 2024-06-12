@@ -6,6 +6,7 @@ import ShowGameProduct from "./components/BrowsePage";
 import liff from "@line/liff";
 import { Profile } from "./type/Items";
 import Home from "./components/Home";
+import FavPage from "./components/FavoritePage";
 
 export const GetProfile = createContext<Profile | null>(null);
 
@@ -60,6 +61,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user" element={<ShowGameProduct />} />
+        <Route path="/fav" element={<FavPage />}/>
         <Route />
       </Routes>
     </GetProfile.Provider>

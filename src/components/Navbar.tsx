@@ -17,12 +17,16 @@ import {
   MenuItem,
   useMediaQuery,
   Avatar,
+  Modal,
+  Backdrop,
+  Fade,
 } from "@mui/material/";
 
 export default function Navbar() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -57,6 +61,18 @@ export default function Navbar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const goToFavPage = () => {
+    window.location.href = "/fav";
+  }
+
+  // const plsLogin = () => {
+  //   setOpenModal(true);
+  // }
+
+  // const handleCloseModal = () => {
+  //   setOpenModal(false);
+  // };
 
   return (
     <Box sx={{ flexGrow: 1, width: "100dvw" }}>
@@ -95,34 +111,34 @@ export default function Navbar() {
               onClose={handleMenuClose}>
               {!isLogin
                 ? [
-                    <MenuItem key="login" onClick={btnLogin}>
-                      Login
-                    </MenuItem>,
-                    <MenuItem key="avatar">
-                      <Avatar
-                        alt="Profile Picture"
-                        src={dataLine?.pictureUrl}
-                        sx={{ mr: 2 }}
-                      />
-                    </MenuItem>,
-                  ]
+                  <MenuItem key="login" onClick={btnLogin}>
+                    Login
+                  </MenuItem>,
+                  <MenuItem key="avatar">
+                    <Avatar
+                      alt="Profile Picture"
+                      src={dataLine?.pictureUrl}
+                      sx={{ mr: 2 }}
+                    />
+                  </MenuItem>,
+                ]
                 : [
-                    <MenuItem key="logout" onClick={btnLogOut}>
-                      LogOut
-                    </MenuItem>,
-                    <MenuItem key="img">
-                      <img
-                        width="50px"
-                        height="50px"
-                        style={{ borderRadius: "2rem", marginRight: "10px" }}
-                        src={dataLine?.pictureUrl}
-                        alt="User"
-                      />
-                    </MenuItem>,
-                    <MenuItem key="displayName">
-                      <p>{dataLine?.displayName}</p>
-                    </MenuItem>,
-                  ]}
+                  <MenuItem key="logout" onClick={btnLogOut}>
+                    LogOut
+                  </MenuItem>,
+                  <MenuItem key="img">
+                    <img
+                      width="50px"
+                      height="50px"
+                      style={{ borderRadius: "2rem", marginRight: "10px" }}
+                      src={dataLine?.pictureUrl}
+                      alt="User"
+                    />
+                  </MenuItem>,
+                  <MenuItem key="displayName">
+                    <p>{dataLine?.displayName}</p>
+                  </MenuItem>,
+                ]}
             </Menu>
           ) : (
             <ButtonGroup
@@ -135,7 +151,13 @@ export default function Navbar() {
                     alt="Profile Picture"
                     src={dataLine?.pictureUrl}
                     sx={{ mr: 2 }}
+                    onClick={() => goToFavPage()}
                   />
+                  {/* <button
+                    onClick={() => plsLogin()}
+                    className={` p-2 rounded-full bg-red-500`}>
+                    ❤️
+                  </button> */}
                   <Button
                     variant="contained"
                     style={{
@@ -154,7 +176,13 @@ export default function Navbar() {
                     style={{ borderRadius: "2rem", marginRight: "10px" }}
                     src={dataLine?.pictureUrl}
                     alt="User"
+                    onClick={() => goToFavPage()}
                   />
+                  <button
+                    onClick={() => goToFavPage()}
+                    className={`absolute top-2 right-2 p-2 rounded-full "bg-red-500"`}>
+                    ❤️
+                  </button>
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
                   </Button>
@@ -164,6 +192,46 @@ export default function Navbar() {
           )}
         </Toolbar>
       </AppBar>
+
+      {/* <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={openModal}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}>
+        <Fade in={openModal}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 400,
+              bgcolor: 'background.paper',
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+              textAlign: 'center',
+            }}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              กรุณา Login
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              คุณต้องเข้าสู่ระบบเพื่อดำเนินการต่อ
+            </Typography>
+            <Button
+              variant="contained"
+              style={{ marginTop: '20px' }}
+              onClick={btnLogin}>
+              Login
+            </Button>
+          </Box>
+        </Fade>
+      </Modal> */}
     </Box>
   );
 }
