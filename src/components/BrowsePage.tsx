@@ -44,6 +44,8 @@ export default function ShowGameProduct() {
       console.log("create");
       await setWishList([...wishList,info]);
       console.log(wishList)
+      const wishList1 = [...wishList,info];
+      console.log( "Wish 1"+wishList1);
       await updateWishlist(info as Wishlist, dataLine?.userId || "");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม
