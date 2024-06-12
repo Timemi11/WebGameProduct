@@ -19,6 +19,17 @@ export type beforeTypeGameProduct = {
   update_at: string;
 };
 
+type DatainWishlists = {
+  appId: number;
+  image: string;
+  name: string;
+  price: { formattedPrice: string };
+};
+
+export type Wishlist = {
+  wishList: DatainWishlists[];
+};
+
 export type SteamGame = {
   large_capsules: GameInfo[];
   featured_win: GameInfo[];

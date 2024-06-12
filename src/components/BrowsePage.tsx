@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
-import { GameInfo, SteamGame } from "../type/Items";
-import { getFeatureGameSteam, getGameSteamById } from "../services/HttpMethod";
+import { GameInfo, Profile, SteamGame, Wishlist } from "../type/Items";
+import {
+  getFeatureGameSteam,
+  getGameSteamById,
+  updateUserWishlist,
+} from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { GetProfile } from "../App";
 
 export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
-  const [steamItems, setSteamItems] = useState();
+  const [steamItems, setSteamItems] = useState<Wishlist>();
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
-
+  const dataLine = useContext<Profile | null>(GetProfile);
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
@@ -29,13 +34,22 @@ export default function ShowGameProduct() {
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
     setSteamItems(info);
-    console.log("res" + info);
-    console.log("steam" + steamItems);
+    console.log(dataLine?.userId);
+    // await updateWishlist(info as Wishlist, dataLine?.userId || "");
+    // console.log("info");
+    // console.log(info);
+    // console.log("steamItems");
+    // console.log(steamItems);
+  }
+
+  async function updateWishlist(info: Wishlist, userId: string | "") {
+    const res = await updateUserWishlist(info, userId);
+    console.log(res);
   }
 
   useEffect(() => {
     get();
-  }, []);
+  }, [dataLine]);
 
   // const handleFavorites = (item: GameInfo) => {
   //   console.log("Favorited:", item.id);
@@ -73,7 +87,7 @@ export default function ShowGameProduct() {
           <div
             key={ind}
             className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
-            <div className="image w-46 h-full mb-4 flex justify-center items-center">
+            <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"

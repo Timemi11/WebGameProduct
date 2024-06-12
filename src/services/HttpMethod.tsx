@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GameInfo } from "../type/Items";
+import { GameInfo, Wishlist } from "../type/Items";
 import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
 const mapItems = (items: any) =>
@@ -102,6 +102,26 @@ export const createMember = async (
   } catch (err) {}
 };
 
+export const updateUserWishlist = async (
+  steamdata: Wishlist,
+  userId: string
+) => {
+  try {
+    const response = await axios.put(
+      `${endpoint}/usermember/userid/${userId}`,
+      {
+        steamdata,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {}
+};
+
 export const getGameSteamById = async (appId: number) => {
   try {
     const response = await axios.get(`${endpointSteam}/${appId}`, {
@@ -109,16 +129,13 @@ export const getGameSteamById = async (appId: number) => {
         "Content-Type": "application/json",
       },
     });
+
     return response.data;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
-
-
-
-
 
 export const getFeatureGameSteam = async () => {
   try {
