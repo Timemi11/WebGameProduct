@@ -54,6 +54,20 @@ export const sendMessageToLine = async (
 // route.put("/usermember/userid/:id",userMemberController.updateUserMember);
 // route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
 
+export const getAllAppId = async (userId: string, appid: number) => {
+  try {
+    const response = await axios.get(
+      `${endpoint}/usermember/userid/${userId}/appid/${appid}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {}
+};
+
 export const getMember = async () => {
   try {
     const response = await axios.get(`${endpoint}/usermember`, {

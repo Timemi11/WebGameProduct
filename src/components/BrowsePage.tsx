@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { GameInfo, Profile, SteamGame, Wishlist } from "../type/Items";
 import {
+  getAllAppId,
   getFeatureGameSteam,
   getGameSteamById,
   getMemberById,
@@ -36,15 +37,11 @@ export default function ShowGameProduct() {
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
 
-    // setWishList([...wishList, newwishList]);
-
-    // 1.
-
+    // if มี appid ก็ไม่ต้องเพิ่ม
+    const arrApp = await getAllAppId(dataLine?.userId || "", appId);
+    console.log(arrApp);
+    // ไม่มี เพิ่ม
     // await updateWishlist(info as Wishlist, dataLine?.userId || "");
-    // console.log("info");
-    // console.log(info);
-    // console.log("steamItems");
-    // console.log(steamItems);
   }
 
   async function updateWishlist(info: Wishlist, userId: string | "") {
@@ -59,11 +56,13 @@ export default function ShowGameProduct() {
 
   useEffect(() => {
     get();
-    getMemberId(dataLine?.userId || "").then((result) => {
-      setWishList(result["wishList"]);
-    });
+
+    // getMemberId(dataLine?.userId || "").then((result) => {
+    //   setWishList(result["wishList"]);
+    // });
+
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
-  }, [dataLine, wishList]);
+  }, [dataLine]);
 
   // const handleFavorites = (item: GameInfo) => {
   //   console.log("Favorited:", item.id);
