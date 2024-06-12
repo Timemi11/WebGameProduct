@@ -28,6 +28,7 @@ export default function ShowGameProduct() {
 
   async function get() {
     const myWishList = await getWishListApp(dataLine?.userId || "");
+    console.log(dataLine?.userId)
     console.log(myWishList)
     if (myWishList) {
       // Check if myWishList is an array or a single object
