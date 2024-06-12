@@ -65,7 +65,7 @@ export default function ShowGameProduct() {
     setSearchQuery(e.target.value);
   };
 
-  const filteredGames = gameSteam?.featured_mac?.filter((game) =>
+  const filteredGames = favGame?.filter((game) =>
     game.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -92,7 +92,7 @@ export default function ShowGameProduct() {
         />
       </div>
       <div className="block block-cols-1 sm:block-cols-2 md:block-cols-3 lg:block-cols-4 xl:block-cols-5 place-items-center gap-8">
-        {favGame?.map((items, ind) => (
+        {filteredGames?.map((items, ind) => (
           <div
             key={ind}
             className="flex flex-row items-start justify-center text-white p-4 shadow-2xl rounded-lg relative">
