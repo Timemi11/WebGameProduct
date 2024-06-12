@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import { GameInfo, SteamGame } from "../type/Items";
-import { getFeatureGameSteam } from "../services/HttpMethod";
+import { getFeatureGameSteam, getGameSteamById } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,7 @@ export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
+
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
 
   const handleToggleModal = (product?: GameInfo) => {
@@ -23,7 +24,12 @@ export default function ShowGameProduct() {
     const steamGame = (await getFeatureGameSteam()) || undefined;
     setGameSteam(steamGame);
   }
-  console.log(gameSteam);
+
+  // get info steam game before sent to favorite
+  async function getFavorites(appId: number) {
+    const info = await getGameSteamById(appId);
+    setSteamItems(info);
+  }
 
   useEffect(() => {
     get();
@@ -64,18 +70,21 @@ export default function ShowGameProduct() {
         {gameSteam?.featured_win.map((items, ind) => (
           <div
             key={ind}
-            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg relative">
-            <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
+            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
+            <div className="image w-46 h-full mb-4 flex justify-center items-center">
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
+
                 <button
                 onClick={() => handleFavorite(items)}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
               </button>
+
+
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
@@ -129,18 +138,21 @@ export default function ShowGameProduct() {
         {gameSteam?.featured_linux.map((items, ind) => (
           <div
             key={ind}
-            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg relative">
-            <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
+            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
+            <div className="image w-46 h-full mb-4 flex justify-center items-center">
+
               <img
                 src={items.large_capsule_image}
                 alt="prod_img"
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
+
                 <button
                 onClick={() => handleFavorite(items)}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon icon={favorites.has(items.id) ? solidHeart : regularHeart} style={{ color: "red" }} />
               </button>
+
             </div>
             <div
               style={{ backgroundColor: "#212233" }}

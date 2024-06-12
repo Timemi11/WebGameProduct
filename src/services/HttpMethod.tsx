@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GameInfo, } from "../type/Items";
+import { GameInfo } from "../type/Items";
 import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
 const mapItems = (items: any) =>
@@ -37,7 +37,8 @@ export const sendMessageToLine = async (
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: process.env.AUTHEN || "",
+          Authorization:
+            "eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
         },
       }
     );
@@ -46,7 +47,74 @@ export const sendMessageToLine = async (
     throw error;
   }
 };
+// route.get("/usermember", userMemberController.getUserMember);
+// route.get("/usermember/:id", userMemberController.findUserMemberById);
+// route.get("/usermember/userid/:id", userMemberController.findUserMemberByUserId);
+// route.post("/usermember", userMemberController.createProduct);
+// route.put("/usermember/userid/:id",userMemberController.updateUserMember);
+// route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
 
+export const getMember = async () => {
+  try {
+    const response = await axios.get(`${endpoint}/usermember`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (err) {}
+};
+
+export const getMemberById = async (userId: string) => {
+  try {
+    const response = await axios.get(
+      `${endpoint}/usermember/userid/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {
+    // console.log(err);
+  }
+};
+
+export const createMember = async (
+  userId: string | "",
+  dpName: string | ""
+) => {
+  try {
+    const response = await axios.post(
+      `${endpoint}/usermember`,
+      {
+        userId: userId,
+        displayName: dpName,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response;
+  } catch (err) {}
+};
+
+export const getGameSteamById = async (appId: number) => {
+  try {
+    const response = await axios.get(`${endpointSteam}/${appId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 export const getFeatureGameSteam = async () => {
   try {
     const response = await axios.get(`${endpointSteam}/`, {
@@ -54,14 +122,13 @@ export const getFeatureGameSteam = async () => {
         "Content-Type": "application/json",
       },
     });
-    // แยกข้อมูลและแม็ปรูปแบบ
     const { large_capsules, featured_win, featured_linux, featured_mac } =
       response.data;
     const mappedLargeCapsules = mapItems(large_capsules);
     const mappedFeaturedWin = mapItems(featured_win);
     const mappedFeaturedLinux = mapItems(featured_linux);
     const mappedFeaturedMac = mapItems(featured_mac);
-    // ส่งข้อมูลที่แม็ปแล้วกลับ
+
     return {
       large_capsules: mappedLargeCapsules,
       featured_win: mappedFeaturedWin,
@@ -70,7 +137,7 @@ export const getFeatureGameSteam = async () => {
     };
   } catch (error) {
     console.error(error);
-    throw error; // ส่งข้อผิดพลาดออกไปให้ caller จัดการ
+    throw error;
   }
 };
 
