@@ -47,10 +47,6 @@ export default function Navbar() {
     liff.login();
   };
 
-  const goAdminPage = () => {
-    window.location.href = "/admin";
-  };
-
   const btnLogOut = () => {
     console.log("Logout");
     liff.logout();
@@ -177,7 +173,7 @@ export default function Navbar() {
                     alt="User"
                     onClick={() => goToFavPage()}
                   />
-                    <FavoriteIcon
+                  <FavoriteIcon
                     sx={{
                       color: "red",
                       cursor: "pointer",

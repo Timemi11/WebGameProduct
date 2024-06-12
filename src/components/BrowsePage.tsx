@@ -4,6 +4,7 @@ import { GameInfo, Profile, SteamGame, Wishlist } from "../type/Items";
 import {
   getFeatureGameSteam,
   getGameSteamById,
+  getMemberById,
   updateUserWishlist,
 } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
@@ -17,9 +18,10 @@ export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
-  const [steamItems, setSteamItems] = useState<Wishlist>();
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const dataLine = useContext<Profile | null>(GetProfile);
+  const [wishList, setWishList] = useState();
+
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
@@ -33,9 +35,14 @@ export default function ShowGameProduct() {
   // get info steam game before sent to favorite
   async function getFavorites(appId: number) {
     const info = await getGameSteamById(appId);
-    setSteamItems(info);
-    console.log(dataLine?.userId);
-    await updateWishlist(info as Wishlist, dataLine?.userId || "");
+
+    getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
+
+    console.log(wishList);
+
+    // await updateWishlist(info as Wishlist, dataLine?.userId || "");
     // console.log("info");
     // console.log(info);
     // console.log("steamItems");
@@ -45,6 +52,11 @@ export default function ShowGameProduct() {
   async function updateWishlist(info: Wishlist, userId: string | "") {
     const res = await updateUserWishlist(info, userId);
     console.log(res);
+  }
+
+  async function getMemberId(userId: string) {
+    const info = await getMemberById(userId); //ข้อมูลของ user ใน userMember
+    return info;
   }
 
   useEffect(() => {
