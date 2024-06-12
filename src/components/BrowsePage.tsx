@@ -35,7 +35,7 @@ export default function ShowGameProduct() {
     const info = await getGameSteamById(appId);
     setSteamItems(info);
     console.log(dataLine?.userId);
-    // await updateWishlist(info as Wishlist, dataLine?.userId || "");
+    await updateWishlist(info as Wishlist, dataLine?.userId || "");
     // console.log("info");
     // console.log(info);
     // console.log("steamItems");
