@@ -33,7 +33,7 @@ export default function ShowGameProduct() {
   const get = async () => {
     const steamGame = (await getFeatureGameSteam()) || undefined;
     const newSteamGame = await checkAllHeart(steamGame);
-    // setGameSteam(newSteamGame);
+    setGameSteam(newSteamGame);
   };
 
   // get info steam game before sent to favorite
