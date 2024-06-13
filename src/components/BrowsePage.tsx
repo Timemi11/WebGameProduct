@@ -54,7 +54,7 @@ export default function ShowGameProduct() {
       const wishList1 = [...wishList, info];
       await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
     } else {
-      // if มี appid ก็ไม่ต้องเพิ่ม
+      // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
       alert("ลบแล้วจ้า");
@@ -119,7 +119,7 @@ export default function ShowGameProduct() {
     // });
 
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
-  }, [dataLine]);
+  }, [dataLine, gameSteam]);
 
   return (
     <div className=" container mx-auto p-8 ">
