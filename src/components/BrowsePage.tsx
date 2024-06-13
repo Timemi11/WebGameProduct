@@ -63,15 +63,16 @@ export default function ShowGameProduct() {
   }
 
   useEffect(() => {
-    if (dataLine) {
-      get();
-      getMemberId(dataLine?.userId).then((result) => {
-        setWishList(result["wishList"]);
-      });
-    }
+    get();
+    getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
+    // getMemberId("Uee534050cb274b81e66a9f0333932612").then((result) => {
+    //   setWishList(result["wishList"]);
+    // });
 
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
-  }, [dataLine, wishList]);
+  }, [dataLine]);
 
   return (
     <div className=" container mx-auto p-8 ">
