@@ -45,4 +45,5 @@ export type GameInfo = {
   discount_percent: number;
   original_price: number;
   final_price: number;
+  fav : boolean
 };

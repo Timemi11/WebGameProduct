@@ -10,6 +10,7 @@ const mapItems = (items: any) =>
     discount_percent: item.discount_percent,
     original_price: item.original_price,
     final_price: item.final_price,
+    fav: false,
   }));
 
 // ! Bearer ต่อด้วย  [Channel access token] ของ messagesing api
@@ -168,9 +169,6 @@ export const deleteUserWishlistOneApp = async (
     return response.data;
   } catch (err) {}
 };
-
-
-
 
 export const getGameSteamById = async (appId: number) => {
   try {

@@ -64,27 +64,12 @@ export default function ShowGameProduct() {
 
   useEffect(() => {
     get();
-
     getMemberId(dataLine?.userId || "").then((result) => {
       setWishList(result["wishList"]);
     });
 
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
   }, [dataLine, wishList]);
-
-  // const handleFavorites = (item: GameInfo) => {
-  //   console.log("Favorited:", item.id);
-  //   setFavorites((prev) => {
-  //     const newFavorites = new Set(prev);
-  //     if (newFavorites.has(item.id)) {
-  //       newFavorites.delete(item.id);
-  //     } else {
-  //       newFavorites.add(item.id);
-  //     }
-  //     console.log("Set:", newFavorites);
-  //     return newFavorites;
-  //   });
-  // };
 
   return (
     <div className=" container mx-auto p-8 ">
@@ -118,6 +103,7 @@ export default function ShowGameProduct() {
               <button
                 onClick={() => {
                   getFavorites(items.id);
+                  items.fav = !items.fav;
                 }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
