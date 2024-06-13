@@ -32,8 +32,12 @@ export default function ShowGameProduct() {
 
   const get = async () => {
     const steamGame = (await getFeatureGameSteam()) || undefined;
-    const newSteamGame = await checkAllHeart(steamGame);
-    setGameSteam(newSteamGame);
+    if (dataLine) {
+      const newSteamGame = await checkAllHeart(steamGame);
+      setGameSteam(newSteamGame);
+    } else {
+      setGameSteam(steamGame);
+    }
   };
 
   // get info steam game before sent to favorite
@@ -103,12 +107,11 @@ export default function ShowGameProduct() {
   };
 
   useEffect(() => {
-    if (dataLine) {
-      get();
-      getMemberId(dataLine?.userId).then((result) => {
-        setWishList(result["wishList"]);
-      });
-    }
+    get();
+    getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
+
     // getMemberId("Uee534050cb274b81e66a9f0333932612").then((result) => {
     //   setWishList(result["wishList"]);
     // });
