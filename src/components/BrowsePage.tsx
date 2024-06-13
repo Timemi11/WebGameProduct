@@ -117,6 +117,8 @@ export default function ShowGameProduct() {
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
   }, [dataLine]);
 
+  useEffect(() => {}, [gameSteam]);
+
   return (
     <div className=" container mx-auto p-8 ">
       <h1
