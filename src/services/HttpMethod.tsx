@@ -65,7 +65,7 @@ export const sendWishListToLine = async (
         prod_img: product.image,
         prod_name: product.name,
         prod_desc: product.name,
-        prod_beforeprice: "notGet",
+        prod_beforeprice: newprice,
         prod_price: newprice,
         url: liffurl,
         steamurl: steamUrlGame,
