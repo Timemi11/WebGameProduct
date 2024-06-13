@@ -18,7 +18,11 @@ const GameCarousel = ({
   steamUrlGame: string;
 }) => {
   return (
-    <div className="carousel flex overflow-auto">
+    <div
+      className="carousel flex overflow-auto"
+      style={{
+        zIndex: "-999",
+      }}>
       <Swiper
         spaceBetween={10}
         slidesPerView={1}
