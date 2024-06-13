@@ -35,7 +35,7 @@ const GameCarousel = ({
                 <img
                   src={items.large_capsule_image}
                   alt="steamgame"
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-contain  sm:object-cover rounded-lg"
                 />
               </a>
             </div>
