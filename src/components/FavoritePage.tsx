@@ -112,7 +112,7 @@ export default function ShowGameProduct() {
             </div>
             <div
               style={{ backgroundColor: "#212233" }}
-              className="details w-full h-full ml-4 flex flex-col justify-center items-center text-center p-[22px] rounded-lg relative">
+              className="details w-full h-full flex flex-col justify-center items-center text-center p-[22px] rounded-lg relative">
               <button
                 onClick={() => deleteFav(items)}
                 className="absolute top-2 right-2 text-red-600 underline">
