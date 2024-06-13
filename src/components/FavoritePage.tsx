@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Modal from "./FavPageModal";
-import { GameInfo, SteamGame, Wishlist } from "../type/Items";
 import {
   deleteUserWishlistOneApp,
-  getFeatureGameSteam,
   getWishListApp,
 } from "../services/HttpMethod";
-import { steamUrlGame } from "../services/ApiEndpoint";
 import { Profile, DatainWishlists } from "../type/Items";
 import { GetProfile } from "../App";
 
@@ -14,8 +11,6 @@ export default function ShowGameProduct() {
   const dataLine = useContext<Profile | null>(GetProfile);
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<DatainWishlists>();
-  const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
-  const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [favGame, setFavGame] = useState<DatainWishlists[]>([]);
 
@@ -23,12 +18,6 @@ export default function ShowGameProduct() {
     setIsDetail(!isDetail);
     setSelectedProduct(fproduct);
   };
-
-  // async function get() {
-  //   const steamGame = (await getFeatureGameSteam()) || undefined;
-  //   setGameSteam(steamGame);
-  // console.log(steamGame)
-  // }
 
   async function get() {
     const myWishList = await getWishListApp(dataLine?.userId || "");
@@ -51,20 +40,6 @@ export default function ShowGameProduct() {
     get();
   }, [dataLine]);
 
-  // const handleFavorite = (item: GameInfo) => {
-  //     setFavorites(prev => {
-  //         const newFavorites = new Set(prev);
-  //         if (newFavorites.has(item.id)) {
-  //             newFavorites.delete(item.id);
-  //         } else {
-  //             newFavorites.add(item.id);
-  //         }
-  //         return newFavorites;
-  //     });
-  // };
-
-  // const favoriteGames = gameSteam?.featured_mac.filter(game => favorites.has(game.id));
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
@@ -76,7 +51,7 @@ export default function ShowGameProduct() {
   const deleteFav = async (item: DatainWishlists) => {
     console.log("deleteFav:", item.appId);
     const appId = String(item.appId);
-    const info = await deleteUserWishlistOneApp(dataLine?.userId || "", appId);
+    await deleteUserWishlistOneApp(dataLine?.userId || "", appId);
     window.location.reload();
   };
 

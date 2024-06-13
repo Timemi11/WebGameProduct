@@ -7,7 +7,6 @@ import {
   getGameSteamById,
   getMemberById,
   updateUserWishlist,
-  getWishListApp,
   getAllAppId,
   deleteUserWishlistOneApp,
 } from "../services/HttpMethod";
@@ -61,7 +60,7 @@ export default function ShowGameProduct() {
 
   const updateWishlist = async (info: Wishlist[], userId: string | "") => {
     const res = await updateUserWishlist(info, userId);
-    // console.log(res);
+    console.log(res);
   };
 
   const getMemberId = async (userId: string) => {
