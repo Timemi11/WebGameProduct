@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GameInfo, Wishlist } from "../type/Items";
+import { DatainWishlists, GameInfo, Wishlist } from "../type/Items";
 import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
 const mapItems = (items: any) =>
@@ -48,6 +48,39 @@ export const sendMessageToLine = async (
     throw error;
   }
 };
+
+export const sendWishListToLine = async (
+  product: DatainWishlists,
+  liffurl: string,
+  userId: string | undefined
+) => {
+  try {
+    const response = await axios.post(
+      `${endpoint}/sent-gameproduct/${userId}`,
+      {
+        prod_id: product.appId,
+        prod_img: product.image,
+        prod_name: product.name,
+        prod_desc: product.name,
+        prod_beforeprice: product.price.formattedPrice,
+        prod_price: product.price.formattedPrice,
+        url: liffurl,
+        steamurl: steamUrlGame,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // route.get("/usermember", userMemberController.getUserMember);
 // route.get("/usermember/:id", userMemberController.findUserMemberById);
 // route.get("/usermember/userid/:id", userMemberController.findUserMemberByUserId);

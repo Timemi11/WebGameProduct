@@ -3,7 +3,7 @@ import liff from "@line/liff";
 import { Profile, DatainWishlists } from "../type/Items";
 import "../assets/Home.css";
 import "../assets/Loading.css";
-import { sendMessageToLine } from "../services/HttpMethod";
+import { sendMessageToLine, sendWishListToLine } from "../services/HttpMethod";
 import { GetProfile } from "../App";
 
 // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
@@ -33,7 +33,7 @@ export default function Modal({
           liff.login();
         } else {
           setisLoading(true); //ตั้งเวลา loading เมื่อกดสั่งซื้อ
-          // sendMessageToLine(fproduct, liffurl, proflie?.userId);
+          sendWishListToLine(fproduct, liffurl, proflie?.userId);
           setInterval(() => {
             //loadingเสร็จ ประมาณ 2 วินาที
             setisLoading(false);
