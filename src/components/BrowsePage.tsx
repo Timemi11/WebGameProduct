@@ -48,9 +48,10 @@ export default function ShowGameProduct() {
     if (arrApp === undefined) {
       console.log("create");
       setWishList([...wishList, info]);
-      setCheck(true);
+
       const wishList1 = [...wishList, info];
       await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
+      alert("เพิ่มแล้ววว");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
