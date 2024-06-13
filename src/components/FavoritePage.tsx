@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import Modal from "./FavPageModal";
 import { GameInfo, SteamGame, Wishlist } from "../type/Items";
-import { deleteUserWishlistOneApp, getFeatureGameSteam, getWishListApp } from "../services/HttpMethod";
+import {
+  deleteUserWishlistOneApp,
+  getFeatureGameSteam,
+  getWishListApp,
+} from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
-import { Profile, DatainWishlists} from "../type/Items";
+import { Profile, DatainWishlists } from "../type/Items";
 import { GetProfile } from "../App";
 
 export default function ShowGameProduct() {
@@ -28,8 +32,8 @@ export default function ShowGameProduct() {
 
   async function get() {
     const myWishList = await getWishListApp(dataLine?.userId || "");
-    console.log(dataLine?.userId)
-    console.log(myWishList)
+    console.log(dataLine?.userId);
+    console.log(myWishList);
     if (myWishList) {
       // Check if myWishList is an array or a single object
       if (Array.isArray(myWishList)) {
@@ -71,8 +75,8 @@ export default function ShowGameProduct() {
 
   const deleteFav = async (item: DatainWishlists) => {
     console.log("deleteFav:", item.appId);
-    const appId = String(item.appId)
-    const info = await deleteUserWishlistOneApp(dataLine?.userId || "",appId);
+    const appId = String(item.appId);
+    const info = await deleteUserWishlistOneApp(dataLine?.userId || "", appId);
     window.location.reload();
   };
 
@@ -98,7 +102,7 @@ export default function ShowGameProduct() {
         {filteredGames?.map((items, ind) => (
           <div
             key={ind}
-            className="flex flex-row items-start justify-center text-white p-4 shadow-2xl rounded-lg relative">
+            className="flex flex-col sm:flex-row sm:items-start sm:justify-center text-white p-4 shadow-2xl rounded-lg relative">
             <div className="image w-46 h-full flex justify-center items-center relative">
               <img
                 src={items.image}
@@ -117,8 +121,10 @@ export default function ShowGameProduct() {
               <h3 className="text-2xl font-semibold text-center">
                 {items.name}
               </h3>
-              <p className="text-green-400 text-xl">{items.price.formattedPrice}</p>
-              
+              <p className="text-green-400 text-xl">
+                {items.price.formattedPrice}
+              </p>
+
               <button
                 onClick={() => fhandleToggleModal(items)}
                 className="mt-4 font-extrabold bg-violet-800 hover:bg-violet-700 text-white px-4 py-2 rounded-md">

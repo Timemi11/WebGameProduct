@@ -85,7 +85,7 @@ export default function Modal({
                 <button
                   onClick={logInBeforeBuy}
                   className="w-1/2 md:w-full mt-4 text-lg md:text-2xl font-extrabold bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-md">
-                  สั่งซื้อ
+                  เลือกดู
                 </button>
               </div>
             </div>
