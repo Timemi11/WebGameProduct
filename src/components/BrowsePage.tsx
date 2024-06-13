@@ -27,6 +27,7 @@ export default function ShowGameProduct() {
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
+    
   };
 
   const get = async () => {
