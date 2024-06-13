@@ -46,7 +46,7 @@ export default function Modal({
   };
 
   return (
-    <div className="higher-bg ">
+    <div className="higher-bg " style={{ zIndex: 999 }}>
       {!isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div
