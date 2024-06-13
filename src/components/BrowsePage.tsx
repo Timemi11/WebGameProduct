@@ -56,7 +56,7 @@ export default function ShowGameProduct() {
       console.log(appId);
       // console.log(appId.toString());
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
-      setCheckHotReload(appId);
+      setCheckHotReload(appId + 1);
     }
   };
 
