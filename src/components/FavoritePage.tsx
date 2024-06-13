@@ -115,21 +115,22 @@ export default function ShowGameProduct() {
               className="details w-full h-full ml-4 flex flex-col justify-center items-center text-center p-[22px] rounded-lg relative">
               <button
                 onClick={() => deleteFav(items)}
-                className="absolute top-2 right-2 text-gray-400 underline">
+                className="absolute top-2 right-2 text-red-600 underline">
                 ลบออกจากสิ่งที่อยากได้
               </button>
-              <h3 className="text-2xl font-semibold text-center">
-                {items.name}
-              </h3>
-              <p className="text-green-400 text-xl">
-                {items.price.formattedPrice}
-              </p>
-
-              <button
-                onClick={() => fhandleToggleModal(items)}
-                className="mt-4 font-extrabold bg-violet-800 hover:bg-violet-700 text-white px-4 py-2 rounded-md">
-                รายละเอียด
-              </button>
+              <div className="textfield mt-4 sm:mt-0">
+                <h3 className="text-2xl font-semibold text-center">
+                  {items.name}
+                </h3>
+                <p className="text-green-400 text-xl">
+                  {items.price.formattedPrice}
+                </p>
+                <button
+                  onClick={() => fhandleToggleModal(items)}
+                  className="mt-4 font-extrabold bg-violet-800 hover:bg-violet-700 text-white px-4 py-2 rounded-md">
+                  รายละเอียด
+                </button>
+              </div>
             </div>
           </div>
         ))}
