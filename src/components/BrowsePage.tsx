@@ -153,8 +153,7 @@ export default function ShowGameProduct() {
                   getFavorites(items.id);
                   items.fav = !items.fav;
                 }}
-                className={`absolute top-1 right-1 p-1`}
-                style={{top:"10px", right:"10px"}}>
+                className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red", fontSize: "30px" }}
