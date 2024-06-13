@@ -120,6 +120,16 @@ export default function Navbar() {
                     <MenuItem key="logout" onClick={btnLogOut}>
                       LogOut
                     </MenuItem>,
+                    <MenuItem>
+                      <FavoriteIcon
+                        sx={{
+                          color: "red",
+                          cursor: "pointer",
+                          textAlign: "center",
+                          fontSize: "30px",
+                        }}
+                        onClick={() => goToFavPage()}></FavoriteIcon>
+                    </MenuItem>,
                     <MenuItem key="img">
                       <img
                         width="50px"
