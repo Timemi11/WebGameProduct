@@ -23,11 +23,10 @@ export default function ShowGameProduct() {
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const dataLine = useContext<Profile | null>(GetProfile);
   const [wishList, setWishList] = useState<Wishlist[]>([]);
-  const [checkHotReloat, setCheckHotReload] = useState<number>(0);
+  const [checkHotReloat, setCheckHotReload] = useState<number>();
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
-    
   };
 
   const get = async () => {
