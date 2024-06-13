@@ -9,6 +9,7 @@ import {
   updateUserWishlist,
   getWishListApp,
   getAllAppId,
+  deleteUserWishlistOneApp,
 } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
@@ -55,6 +56,7 @@ export default function ShowGameProduct() {
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม
       console.log(appId);
+      await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
       alert("มีอยู่แล้วจ้าาา");
     }
   };
@@ -221,10 +223,13 @@ export default function ShowGameProduct() {
                 className="object-cover rounded-lg "></img>
 
               <button
-                onClick={() => getFavorites(items.id)}
+                onClick={() => {
+                  getFavorites(items.id);
+                  items.fav = !items.fav;
+                }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
-                  icon={favorites.has(items.id) ? solidHeart : regularHeart}
+                  icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red" }}
                 />
               </button>
@@ -289,10 +294,13 @@ export default function ShowGameProduct() {
                 onClick={() => handleToggleModal(items)}
                 className="object-cover rounded-lg"></img>
               <button
-                onClick={() => getFavorites(items.id)}
+                onClick={() => {
+                  getFavorites(items.id);
+                  items.fav = !items.fav;
+                }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
-                  icon={favorites.has(items.id) ? solidHeart : regularHeart}
+                  icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red" }}
                 />
               </button>
