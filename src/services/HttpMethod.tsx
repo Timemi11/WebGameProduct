@@ -215,7 +215,7 @@ export const deleteUserWishlistOneApp = async (
         },
       }
     );
-    return response.data;
+    // return response.data;
   } catch (err) {}
 };
 
