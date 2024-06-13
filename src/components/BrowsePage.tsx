@@ -106,7 +106,9 @@ export default function ShowGameProduct() {
               <button
                 onClick={() => {
                   getFavorites(items.id);
+                  console.log("before => " + items.fav);
                   items.fav = !items.fav;
+                  console.log("after => " + items.fav);
                 }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
