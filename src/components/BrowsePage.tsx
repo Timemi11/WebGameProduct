@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { GameInfo, Profile, SteamGame, Wishlist } from "../type/Items";
 import {
-  getAllAppId,
+  getHaveAppId,
   getFeatureGameSteam,
   getGameSteamById,
   getMemberById,
   updateUserWishlist,
+  getWishListApp,
 } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
@@ -28,16 +29,17 @@ export default function ShowGameProduct() {
     setSelectedProduct(product);
   };
 
-  async function get() {
+  const get = async () => {
     const steamGame = (await getFeatureGameSteam()) || undefined;
-    setGameSteam(steamGame);
-  }
+    const newSteamGame = await checkAllHeart(steamGame);
+    // setGameSteam(newSteamGame);
+  };
 
   // get info steam game before sent to favorite
-  async function getFavorites(appId: number) {
+  const getFavorites = async (appId: number) => {
     const info: Wishlist = await getGameSteamById(appId);
 
-    const arrApp = await getAllAppId(dataLine?.userId || "", appId);
+    const arrApp = await getHaveAppId(dataLine?.userId || "", appId);
 
     if (arrApp === undefined) {
       console.log("create");
@@ -50,20 +52,58 @@ export default function ShowGameProduct() {
       console.log(appId);
       alert("มีอยู่แล้วจ้าาา");
     }
-  }
+  };
 
-  async function updateWishlist(info: Wishlist[], userId: string | "") {
+  const updateWishlist = async (info: Wishlist[], userId: string | "") => {
     const res = await updateUserWishlist(info, userId);
-    //console.log(res);
-  }
+    console.log(res);
+  };
 
-  async function getMemberId(userId: string) {
+  const getMemberId = async (userId: string) => {
     const info = await getMemberById(userId); //ข้อมูลของ user ใน userMember
     return info;
-  }
+  };
+
+  // 1.useeffect เพิ่ม check ว่ามี appid อะไรบ้างใน wihslist member ถ้ามีก็ไปเซตในตัวของ fav gamesteam  เป็น true
+  const checkAllHeart = async (steamgame: SteamGame) => {
+    const allApp = await getWishListApp(dataLine?.userId || "");
+
+    console.log(allApp);
+    // const appIdSet = new Set(allApp); // Set ช่วยให้ array ไม่เก็บค่าซ้ำ
+
+    // const newLargeCapsules = steamgame.large_capsules;
+
+    // เปลี่ยนแปลงค่าของ fav ในข้อมูลเกม
+    // const newFeatured_win = steamgame?.featured_win.map((items) => {
+    //   if (appIdSet.has(items.id)) {
+    //     return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
+    //   }
+    //   return items;
+    // });
+    // const newFeatured_mac = steamgame?.featured_mac.map((items) => {
+    //   if (appIdSet.has(items.id)) {
+    //     return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
+    //   }
+    //   return items;
+    // });
+    // const newFeatured_linux = steamgame?.featured_linux.map((items) => {
+    //   if (appIdSet.has(items.id)) {
+    //     return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
+    //   }
+    //   return items;
+    // });
+
+    // return {
+    //   large_capsules: newLargeCapsules,
+    //   featured_win: newFeatured_win,
+    //   featured_mac: newFeatured_mac,
+    //   featured_linux: newFeatured_linux,
+    // };
+  };
 
   useEffect(() => {
     get();
+
     getMemberId(dataLine?.userId || "").then((result) => {
       setWishList(result["wishList"]);
     });
@@ -106,9 +146,7 @@ export default function ShowGameProduct() {
               <button
                 onClick={() => {
                   getFavorites(items.id);
-                  console.log("before => " + items.fav);
                   items.fav = !items.fav;
-                  console.log("after => " + items.fav);
                 }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon

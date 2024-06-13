@@ -55,8 +55,10 @@ export const sendMessageToLine = async (
 // route.put("/usermember/userid/:id",userMemberController.updateUserMember);
 // route.get("/usermember/userid/:id/appid/:appid",userMemberController.findAppId)
 // route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
+// get all appid
+// route.get("/usermember/userid/:id/appid", userMemberController.findApp);
 
-export const getAllAppId = async (userId: string, appid: number) => {
+export const getHaveAppId = async (userId: string, appid: number) => {
   try {
     const response = await axios.get(
       `${endpoint}/usermember/userid/${userId}/appid/${appid}`,
@@ -80,7 +82,7 @@ export const getWishListApp = async (userId: string) => {
         },
       }
     );
-    // const name = mapItems(name);
+
     return response.data;
   } catch (err) {}
 };
