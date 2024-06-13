@@ -65,9 +65,9 @@ export default function Navbar() {
     window.location.href = "/fav";
   };
 
-  // const plsLogin = () => {
-  //   setOpenModal(true);
-  // }
+  const goHome = () => {
+    window.location.href = "/user";
+  };
 
   // const handleCloseModal = () => {
   //   setOpenModal(false);
@@ -117,8 +117,8 @@ export default function Navbar() {
                     </MenuItem>,
                   ]
                 : [
-                    <MenuItem key="logout" onClick={btnLogOut}>
-                      LogOut
+                    <MenuItem key="logout" onClick={goHome}>
+                      Home
                     </MenuItem>,
                     <MenuItem>
                       <FavoriteIcon
@@ -146,7 +146,7 @@ export default function Navbar() {
             </Menu>
           ) : (
             <ButtonGroup
-              className="flex gap-x-4 p-4 items-center"
+              className="flex gap-x-4 p-4 items-center justify-center"
               variant="outlined"
               aria-label="Basic button group">
               {!isLogin ? (
@@ -168,6 +168,14 @@ export default function Navbar() {
                     style={{
                       backgroundColor: "rgb(104, 66, 255)",
                     }}
+                    onClick={goHome}>
+                    Home
+                  </Button>
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: "rgb(104, 66, 255)",
+                    }}
                     onClick={btnLogin}>
                     Login
                   </Button>
@@ -175,6 +183,14 @@ export default function Navbar() {
               ) : (
                 <>
                   <p className="flex items-center ">{dataLine?.displayName}</p>
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: "rgb(104, 66, 255)",
+                    }}
+                    onClick={goHome}>
+                    Home
+                  </Button>
                   <img
                     width="50px"
                     height="50px"
