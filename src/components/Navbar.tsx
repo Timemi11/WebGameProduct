@@ -157,12 +157,6 @@ export default function Navbar() {
                     sx={{ mr: 2 }}
                     onClick={() => goToFavPage()}
                   />
-                  {/* <button
-                    // onClick={() => plsLogin()}
-                    className={` p-2 rounded-full bg-red-500`}>
-                    <FontAwesomeIcon icon={solidHeart} style={{ color: "white" }} />
-                  </button> */}
-
                   <Button
                     variant="contained"
                     style={{
@@ -182,7 +176,6 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <p className="flex items-center ">{dataLine?.displayName}</p>
                   <Button
                     variant="contained"
                     style={{
@@ -191,14 +184,6 @@ export default function Navbar() {
                     onClick={goHome}>
                     Home
                   </Button>
-                  <img
-                    width="50px"
-                    height="50px"
-                    style={{ borderRadius: "2rem", marginRight: "10px" }}
-                    src={dataLine?.pictureUrl}
-                    alt="User"
-                    onClick={() => goToFavPage()}
-                  />
                   <FavoriteIcon
                     sx={{
                       color: "red",
@@ -207,6 +192,15 @@ export default function Navbar() {
                       fontSize: "30px",
                     }}
                     onClick={() => goToFavPage()}></FavoriteIcon>
+                  <p className="flex items-center ">{dataLine?.displayName}</p>
+                  <img
+                    width="50px"
+                    height="50px"
+                    style={{ borderRadius: "2rem", marginRight: "10px" }}
+                    src={dataLine?.pictureUrl}
+                    alt="User"
+                    onClick={() => goToFavPage()}
+                  />
                   <Button variant="contained" color="error" onClick={btnLogOut}>
                     LogOut
                   </Button>
