@@ -107,7 +107,7 @@ export default function ShowGameProduct() {
                 }}
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
-                  icon={favorites.has(items.id) ? solidHeart : regularHeart}
+                  icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red" }}
                 />
               </button>
