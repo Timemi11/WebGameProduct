@@ -55,6 +55,7 @@ export default function ShowGameProduct() {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
+      window.location.reload();
     }
   };
 
@@ -151,7 +152,8 @@ export default function ShowGameProduct() {
                   getFavorites(items.id);
                   items.fav = !items.fav;
                 }}
-                className={`absolute top-1 right-1 p-1`} style={{width: '38px'}}>
+                className={`absolute top-1 right-1 p-1`}
+                style={{ width: "38px" }}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red", fontSize: "30px" }}
@@ -223,7 +225,8 @@ export default function ShowGameProduct() {
                   getFavorites(items.id);
                   items.fav = !items.fav;
                 }}
-                className={`absolute top-1 right-1 p-1`} style={{width: '38px'}}>
+                className={`absolute top-1 right-1 p-1`}
+                style={{ width: "38px" }}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red", fontSize: "30px" }}
@@ -294,7 +297,8 @@ export default function ShowGameProduct() {
                   getFavorites(items.id);
                   items.fav = !items.fav;
                 }}
-                className={`absolute top-1 right-1 p-1`} style={{width: '38px'}}>
+                className={`absolute top-1 right-1 p-1`}
+                style={{ width: "38px" }}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
                   style={{ color: "red", fontSize: "30px" }}
