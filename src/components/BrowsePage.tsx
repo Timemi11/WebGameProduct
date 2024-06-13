@@ -22,7 +22,7 @@ export default function ShowGameProduct() {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<GameInfo>();
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
-  const [favorites, setFavorites] = useState<Set<number>>(new Set());
+
   const dataLine = useContext<Profile | null>(GetProfile);
   const [wishList, setWishList] = useState<Wishlist[]>([]);
 
@@ -49,7 +49,6 @@ export default function ShowGameProduct() {
 
     if (arrApp === undefined) {
       console.log("create");
-      alert("เพิ่มแล้วววว");
       setWishList([...wishList, info]);
       const wishList1 = [...wishList, info];
       await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
@@ -57,7 +56,6 @@ export default function ShowGameProduct() {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
-      alert("ลบแล้วจ้า");
     }
   };
 
