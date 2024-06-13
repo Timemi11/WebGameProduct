@@ -67,9 +67,6 @@ export default function Modal({
               <h2 className="text-4xl text-center font-extarbold mb-4">
                 {product.name}
               </h2>
-              <p>รายละเอียด</p>
-              <p className="text-white mb-4">{product.name}</p>
-
               {product.discount_percent === 0 ? (
                 <p className="mb-4 text-green-400 text-2xl font-extrabold">
                   {product.original_price === 0 ||

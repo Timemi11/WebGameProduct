@@ -3,7 +3,7 @@ import liff from "@line/liff";
 import { Profile, DatainWishlists } from "../type/Items";
 import "../assets/Home.css";
 import "../assets/Loading.css";
-import {  sendWishListToLine } from "../services/HttpMethod";
+import { sendWishListToLine } from "../services/HttpMethod";
 import { GetProfile } from "../App";
 
 // !  ใช้เครื่องหมาย ? เพื่อเริ่มต้น query string และเราใช้ & เพื่อเชื่อมต่อแต่ละพารามิเตอร์
@@ -71,8 +71,6 @@ export default function Modal({
               <h2 className="text-4xl text-center font-extarbold mb-4">
                 {fproduct.name}
               </h2>
-              <p>รายละเอียด</p>
-              <p className="text-white mb-4">{fproduct.name}</p>
               <p className="mb-4 text-green-400 text-2xl font-extrabold">
                 {fproduct.price.formattedPrice}
               </p>

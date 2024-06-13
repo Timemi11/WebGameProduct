@@ -117,7 +117,6 @@ export default function ShowGameProduct() {
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
   }, [dataLine]);
 
-
   return (
     <div className=" container mx-auto p-8 ">
       <h1
@@ -139,7 +138,7 @@ export default function ShowGameProduct() {
         {gameSteam?.featured_win.map((items, ind) => (
           <div
             key={ind}
-            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg ">
+            className=" flex flex-col items-center justify-center text-white p-4 shadow-2xl rounded-lg relative">
             <div className="image w-46 h-full mb-4 flex justify-center items-center relative">
               <img
                 src={items.large_capsule_image}
