@@ -23,7 +23,7 @@ export default function ShowGameProduct() {
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const dataLine = useContext<Profile | null>(GetProfile);
   const [wishList, setWishList] = useState<Wishlist[]>([]);
-  const [checkHotReloat, setCheckHotReload] = useState<Number>(0);
+  // const [checkHotReloat, setCheckHotReload] = useState<Number>(0);
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
@@ -49,13 +49,13 @@ export default function ShowGameProduct() {
       console.log("create");
       setWishList([...wishList, info]);
       const wishList1 = [...wishList, info];
-      setCheckHotReload(appId);
+      // setCheckHotReload(appId);
       await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       // console.log(appId.toString());
-      setCheckHotReload(appId);
+      // setCheckHotReload(appId);
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
     }
   };
