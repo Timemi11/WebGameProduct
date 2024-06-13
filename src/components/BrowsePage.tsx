@@ -69,37 +69,37 @@ export default function ShowGameProduct() {
   const checkAllHeart = async (steamgame: SteamGame) => {
     const allApp = await getAllAppId(dataLine?.userId || "");
 
-    console.log(allApp);
-    // const appIdSet = new Set(allApp); // Set ช่วยให้ array ไม่เก็บค่าซ้ำ
+    // console.log(allApp);
+    const appIdSet = new Set(allApp); // Set ช่วยให้ array ไม่เก็บค่าซ้ำ
 
-    // const newLargeCapsules = steamgame.large_capsules;
+    const newLargeCapsules = steamgame.large_capsules;
 
     // เปลี่ยนแปลงค่าของ fav ในข้อมูลเกม
-    // const newFeatured_win = steamgame?.featured_win.map((items) => {
-    //   if (appIdSet.has(items.id)) {
-    //     return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
-    //   }
-    //   return items;
-    // });
-    // const newFeatured_mac = steamgame?.featured_mac.map((items) => {
-    //   if (appIdSet.has(items.id)) {
-    //     return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
-    //   }
-    //   return items;
-    // });
-    // const newFeatured_linux = steamgame?.featured_linux.map((items) => {
-    //   if (appIdSet.has(items.id)) {
-    //     return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
-    //   }
-    //   return items;
-    // });
+    const newFeatured_win = steamgame?.featured_win.map((items) => {
+      if (appIdSet.has(items.id)) {
+        return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
+      }
+      return items;
+    });
+    const newFeatured_mac = steamgame?.featured_mac.map((items) => {
+      if (appIdSet.has(items.id)) {
+        return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
+      }
+      return items;
+    });
+    const newFeatured_linux = steamgame?.featured_linux.map((items) => {
+      if (appIdSet.has(items.id)) {
+        return { ...items, fav: true }; // เซ็ต fav เป็น true ถ้า appId อยู่ใน wishlist
+      }
+      return items;
+    });
 
-    // return {
-    //   large_capsules: newLargeCapsules,
-    //   featured_win: newFeatured_win,
-    //   featured_mac: newFeatured_mac,
-    //   featured_linux: newFeatured_linux,
-    // };
+    return {
+      large_capsules: newLargeCapsules,
+      featured_win: newFeatured_win,
+      featured_mac: newFeatured_mac,
+      featured_linux: newFeatured_linux,
+    };
   };
 
   useEffect(() => {
