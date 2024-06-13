@@ -24,7 +24,7 @@ export default function Modal({
   const proflie = useContext<Profile | null>(GetProfile);
 
   const newprice = Number(
-    fproduct.price.formattedPrice.replace(/[^0-9.-]+/g, "")
+    fproduct.price.formattedPrice.replace(/[^0-9]+/g, "")
   );
   console.log(newprice);
   const logInBeforeBuy = () => {

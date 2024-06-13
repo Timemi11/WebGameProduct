@@ -54,9 +54,7 @@ export const sendWishListToLine = async (
   liffurl: string,
   userId: string | undefined
 ) => {
-  const newprice = Number(
-    product.price.formattedPrice.replace(/[^0-9.-]+/g, "")
-  );
+  const newprice = Number(product.price.formattedPrice.replace(/[^0-9]+/g, ""));
   try {
     const response = await axios.post(
       `${endpoint}/sent-gameproduct/${userId}`,
