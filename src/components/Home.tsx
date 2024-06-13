@@ -48,6 +48,7 @@ export default function Home() {
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
           src={videobg}
           autoPlay
+          
           muted
           loop></video>
         <div className="content">
