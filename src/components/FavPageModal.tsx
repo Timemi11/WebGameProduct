@@ -23,8 +23,6 @@ export default function Modal({
   const [isLoading, setisLoading] = useState(false);
   const proflie = useContext<Profile | null>(GetProfile);
 
-  fproduct.price.formattedPrice.replace("$", "");
-
   const logInBeforeBuy = () => {
     liff
       .init({
@@ -35,7 +33,7 @@ export default function Modal({
           liff.login();
         } else {
           setisLoading(true); //ตั้งเวลา loading เมื่อกดสั่งซื้อ
-          //   sendWishListToLine(fproduct, liffurl, proflie?.userId);
+          sendWishListToLine(fproduct, liffurl, proflie?.userId);
           setInterval(() => {
             //loadingเสร็จ ประมาณ 2 วินาที
             setisLoading(false);
