@@ -8,6 +8,7 @@ import {
   getMemberById,
   updateUserWishlist,
   getWishListApp,
+  getAllAppId,
 } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
 import GameCarousel from "./GameCarosel";
@@ -66,9 +67,9 @@ export default function ShowGameProduct() {
 
   // 1.useeffect เพิ่ม check ว่ามี appid อะไรบ้างใน wihslist member ถ้ามีก็ไปเซตในตัวของ fav gamesteam  เป็น true
   const checkAllHeart = async (steamgame: SteamGame) => {
-    const allApp = await getWishListApp(dataLine?.userId || "");
+    const allApp = await getAllAppId(dataLine?.userId || "");
 
-    console.log(allApp["appId"]);
+    console.log(allApp);
     // const appIdSet = new Set(allApp); // Set ช่วยให้ array ไม่เก็บค่าซ้ำ
 
     // const newLargeCapsules = steamgame.large_capsules;

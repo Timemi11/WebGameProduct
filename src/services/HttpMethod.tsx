@@ -55,13 +55,27 @@ export const sendMessageToLine = async (
 // route.put("/usermember/userid/:id",userMemberController.updateUserMember);
 // route.get("/usermember/userid/:id/appid/:appid",userMemberController.findAppId)
 // route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
-// get all appid
 // route.get("/usermember/userid/:id/appid", userMemberController.findApp);
+// route.get("/usermember/userid/:id/appid", userMemberController.findApp);
+// route.get("/usermember/userid/:id/onlyappid", userMemberController.findAppOnlyAppId); // ดู App fav ทั้งหมดของ User แต่เอาแค่ App Id
 
 export const getHaveAppId = async (userId: string, appid: number) => {
   try {
     const response = await axios.get(
       `${endpoint}/usermember/userid/${userId}/appid/${appid}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {}
+};
+export const getAllAppId = async (userId: string) => {
+  try {
+    const response = await axios.get(
+      `${endpoint}/usermember/userid/${userId}/onlyappid`,
       {
         headers: {
           "Content-Type": "application/json",
