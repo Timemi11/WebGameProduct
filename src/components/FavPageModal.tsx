@@ -23,7 +23,7 @@ export default function Modal({
   const [isLoading, setisLoading] = useState(false);
   const proflie = useContext<Profile | null>(GetProfile);
 
-  console.log(parseFloat(fproduct.price.formattedPrice));
+  fproduct.price.formattedPrice.replace("$", "");
 
   const logInBeforeBuy = () => {
     liff
