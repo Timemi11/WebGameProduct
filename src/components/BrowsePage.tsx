@@ -68,7 +68,7 @@ export default function ShowGameProduct() {
   const checkAllHeart = async (steamgame: SteamGame) => {
     const allApp = await getWishListApp(dataLine?.userId || "");
 
-    console.log(allApp);
+    console.log(allApp.appId);
     // const appIdSet = new Set(allApp); // Set ช่วยให้ array ไม่เก็บค่าซ้ำ
 
     // const newLargeCapsules = steamgame.large_capsules;
