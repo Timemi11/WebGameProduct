@@ -103,11 +103,12 @@ export default function ShowGameProduct() {
   };
 
   useEffect(() => {
-    get();
-
-    getMemberId(dataLine?.userId || "").then((result) => {
-      setWishList(result["wishList"]);
-    });
+    if (dataLine) {
+      get();
+      getMemberId(dataLine?.userId).then((result) => {
+        setWishList(result["wishList"]);
+      });
+    }
     // getMemberId("Uee534050cb274b81e66a9f0333932612").then((result) => {
     //   setWishList(result["wishList"]);
     // });
