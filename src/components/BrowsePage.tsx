@@ -57,7 +57,7 @@ export default function ShowGameProduct() {
       // if มี appid ก็ไม่ต้องเพิ่ม
       console.log(appId);
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
-      alert("มีอยู่แล้วจ้าาา");
+      alert("ลบแล้วจ้า");
     }
   };
 
