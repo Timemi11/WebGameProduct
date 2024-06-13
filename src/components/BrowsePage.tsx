@@ -114,10 +114,6 @@ export default function ShowGameProduct() {
       });
     }
 
-    // getMemberId("Uee534050cb274b81e66a9f0333932612").then((result) => {
-    //   setWishList(result["wishList"]);
-    // });
-
     // ใช้wishlist แล้วมันนำข้อมูล่าสุดมาให้ หลัง dom render เสร้จ useeffect  // ! ไปดูต่อคืนนี้ lifecycle
   }, [dataLine, gameSteam]);
 
@@ -158,7 +154,7 @@ export default function ShowGameProduct() {
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
-                  style={{ color: "red" }}
+                  style={{ color: "red", fontSize: "30px" }}
                 />
               </button>
             </div>
@@ -230,7 +226,7 @@ export default function ShowGameProduct() {
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
-                  style={{ color: "red" }}
+                  style={{ color: "red", fontSize: "30px" }}
                 />
               </button>
             </div>
@@ -301,7 +297,7 @@ export default function ShowGameProduct() {
                 className={`absolute top-1 right-1 p-1`}>
                 <FontAwesomeIcon
                   icon={items.fav ? solidHeart : regularHeart}
-                  style={{ color: "red" }}
+                  style={{ color: "red", fontSize: "30px" }}
                 />
               </button>
             </div>
