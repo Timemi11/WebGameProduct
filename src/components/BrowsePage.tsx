@@ -23,7 +23,7 @@ export default function ShowGameProduct() {
   const [gameSteam, setGameSteam] = useState<SteamGame | undefined>(undefined);
   const dataLine = useContext<Profile | null>(GetProfile);
   const [wishList, setWishList] = useState<Wishlist[]>([]);
-  const [checkHotReloat, setCheckHotReload] = useState<number>();
+  const [checkHotReloat, setCheckHotReload] = useState<number>(0);
   const handleToggleModal = (product?: GameInfo) => {
     setIsDetail(!isDetail);
     setSelectedProduct(product);
@@ -47,17 +47,27 @@ export default function ShowGameProduct() {
 
     if (arrApp === undefined) {
       console.log("create");
+      console.log(appId);
       setWishList([...wishList, info]);
       const wishList1 = [...wishList, info];
+      setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
       await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
-      setCheckHotReload(appId);
+      alert("เพิ่มแล้ววว");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       // console.log(appId.toString());
+      setCheckHotReload(appId + 1); //22223
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
-      setCheckHotReload(appId + 1);
     }
+    console.log("before fav wishlist");
+    console.log(wishList);
+    //ล้างค่าเดิมทิ้ง
+    await getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
+    console.log("after fav wishlist");
+    console.log(wishList);
   };
 
   const updateWishlist = async (info: Wishlist[], userId: string | "") => {
