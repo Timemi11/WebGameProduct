@@ -52,7 +52,7 @@ export default function ShowGameProduct() {
       const wishList1 = [...wishList, info];
       setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
       await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
-      alert("เพิ่มแล้วลงรายการโปรดแล้ว");
+      alert("เพิ่มลงรายการโปรดแล้ว");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
