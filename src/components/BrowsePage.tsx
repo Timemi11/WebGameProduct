@@ -57,7 +57,7 @@ export default function ShowGameProduct() {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       // console.log(appId.toString());
-      setCheckHotReload(appId + 1); //22223
+      setCheckHotReload(appId + 1); //22223 a
       await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
     }
     console.log("before fav wishlist");
