@@ -44,30 +44,35 @@ export default function ShowGameProduct() {
   // เอาข้อมูลเข้า wishlist ของ user นั่นๆ ก่อนแสดง
   const getFavorites = async (appId: number) => {
     const info: Wishlist = await getGameSteamById(appId);
-    const arrApp = await getHaveAppId(dataLine?.userId || "", appId);
 
-    if (arrApp === undefined) {
-      console.log("create");
-      console.log(appId);
-      setWishList([...wishList, info]);
-      const wishList1 = [...wishList, info];
-      setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
-      alert("เพิ่มลงในรายการโปรดแล้ว");
-      await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
-    } else {
-      // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
-      console.log(appId);
-      // console.log(appId.toString());
-      setCheckHotReload(appId + 1); //22223 a
-      alert("นำออกจากรายการโปรดแล้ว");
-      await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
+    if (dataLine) {
+      const arrApp = await getHaveAppId(dataLine?.userId || "", appId);
+      if (arrApp === undefined) {
+        console.log("create");
+        console.log(appId);
+        setWishList([...wishList, info]);
+        const wishList1 = [...wishList, info];
+        setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
+        alert("เพิ่มลงในรายการโปรดแล้ว");
+        await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
+      } else {
+        // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
+        console.log(appId);
+        // console.log(appId.toString());
+        setCheckHotReload(appId + 1); //22223 a
+        alert("นำออกจากรายการโปรดแล้ว");
+        await deleteUserWishlistOneApp(
+          dataLine?.userId || "",
+          appId.toString()
+        );
+      }
+      //ล้างค่าเดิมทิ้ง
+      await getMemberId(dataLine?.userId || "").then((result) => {
+        setWishList(result["wishList"]);
+      });
+      console.log("after fav wishlist");
+      console.log(wishList); //ข้อมูลตัวนี้คือมัน delay แต่ข้อมูลใหม่ถูก set ไว้แล้ว
     }
-    //ล้างค่าเดิมทิ้ง
-    await getMemberId(dataLine?.userId || "").then((result) => {
-      setWishList(result["wishList"]);
-    });
-    console.log("after fav wishlist");
-    console.log(wishList); //ข้อมูลตัวนี้คือมัน delay แต่ข้อมูลใหม่ถูก set ไว้แล้ว
   };
 
   // set ค่า wishlist ทั้งหมดลงใน state gamesteam
