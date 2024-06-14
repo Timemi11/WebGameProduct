@@ -19,8 +19,6 @@
   }
   @keyframes s3 {to{transform: rotate(1turn)}}
 
-
-
   .image img, .image-big img{
     transform: scale(1.0);
     transition: transform 1s ease-out;

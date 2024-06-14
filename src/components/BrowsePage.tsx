@@ -29,47 +29,7 @@ export default function ShowGameProduct() {
     setSelectedProduct(product);
   };
 
-  const get = async () => {
-    const steamGame = (await getFeatureGameSteam()) || undefined;
-    if (dataLine) {
-      const newSteamGame = await checkAllHeart(steamGame);
-      setGameSteam(newSteamGame);
-    } else {
-      setGameSteam(steamGame);
-    }
-  };
-
-  // get info steam game before sent to favorite
-  const getFavorites = async (appId: number) => {
-    const info: Wishlist = await getGameSteamById(appId);
-
-    const arrApp = await getHaveAppId(dataLine?.userId || "", appId);
-
-    if (arrApp === undefined) {
-      console.log("create");
-      console.log(appId);
-      setWishList([...wishList, info]);
-      const wishList1 = [...wishList, info];
-      setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
-      await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
-      alert("เพิ่มแล้ววว");
-    } else {
-      // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
-      console.log(appId);
-      // console.log(appId.toString());
-      setCheckHotReload(appId + 1); //22223 a
-      await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
-    }
-    console.log("before fav wishlist");
-    console.log(wishList);
-    //ล้างค่าเดิมทิ้ง
-    await getMemberId(dataLine?.userId || "").then((result) => {
-      setWishList(result["wishList"]);
-    });
-    console.log("after fav wishlist");
-    console.log(wishList);
-  };
-
+  // เพิ่มข้อมูล wishlist ใน user นั่น
   const updateWishlist = async (info: Wishlist[], userId: string | "") => {
     const res = await updateUserWishlist(info, userId);
     console.log(res);
@@ -81,6 +41,46 @@ export default function ShowGameProduct() {
   };
 
   // 1.useeffect เพิ่ม check ว่ามี appid อะไรบ้างใน wihslist member ถ้ามีก็ไปเซตในตัวของ fav gamesteam  เป็น true
+  // เอาข้อมูลเข้า wishlist ของ user นั่นๆ ก่อนแสดง
+  const getFavorites = async (appId: number) => {
+    const info: Wishlist = await getGameSteamById(appId);
+    const arrApp = await getHaveAppId(dataLine?.userId || "", appId);
+
+    if (arrApp === undefined) {
+      console.log("create");
+      console.log(appId);
+      setWishList([...wishList, info]);
+      const wishList1 = [...wishList, info];
+      setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
+      await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
+      // alert("เพิ่มแล้ววว");
+    } else {
+      // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
+      console.log(appId);
+      // console.log(appId.toString());
+      setCheckHotReload(appId + 1); //22223 a
+      await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
+    }
+    //ล้างค่าเดิมทิ้ง
+    await getMemberId(dataLine?.userId || "").then((result) => {
+      setWishList(result["wishList"]);
+    });
+    console.log("after fav wishlist");
+    console.log(wishList);
+  };
+
+  // set ค่า wishlist ทั้งหมดลงใน state gamesteam
+  const get = async () => {
+    const steamGame = (await getFeatureGameSteam()) || undefined;
+    if (dataLine) {
+      const newSteamGame = await checkAllHeart(steamGame);
+      setGameSteam(newSteamGame);
+    } else {
+      setGameSteam(steamGame);
+    }
+  };
+
+  // เช็คข้อมูลใน wislist ว่ามีหรือยังก่อนนำมาแสดงพร้อมกับที่ favorite ไว้
   const checkAllHeart = async (steamgame: SteamGame) => {
     const allApp = await getAllAppId(dataLine?.userId || "");
 
@@ -119,7 +119,6 @@ export default function ShowGameProduct() {
 
   useEffect(() => {
     get();
-
     if (dataLine) {
       getMemberId(dataLine?.userId || "").then((result) => {
         setWishList(result["wishList"]);

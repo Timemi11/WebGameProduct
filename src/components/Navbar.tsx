@@ -69,10 +69,6 @@ export default function Navbar() {
     window.location.href = "/user";
   };
 
-  // const handleCloseModal = () => {
-  //   setOpenModal(false);
-  // };
-
   return (
     <Box sx={{ flexGrow: 1, width: "100dvw" }}>
       <AppBar
