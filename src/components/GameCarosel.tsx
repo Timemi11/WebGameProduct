@@ -34,7 +34,7 @@ const GameCarousel = ({
         className="w-full h-full ">
         {gameSteam?.featured_win.map((items) => (
           <SwiperSlide key={items.id}>
-            <div className="image-big featured_win w-full h-dvh sm:h-90  flex justify-center items-center">
+            <div className="image-big featured_win w-full flex justify-center items-center">
               <a className="w-full h-full" href={`${steamUrlGame}${items.id}`}>
                 <img
                   src={items.large_capsule_image}
