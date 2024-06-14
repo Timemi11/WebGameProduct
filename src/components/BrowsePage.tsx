@@ -52,15 +52,15 @@ export default function ShowGameProduct() {
       setWishList([...wishList, info]);
       const wishList1 = [...wishList, info];
       setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
-      await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
       alert("เพิ่มลงในรายการโปรดแล้ว");
+      await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
     } else {
       // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
       console.log(appId);
       // console.log(appId.toString());
       setCheckHotReload(appId + 1); //22223 a
-      await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
       alert("นำออกจากรายการโปรดแล้ว");
+      await deleteUserWishlistOneApp(dataLine?.userId || "", appId.toString());
     }
     //ล้างค่าเดิมทิ้ง
     await getMemberId(dataLine?.userId || "").then((result) => {
