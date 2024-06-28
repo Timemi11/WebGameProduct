@@ -8,12 +8,6 @@ import { createMember, getMemberById } from "../services/HttpMethod";
 
 export default function Home() {
   const dataLine = useContext<Profile | null>(GetProfile);
-
-  // check userId wishlist
-  // async function get() {
-  //   const info = await getMember(); //ข้อมูลของ user ใน userMember
-  //   setMember(info);
-  // }
   async function create(userId: string, displayName: string) {
     await createMember(userId || "", displayName || "");
   }

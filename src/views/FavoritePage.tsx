@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Modal from "./FavPageModal";
+import Modal from "../components/FavPageModal";
 import {
   deleteUserWishlistOneApp,
   getWishListApp,

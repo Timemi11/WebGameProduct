@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 import { GameInfo, Profile, SteamGame, Wishlist } from "../type/Items";
 import {
   getHaveAppId,
@@ -11,7 +11,7 @@ import {
   deleteUserWishlistOneApp,
 } from "../services/HttpMethod";
 import { steamUrlGame } from "../services/ApiEndpoint";
-import GameCarousel from "./GameCarosel";
+import GameCarousel from "../components/GameCarosel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";

@@ -2,11 +2,11 @@ import React, { useEffect, useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import ShowGameProduct from "./components/BrowsePage";
+import ShowGameProduct from "./views/BrowsePage";
 import liff from "@line/liff";
 import { Profile } from "./type/Items";
-import Home from "./components/Home";
-import FavPage from "./components/FavoritePage";
+import Home from "./views/Home";
+import FavPage from "./views/FavoritePage";
 
 export const GetProfile = createContext<Profile | null>(null);
 
@@ -15,6 +15,20 @@ const App: React.FC = () => {
   const [dataLine, setDataLine] = useState<Profile | null>(null);
 
   const getProfile = async (): Promise<void> => {
+    const accesssToken = liff.getAccessToken();
+    console.log(accesssToken)
+    
+    
+
+
+
+
+
+
+
+
+    // sentToken
+    // getProfile
     const profile = await liff.getProfile();
     const { pictureUrl, userId, displayName, statusMessage } = profile as {
       pictureUrl: string | "";
@@ -48,12 +62,6 @@ const App: React.FC = () => {
     };
     initLiff();
   }, []);
-
-  
-
-
-
-
 
   return (
     <GetProfile.Provider value={dataLine}>

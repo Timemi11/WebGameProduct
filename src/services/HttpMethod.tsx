@@ -2,6 +2,9 @@ import axios from "axios";
 import { DatainWishlists, GameInfo, Wishlist } from "../type/Items";
 import { endpoint, endpointSteam, steamUrlGame } from "./ApiEndpoint";
 
+
+
+const channelAccessToken = "eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=";
 const mapItems = (items: any) =>
   items.map((item: any) => ({
     id: item.id,
@@ -38,8 +41,8 @@ export const sendMessageToLine = async (
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
+          Authorization:channelAccessToken   , //channel access token
+
         },
       }
     );
@@ -72,8 +75,7 @@ export const sendWishListToLine = async (
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "eCR3NwXUmzIqOq8HMYtuXooaWPDEBlszMMeF6BGoyRk4XpK2Ho89HV+hF0IUBuhsTRZYhWxLzRPFV6GyywHaaY7EL4t6uH8KgWUDTh4crPqW560gTHNJC98g+eStkQXgxKUO5StidnjRdPDxScYUHAdB04t89/1O/w1cDnyilFU=",
+          Authorization:channelAccessToken        
         },
       }
     );
@@ -83,26 +85,11 @@ export const sendWishListToLine = async (
   }
 };
 
-// route.get("/usermember", userMemberController.getUserMember);
-// route.get("/usermember/:id", userMemberController.findUserMemberById);
-// route.get("/usermember/userid/:id", userMemberController.findUserMemberByUserId);
-// route.post("/usermember", userMemberController.createProduct);
-// route.put("/usermember/userid/:id",userMemberController.updateUserMember);
-// route.get("/usermember/userid/:id/appid/:appid",userMemberController.findAppId)
-// route.delete("/usermember/userid/:id",userMemberController.deleteUserMember);
-// route.get("/usermember/userid/:id/appid", userMemberController.findApp);
-// route.get("/usermember/userid/:id/appid", userMemberController.findApp);
-// route.get("/usermember/userid/:id/onlyappid", userMemberController.findAppOnlyAppId); // ดู App fav ทั้งหมดของ User แต่เอาแค่ App Id
 
 export const getHaveAppId = async (userId: string, appid: number) => {
   try {
     const response = await axios.get(
       `${endpoint}/usermember/userid/${userId}/appid/${appid}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
     return response.data;
   } catch (err) {}
@@ -111,11 +98,6 @@ export const getAllAppId = async (userId: string) => {
   try {
     const response = await axios.get(
       `${endpoint}/usermember/userid/${userId}/onlyappid`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
     return response.data;
   } catch (err) {}
@@ -124,14 +106,8 @@ export const getAllAppId = async (userId: string) => {
 export const getWishListApp = async (userId: string) => {
   try {
     const response = await axios.get(
-      `${endpoint}/usermember/userid/${userId}/appid`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      `${endpoint}/usermember/userid/${userId}/appid`
     );
-
     return response.data;
   } catch (err) {}
 };
@@ -151,11 +127,6 @@ export const getMemberById = async (userId: string) => {
   try {
     const response = await axios.get(
       `${endpoint}/usermember/userid/${userId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
     return response.data;
   } catch (err) {
@@ -174,11 +145,6 @@ export const createMember = async (
         userId: userId,
         displayName: dpName,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
     return response;
   } catch (err) {}
@@ -194,11 +160,6 @@ export const updateUserWishlist = async (
       {
         wishList,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
     return response.data;
   } catch (err) {}
@@ -211,11 +172,6 @@ export const deleteUserWishlistOneApp = async (
   try {
     const response = await axios.put(
       `${endpoint}/usermember/userid/${userId}/appid/${appId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
     return response.data;
   } catch (err) {}
@@ -223,12 +179,7 @@ export const deleteUserWishlistOneApp = async (
 
 export const getGameSteamById = async (appId: number) => {
   try {
-    const response = await axios.get(`${endpointSteam}/${appId}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
+    const response = await axios.get(`${endpointSteam}/${appId}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -238,11 +189,7 @@ export const getGameSteamById = async (appId: number) => {
 
 export const getFeatureGameSteam = async () => {
   try {
-    const response = await axios.get(`${endpointSteam}/`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.get(`${endpointSteam}/`);
     const { large_capsules, featured_win, featured_linux, featured_mac } =
       response.data;
     const mappedLargeCapsules = mapItems(large_capsules);
