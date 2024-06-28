@@ -7,6 +7,7 @@ import liff from "@line/liff";
 import { Profile } from "./type/Items";
 import Home from "./views/Home";
 import FavPage from "./views/FavoritePage";
+import { getProfileByAccessToken } from "./services/HttpMethod";
 
 export const GetProfile = createContext<Profile | null>(null);
 
@@ -15,21 +16,8 @@ const App: React.FC = () => {
   const [dataLine, setDataLine] = useState<Profile | null>(null);
 
   const getProfile = async (): Promise<void> => {
-    const accesssToken = liff.getAccessToken();
-    console.log(accesssToken)
-    
-    
-
-
-
-
-
-
-
-
-    // sentToken
-    // getProfile
-    const profile = await liff.getProfile();
+    const accesssToken = `Bearer ${liff.getAccessToken()}`;
+    const profile = await getProfileByAccessToken(accesssToken)
     const { pictureUrl, userId, displayName, statusMessage } = profile as {
       pictureUrl: string | "";
       userId: string | "";

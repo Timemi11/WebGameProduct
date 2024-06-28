@@ -209,6 +209,29 @@ export const getFeatureGameSteam = async () => {
   }
 };
 
+
+export const getProfileByAccessToken = async (token:string) => {
+    try{
+      const response = await axios.get(  `${endpoint}/get-profile`,{   
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:token
+      }
+    });
+    return response.data  
+    }catch(error){    
+      console.error(error);
+      throw error;
+    }
+}
+
+
+
+
+
+
+
+
 // ! Bearer ต่อด้วย  [Channel access token] ของ messagesing api
 
 // * Fetch Without Axios
