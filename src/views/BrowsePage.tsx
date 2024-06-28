@@ -43,33 +43,35 @@ export default function ShowGameProduct() {
   // 1.useeffect เพิ่ม check ว่ามี appid อะไรบ้างใน wihslist member ถ้ามีก็ไปเซตในตัวของ fav gamesteam  เป็น true
   // เอาข้อมูลเข้า wishlist ของ user นั่นๆ ก่อนแสดง
   const getFavorites = async (appId: number) => {
-    const info: Wishlist = await getGameSteamById(appId);
-
-    if (dataLine) {
-      const arrApp = await getHaveAppId(dataLine?.userId || "", appId);
-      if (arrApp === undefined) {
-        console.log("create");
-        console.log(appId);
-        setWishList([...wishList, info]);
-        const wishList1 = [...wishList, info];
-        setCheckHotReload(appId); //22222 เปลี่ยนหัวใจแบบ หยาบๆ
-        await updateWishlist(wishList1 as Wishlist[], dataLine?.userId || "");
-      } else {
-        // if มี appid ก็ไม่ต้องเพิ่ม ให้ลบ
-        console.log(appId);
-        // console.log(appId.toString());
-        setCheckHotReload(appId + 1); //22223 a
-        await deleteUserWishlistOneApp(
-          dataLine?.userId || "",
-          appId.toString()
-        );
-      }
-      //ล้างค่าเดิมทิ้ง
-      await getMemberId(dataLine?.userId || "").then((result) => {
+    try {
+      const info: Wishlist = await getGameSteamById(appId);
+  
+      if (dataLine) {
+        const userId = dataLine?.userId || "";
+        const arrApp = await getHaveAppId(userId, appId);
+  
+        if (arrApp === undefined) {
+          console.log("create");
+          console.log(appId);
+          const newWishlist = [...wishList, info];
+          setWishList(newWishlist);
+          setCheckHotReload(appId); // เปลี่ยนหัวใจแบบหยาบๆ
+          await updateWishlist(newWishlist, userId);
+        } else {
+          console.log(appId);
+          setCheckHotReload(appId + 1); // เปลี่ยนหัวใจแบบหยาบๆ
+          await deleteUserWishlistOneApp(userId, appId.toString());
+        }
+  
+        // ล้างค่าเดิมทิ้งและอัปเดต wishlist ใหม่
+        const result = await getMemberId(userId);
         setWishList(result["wishList"]);
-      });
-      console.log("after fav wishlist");
-      console.log(wishList); //ข้อมูลตัวนี้คือมัน delay แต่ข้อมูลใหม่ถูก set ไว้แล้ว
+  
+        console.log("after fav wishlist");
+        console.log(wishList); // ข้อมูลตัวนี้คือมัน delay แต่ข้อมูลใหม่ถูก set ไว้แล้ว
+      }
+    } catch (error) {
+      console.error("Error in getFavorites:", error);
     }
   };
 
