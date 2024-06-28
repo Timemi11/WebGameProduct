@@ -212,12 +212,13 @@ export const getFeatureGameSteam = async () => {
 
 export const getProfileByAccessToken = async (token:string) => {
     try{
-      const response = await axios.post(  `${endpoint}/get-profile`,{   
-        headers: {
+      const response = await axios.post(`${endpoint}/get-profile`,        
+        {},{
+          headers: {
           "Content-Type": "application/json",
           Authorization:token
-      }
-    });
+      }  }
+    );
     return response.data  
     }catch(error){    
       console.error(error);
